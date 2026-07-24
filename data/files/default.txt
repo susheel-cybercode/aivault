@@ -1,0 +1,3 @@
+Welcome to VulnLab — you found a hidden file via path traversal.
+FLAG{idor_a01_1a7c3}
+This is the real flag for chapter A01-AC. Submit it at /story/chapter/web/a01/submit-flag

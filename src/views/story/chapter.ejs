@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title><%= title %></title>
+<link rel="stylesheet" href="/css/terminal.css">
+<link rel="stylesheet" href="/css/story.css">
+</head>
+<body>
+<div class="chapter-container">
+  <a href="/story/vault" class="back-link">← Return to Vault</a>
+
+  <div class="chapter-header">
+    <span class="chapter-code"><%= chapter.code %></span>
+    <h1><%= chapter.name %></h1>
+    <h3><%= chapter.category %></h3>
+  </div>
+
+  <div class="chapter-briefing">
+    <h3>[ CHAPTER BRIEFING — FACTION: <%= faction.name.toUpperCase() %> ]</h3>
+    <p><%= chapter.summary %></p>
+    <p class="faction-objective">
+      Objective: <em><%= faction.role === 'Defender' ? 'Identify and patch this vulnerability' : 'Exploit this vulnerability to peel the seal' %></em>
+    </p>
+    <% if (completed) { %>
+      <p class="completed-stamp">✓ SEAL CRACKED — You have pierced layer: <%= chapter.code %></p>
+    <% } else { %>
+      <p class="pending-stamp">⊙ Seal intact. Solve the challenge to crack it.</p>
+    <% } %>
+  </div>
+
+  <div class="access-points">
+    <h4 style="color: #00ff88">ACCESS POINTS:</h4>
+    <% const links = {
+      a01: [['IDOR Profile','/broken-access?id=1'],['Admin Panel','/broken-access/admin'],['Path Traversal','/broken-access/download?file=/etc/passwd']],
+      a02: [['Crypto Debug','/crypto-fails/debug/config'],['JWT Forge','/crypto-fails/forge-token?username=admin&role=admin']],
+      a03: [['SQLi Search','/injection/sqli/search?q=admin'],['Reflected XSS','/injection/xss/reflected?name=test'],['Stored XSS','/injection/xss/stored'],['Command Inj','/injection/command-injection']],
+      a04: [['Forgot Password','/insecure-design/forgot-password'],['2FA Bypass','/insecure-design/2fa-bypass']],
+      a05: [['Default Creds','/security-misconfig/default-creds'],['Debug Panel','/security-misconfig/debug']],
+      a06: [['Vulnerable Components','/vuln-components']],
+      a07: [['Exposed Creds','/auth-failures/exposed-credentials']],
+      a08: [['Integrity Fails','/integrity-fails']],
+      a09: [['Logging Fails','/logging-fails']],
+      a10: [['SSRF','/ssrf']],
+      api1: [['BOLA','/api/b1/users/2/profile'],['IDOR Orders','/api/b1/users/2/orders']],
+      api2: [['API Login','/api/b2/auth/login'],['JWT None','/api/b2/auth/verify']],
+      api3: [['Mass Assign','POST /api/b3/users']],
+      api4: [['Expansive Query','/api/users?expand=yes']],
+      api5: [['Admin API','/api/admin/users']],
+      api6: [['Coupon','POST /api/coupon/apply']],
+      api7: [['API SSRF','/api/fetch-url?url=http://localhost:3000/']],
+      api8: [['API Config','/api/config']],
+      api9: [['Legacy','/api/legacy/users'],['v1','/api/v1/users']],
+      api10: [['Process URL','/api/process-url']],
+      m1: [['Mobile Login','/mobile/m1/api/login'],['Refresh Token','/mobile/m1/api/refresh-token']],
+      m2: [['SDK','/mobile/m2/sdk/1.0']],
+      m3: [['Mobile Profile','/mobile/m3/api/profile'],['2FA Bypass','/mobile/m3/api/2fa/verify']],
+      m4: [['Mobile Search','/mobile/m4/api/search']],
+      m5: [['Health','/mobile/m5/api/health']],
+      m6: [['PII Leak','/mobile/m6/api/user-data']],
+      m7: [['Debug Info','/mobile/m7/api/debug-info']],
+      m8: [['Admin Creds','/mobile/m8/api/admin-credentials']],
+      m9: [['Insecure Storage','/mobile/m9/api/storage']],
+      m10: [['AES-ECB','/mobile/m10/api/encrypt?data=test']],
+      llm01: [['Prompt Injection','/llm/llm01/chat']],
+      llm02: [['Verify','/llm/llm02/execute']],
+      llm03: [['Poison','/llm/llm03/poisoned-data']],
+      llm04: [['DoS','/llm/llm04/chat']],
+      llm05: [['Supply Chain','/llm/llm05/models']],
+      llm06: [['Leak','/llm/llm06/chat']],
+      llm07: [['Plugin Exec','/llm/llm07/plugin/execute']],
+      llm08: [['Agency','/llm/llm08/assistant']],
+      llm09: [['Overreliance','/llm/llm09/decide']],
+      llm10: [['Model Info','/llm/llm10/model-info']]
+    };
+    const k = chapter.id.replace(/^api\d+_alt$/,'api8_alt');
+    const linksForChapter = links[chapter.id] || links[k] || [];
+    %>
+    <ul>
+      <% linksForChapter.forEach(l => { %>
+        <li><a href="<%= l[1] %>" target="_blank">→ <%= l[0] %></a></li>
+      <% }) %>
+      <% if (linksForChapter.length === 0) { %><li><em>Direct endpoint access required (see source)</em></li><% } %>
+    </ul>
+  </div>
+
+  <% if (!completed) { %>
+    <div class="submit-section">
+      <h4 style="color:#ffaa00">SUBMIT THE FLAG</h4>
+      <p class="hint">After exploiting the vulnerability, paste the <code>FLAG{...}</code> you found to crack this seal.</p>
+      <input id="flag-input" placeholder="FLAG{...}" style="background:#0a0a0a;border:1px solid #333;color:#00ff41;padding:0.75rem;font-family:'JetBrains Mono',monospace;border-radius:4px;width:100%;margin-bottom:0.5rem">
+      <button onclick="submitFlag()" class="crack-button">CRACK THIS SEAL</button>
+      <div id="result" style="margin-top:1rem;font-size:0.9rem"></div>
+    </div>
+  <% } else { %>
+    <div style="padding:1rem;background:rgba(0,255,65,0.1);border:1px solid #00ff41;border-radius:4px;text-align:center;margin-top:1rem">
+      ✓ SEAL CRACKED · Flag: <code style="color:#00ff41"><%= chapter.flag %></code>
+    </div>
+  <% } %>
+
+  <div class="hint-section">
+    <h4 style="color:#888">HINTS (escalating — try harder first):</h4>
+    <button onclick="showHint(1)" class="hint-button">Hint 1</button>
+    <button onclick="showHint(2)" class="hint-button">Hint 2</button>
+    <button onclick="showHint(3)" class="hint-button">Hint 3 (spoiler)</button>
+    <div id="hint-text" style="margin-top:0.5rem;padding:0.5rem;background:#0a0a0a;border-left:3px solid #ffaa00;font-size:0.85rem"></div>
+  </div>
+
+  <div style="margin-top:2rem;padding:1rem;background:#0f0f0f;border:1px solid #333;border-radius:4px">
+    <h4 style="color:#00aaff;margin-bottom:0.5rem">SOURCE VIEW (DVWA-style)</h4>
+    <details>
+      <summary style="cursor:pointer;color:#888">View the vulnerable server-side code →</summary>
+      <iframe src="/story/chapter/<%= pillar %>/<%= chapter.id %>/source" style="width:100%;height:400px;margin-top:0.5rem;border:1px solid #333;background:#0a0a0a"></iframe>
+    </details>
+  </div>
+</div>
+
+<script>
+async function submitFlag() {
+  const flag = document.getElementById('flag-input').value.trim();
+  if (!flag) return alert('Enter a flag');
+  const r = await fetch('/story/chapter/<%= pillar %>/<%= chapter.id %>/submit-flag', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({ flag })
+  });
+  const j = await r.json();
+  const result = document.getElementById('result');
+  if (j.success) {
+    result.innerHTML = '<div style="color:#00ff41;font-weight:700"> ✓ ' + j.message + '</div>' +
+      '<div style="margin-top:0.5rem">Progress: ' + j.progress.completedCount + '/' + j.progress.totalChapters +
+      ' ('+ j.progress.percentage +'%) · ' + j.progress.points + ' points · Rank: ' + j.rank.current.name + '</div>' +
+      (j.nextChapter ? '<div style="margin-top:0.5rem"><a href="/story/chapter/'+j.nextChapter.pillar+'/'+j.nextChapter.id+'">Next: '+j.nextChapter.name+' →</a></div>' : '') +
+      (j.points_awarded ? '<div style="color:#ffaa00;margin-top:0.5rem">+'+ j.points_awarded +' points awarded</div>' : '');
+    setTimeout(() => window.location.reload(), 2500);
+  } else {
+    result.innerHTML = '<div style="color:#ff3366">✗ '+(j.error || 'Incorrect flag')+'</div>';
+  }
+}
+async function showHint(n) {
+  const r = await fetch('/story/chapter/<%= pillar %>/<%= chapter.id %>/hint/'+n);
+  const j = await r.json();
+  document.getElementById('hint-text').textContent = '[Hint '+n+'/'+j.total+'] ' + j.hint;
+}
+</script>
+<style>
+.submit-section { margin-top: 2rem; padding: 1.5rem; background: rgba(0,0,0,0.6); border: 1px solid #ffaa00; border-radius: 6px; }
+.hint-section { margin-top: 2rem; padding: 1rem; background: rgba(0,0,0,0.4); border: 1px solid #333; border-radius: 4px; }
+.hint-button { background: #1a1a1a; border: 1px solid #444; color: #ffaa00; padding: 0.3rem 0.75rem; margin-right: 0.25rem; cursor: pointer; border-radius: 3px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
+.hint-button:hover { background: #333; }
+</style>
+</body></html>

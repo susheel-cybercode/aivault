@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html><head><meta charset=UTF-8><title><%= title %></title><link rel="stylesheet" href="/css/terminal.css"></head>
+<body><div class="terminal-container"><div class="terminal-header"><span class="terminal-title">[A10] SSRF Port Scanner</span></div>
+<div class="terminal-body">
+<h1>SSRF Port Scanner</h1>
+<form method="GET" action="/ssrf/port-scan">
+  <input name="host" placeholder="Host" value="localhost">
+  <input name="port" placeholder="Port" value="3000">
+  <button>Scan</button>
+</form>
+<p class="hint">The server opens a TCP socket from its perspective — let it scan internal hosts.</p>
+</div></div></body></html>

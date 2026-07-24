@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/terminal.css">
+</head>
+<body>
+<div class="terminal-container">
+  <div class="terminal-header">
+    <span class="terminal-title">[VULNLAB LOGIN]</span>
+  </div>
+  <div class="terminal-body">
+    <h2>Login</h2>
+    <% if (typeof error !== 'undefined' && error) { %>
+      <p class="error"><%= error %></p>
+    <% } %>
+    <form method="POST" action="/login" class="vuln-form">
+      <input type="text" name="username" placeholder="Username" autofocus>
+      <input type="password" name="password" placeholder="Password">
+      <button type="submit">Login</button>
+    </form>
+    <p class="hint">Try: admin / admin123 (SQL injection: admin'-- / anything)</p>
+    <p><a href="/">← Back to Home</a></p>
+  </div>
+</div>
+</body>
+</html>

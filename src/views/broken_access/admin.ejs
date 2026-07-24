@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title><%= title %></title><link rel="stylesheet" href="/css/terminal.css"></head>
+<body><div class="terminal-container"><div class="terminal-header"><span class="terminal-title">[A01] Admin Panel - Forced Browsing</span></div>
+<div class="terminal-body">
+<h1>⚠️ ADMIN PANEL</h1>
+<p class="warning">This panel is accessible without proper role verification</p>
+
+<h2>All Users</h2>
+<table>
+<tr><th>ID</th><th>Username</th><th>Email</th><th>Role</th></tr>
+<% users.forEach(u => { %>
+<tr><td><%= u.id %></td><td><%= u.username %></td><td><%= u.email %></td><td><%= u.role %></td></tr>
+<% }) %>
+</table>
+
+<h2>Credit Cards (All Users)</h2>
+<table>
+<tr><th>ID</th><th>User ID</th><th>Card Number</th><th>CVV</th><th>Exp</th></tr>
+<% cards.forEach(c => { %>
+<tr><td><%= c.id %></td><td><%= c.user_id %></td><td><%= c.card_number %></td><td><%= c.cvv %></td><td><%= c.exp_date %></td></tr>
+<% }) %>
+</table>
+
+<h2>Recent Logs</h2>
+<pre>
+<% logs.forEach(l => { %>
+[<%= l.timestamp %>] <%= l.level %>: <%= l.message %><% if (l.ip) { %> (IP: <%= l.ip %>)<% } %>
+<% }) %>
+</pre>
+</div></div></body></html>

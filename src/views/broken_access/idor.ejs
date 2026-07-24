@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title><%= title %></title><link rel="stylesheet" href="/css/terminal.css"></head>
+<body><div class="terminal-container"><div class="terminal-header"><span class="terminal-title">[A01 IDOR] User Profile</span></div>
+<div class="terminal-body">
+<div class="nav-menu"><a href="/">Home</a> <a href="/broken-access">A01 Menu</a></div>
+<h1>IDOR - Insecure Direct Object Reference</h1>
+<p class="hint">Change ?id= to view other users. No authorization check.</p>
+
+<% if (typeof error !== 'undefined' && error) { %><div class="error"><%= error %></div><% } %>
+<% if (user) { %>
+<div class="data-card">
+  <h3>User #<%= user.id %></h3>
+  <table>
+    <tr><td>Username</td><td><strong><%= user.username %></strong></td></tr>
+    <tr><td>Email</td><td><%= user.email %></td></tr>
+    <tr><td>Role</td><td><%= user.role %></td></tr>
+    <% if (user.credit_card) { %><tr><td>Credit Card</td><td style="color:#ff4444"><%= user.credit_card %></td></tr><% } %>
+    <% if (user.ssn) { %><tr><td>SSN</td><td style="color:#ff4444"><%= user.ssn %></td></tr><% } %>
+  </table>
+</div>
+<% } %>
+
+<h3>Try these IDs:</h3>
+<ul>
+  <li><a href="?id=1">User 1 (Admin)</a> - Credit Card: 4532-XXXX-XXXX-1234</li>
+  <li><a href="?id=2">User 2 (Alice)</a> - Credit Card: 4111-XXXX-XXXX-1111</li>
+  <li><a href="?id=3">User 3 (Bob)</a> - Credit Card: 5500-XXXX-XXXX-2222</li>
+  <li><a href="?id=4">User 4 (Charlie)</a> - Credit Card: 3400-XXXX-XXXX-3333</li>
+</ul>
+</div></div></body></html>

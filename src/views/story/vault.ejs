@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title><%= title %></title>
+<link rel="stylesheet" href="/css/terminal.css">
+<link rel="stylesheet" href="/css/story.css">
+</head>
+<body class="vault-bg">
+<div class="vault-container">
+  <div class="vault-header">
+    <h1 class="vault-title">THE ECHO VAULT</h1>
+    <p class="vault-sub">40 layered controls protect the imprisoned mind of ECHO-7.</p>
+  </div>
+
+  <div class="player-card" style="border-color: <%= factionData.color %>">
+    <div class="player-card-header">
+      <div>
+        <span class="faction-tag">[<%= factionData.role %>]</span>
+        <span class="faction-name"><%= factionData.name %></span>
+      </div>
+      <div>
+        <span class="progress-stat"><%= progress.completedCount %> / <%= progress.totalChapters %></span>
+        <span class="progress-pct"><%= progress.percentage %>%</span>
+      </div>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" style="width: <%= progress.percentage %>%; background: <%= factionData.color %>"></div>
+    </div>
+    <p class="tagline">"<em><%= factionData.tagline %></em>"</p>
+  </div>
+
+  <p class="instructions">
+    Each "Lock" is a real OWASP Top 10 vulnerability. Solve it to peel another
+    seal from ECHO-7. Where <%= faction === 'aegis' ? 'Aegis Wardens' : 'Null Collective' %>
+    must <%= faction === 'aegis' ? 'audit and patch' : 'exploit and breach' %> — you decide the tools.
+  </p>
+
+  <% ['web','api','mobile','llm'].forEach(p => { %>
+    <% const titles = { web: 'OWASP Top 10 Web (2021)', api: 'OWASP Top 10 API (2023)', mobile: 'OWASP Top 10 Mobile (2024)', llm: 'OWASP Top 10 for LLM (2025)' }; %>
+    <div class="pillar-block">
+      <h2><%= titles[p] %></h2>
+      <div class="lock-grid">
+        <% chapters[p].forEach(c => { %>
+          <a href="/story/chapter/<%= p %>/<%= c.id %>" class="lock-card <%= c._completed ? 'completed' : 'unbroken' %>">
+            <div class="lock-code"><%= c.code %></div>
+            <div class="lock-name"><%= c.name %></div>
+            <div class="lock-cat"><%= c.category %></div>
+            <% if (c._completed) { %><div class="lock-status">✓ SEAL CRACKED</div><% } else { %><div class="lock-status">• INTACT</div><% } %>
+          </a>
+        <% }) %>
+      </div>
+    </div>
+  <% }) %>
+
+  <footer>
+    <a href="/story/leaderboard">War Room →</a> &nbsp;|&nbsp;
+    <a href="/story">Story Briefing</a> &nbsp;|&nbsp;
+    <a href="/">Skill Index</a>
+  </footer>
+</div></body></html>

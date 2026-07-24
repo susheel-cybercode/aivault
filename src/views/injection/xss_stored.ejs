@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title><%= title %></title><link rel="stylesheet" href="/css/terminal.css"></head>
+<body><div class="terminal-container"><div class="terminal-header"><span class="terminal-title">[A03] Stored XSS</span></div>
+<div class="terminal-body">
+<h1>Stored XSS</h1>
+<form method="POST" action="/injection/xss/stored" class="vuln-form">
+  <input name="username" placeholder="Your name" value="anonymous">
+  <textarea name="content" placeholder="Comment (stored without sanitization)"></textarea>
+  <button type="submit">Post Comment</button>
+</form>
+<hr>
+<h3>Comments:</h3>
+<% comments.forEach(c => { %>
+  <div class="comment">
+    <strong><%= c.username %></strong> says: <%- c.content %> <!-- vulnerable: raw html -->
+  </div>
+<% }) %></div></div></body></html>

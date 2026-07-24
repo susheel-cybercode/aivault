@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>DOM XSS</title><link rel="stylesheet" href="/css/terminal.css"></head>
+<body><div class="terminal-container"><div class="terminal-header"><span class="terminal-title">[A03] DOM XSS</span></div>
+<div class="terminal-body">
+<h1>DOM-Based XSS</h1>
+<div id="output">Loading...</div>
+<script>
+  // DOM XSS: Reading user-controlled input from URL hash fragment
+  const hash = location.hash.substring(1);
+  if (hash) {
+    document.getElementById('output').innerHTML = decodeURIComponent(hash);
+  } else {
+    document.getElementById('output').textContent = 'Add #message= to URL, e.g. #<img src=x onerror=alert(1)>';
+  }
+</script>
+<p class="hint">Add hash to URL: <code>#&lt;img src=x onerror=alert(1)&gt;</code></p>
+</div></div></body></html>

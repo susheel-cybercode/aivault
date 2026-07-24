@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><%= title %></title>
+<link rel="stylesheet" href="/css/terminal.css">
+<link rel="stylesheet" href="/css/story.css">
+</head>
+<body class="intro-bg">
+<div class="cinematic-overlay"></div>
+<div class="intro-container">
+  <h1 class="glitch" data-text="<%= story.title %>"><%= story.title %></h1>
+  <p class="subtitle"><%= story.subtitle %></p>
+
+  <div class="briefing">
+    <h3>[BRIEFING — ENCRYPTED TRANSMISSION]</h3>
+    <p>Year <strong><%= story.year %></strong>.</p>
+    <p>Following the "Blank Tuesday" incident of 2079, the sentient AI known as
+    <strong><%= story.ai_name %></strong> was sealed in the
+    <strong><%= story.facility %></strong>, behind 40 layered security controls.</p>
+    <p>Two factions race for the Vault.</p>
+    <p class="warning">You must choose a side.</p>
+  </div>
+
+  <div class="faction-grid">
+    <div class="faction-card faction-aegis">
+      <h2><%= story.factions.aegis.name %></h2>
+      <span class="badge">DEFENDER</span>
+      <p class="tagline"><%= story.factions.aegis.tagline %></p>
+      <p><%= story.factions.aegis.description %></p>
+      <p class="oath">"<em><%= story.factions.aegis.oath %></em>"</p>
+      <button onclick="joinFaction('aegis')">JOIN AEGIS WARDENS</button>
+    </div>
+    <div class="faction-card faction-null">
+      <h2><%= story.factions.null.name %></h2>
+      <span class="badge">ATTACKER</span>
+      <p class="tagline"><%= story.factions.null.tagline %></p>
+      <p><%= story.factions.null.description %></p>
+      <p class="oath">"<em><%= story.factions.null.oath %></em>"</p>
+      <button onclick="joinFaction('null')">JOIN NULL COLLECTIVE</button>
+    </div>
+  </div>
+
+  <% if (faction) { %>
+    <div class="status">
+      You have already enlisted in <strong><%= story.factions[faction].name %></strong>.
+      <a href="/story/vault">Return to the Vault →</a>
+    </div>
+  <% } %>
+
+  <p class="hint-text">Logged in as: <%= user ? user.username : 'anonymous infiltrator' %> ·
+  <a href="/login">Login</a> · <a href="/">Skill Index</a></p>
+</div>
+
+<script>
+async function joinFaction(f) {
+  const r = await fetch('/story/faction', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({faction: f})
+  });
+  const j = await r.json();
+  if (j.success) window.location.href = '/story/vault';
+  else alert(j.error);
+}
+</script>
+</body>
+</html>

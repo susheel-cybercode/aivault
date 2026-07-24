@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html><head><meta charset=UTF-8><title><%= title %></title><link rel="stylesheet" href="/css/terminal.css"></head>
+<body><div class="terminal-container"><div class="terminal-header"><span class="terminal-title">[A10] Image Proxy SSRF</span></div>
+<div class="terminal-body">
+<h1>Image Proxy — SSRF</h1>
+<p>Use the server as a proxy to fetch images. Since the server is internal, this is SSRF.</p>
+<form method="GET" action="/ssrf/image-proxy">
+  <input name="url" placeholder="Image URL" value="http://localhost:3000/css/story.css">
+  <button>Fetch</button>
+</form>
+<p class="hint">Server returns whatever bytes are at the URL. Anything internal can be exfiltrated.</p>
+</div></div></body></html>

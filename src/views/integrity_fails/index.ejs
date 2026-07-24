@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html><head><meta charset=UTF-8><title><%= title %></title><link rel="stylesheet" href="/css/terminal.css"></head>
+<body><div class="terminal-container"><div class="terminal-header"><span class="terminal-title">[A08] Integrity Failures</span></div>
+<div class="terminal-body"><h1>A08:2021 - Software and Data Integrity Failures</h1>
+<ul><li><a href="/integrity-fails/jwt-verify?token=eyJhbGciOiJub25lIn0.eyJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIn0.">JWT None Algorithm Attack</a></li><li><a href="#" onclick="alert('POST /integrity-fails/deserialize'); return false">Unsafe Deserialization</a></li><li><a href="#" onclick="alert('GET /integrity-fails/install-update?url=...'); return false">Unverified Updates</a></li></ul>
+<h3>JWT Verification Tool</h3>
+<form method="GET" action="/integrity-fails/jwt-verify" class="vuln-form"><input name="token" placeholder="Enter JWT token"><button>Verify</button></form></div></div></body></html>

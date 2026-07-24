@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html><head><meta charset=UTF-8><title><%= title %></title><link rel="stylesheet" href="/css/terminal.css"></head>
+<body><div class="terminal-container"><div class="terminal-header"><span class="terminal-title">[A04] Open Redirect</span></div>
+<div class="terminal-body">
+<h1>Unvalidated Redirect</h1>
+<p>Pass a URL via <code>?url=</code> to be redirected without any allow-list.</p>
+<form method="GET" action="/insecure-design/redirect">
+  <input name="url" placeholder="Where to send the user?">
+  <button>Redirect</button>
+</form>
+<p class="hint">Try: <code>?url=https://evil.com</code></p>
+</div></div></body></html>

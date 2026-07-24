@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html><head><meta charset=UTF-8><title><%= title %></title><link rel="stylesheet" href="/css/terminal.css"></head>
+<body><div class="terminal-container"><div class="terminal-header"><span class="terminal-title">[A03] NoSQL Injection</span></div>
+<div class="terminal-body">
+<h1>NoSQL Injection Simulation</h1>
+<p>Form-based search using SQLite backend. Submit any payload below.</p>
+<form method="GET" action="/injection/nosql">
+  <input name="username" placeholder="Username / payload">
+  <button>Search</button>
+</form>
+<p class="hint">Try: { $ne: "" } | ' OR 1=1 -- | admin' UNION SELECT 1,2,3 -- </p>
+<p class="hint">Note: This endpoint actually uses SQLite3 behind the scenes — NoSQL-style payload still triggers classic SQL.</p></div></div></body></html>

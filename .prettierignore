@@ -1,0 +1,15 @@
+node_modules/
+data/
+*.db
+*.log
+dist/
+build/
+coverage/
+package-lock.json
+*.md
+Dockerfile
+*.yaml
+*.yml
+*.toml
+.gitignore
+LICENSE

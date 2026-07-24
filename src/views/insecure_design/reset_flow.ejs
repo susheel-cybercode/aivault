@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html><head><meta charset=UTF-8><title><%= title %></title><link rel="stylesheet" href="/css/terminal.css"></head>
+<body><div class="terminal-container"><div class="terminal-header"><span class="terminal-title">[A04] Password Reset</span></div>
+<div class="terminal-body">
+<h1>Password Reset Token</h1>
+<p>Token generated: <span style="color:#ff4444"><%= token %></span></p>
+<p>User ID: <span style="color:#ff4444"><%= user_id %></span></p>
+<p>Predictable token: {username}-reset-{timestamp}</p>
+<form method="POST" action="/insecure-design/password-reset/confirm">
+  <input type="hidden" name="user_id" value="<%= user_id %>">
+  <input name="new_password" placeholder="New password">
+  <button>Reset (no token required!)</button>
+</form>
+<p class="hint">Token is not verified. You can bypass it entirely.</p></div></div></body></html>

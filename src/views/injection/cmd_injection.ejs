@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title><%= title %></title><link rel="stylesheet" href="/css/terminal.css"></head>
+<body><div class="terminal-container"><div class="terminal-header"><span class="terminal-title">[A03] Command Injection</span></div>
+<div class="terminal-body">
+<h1>Command Injection</h1>
+<form method="GET" action="/injection/command-injection">
+  <input name="host" placeholder="Enter IP/host to ping" value="127.0.0.1">
+  <button>Ping</button>
+</form>
+<p class="hint">Try: <code>127.0.0.1; ls -la</code> or <code>127.0.0.1 && cat /etc/passwd</code></p>
+<p>The backend runs: <code>ping -c 2 [user_input]</code></p>
+</div></div></body></html>

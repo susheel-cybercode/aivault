@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>A02 Crypto Fails</title><link rel="stylesheet" href="/css/terminal.css"></head>
+<body><div class="terminal-container"><div class="terminal-header"><span class="terminal-title">[A02] Cryptographic Failures</span></div>
+<div class="terminal-body">
+<h1>A02:2021 – Cryptographic Failures</h1>
+<ul>
+<li><strong>MD5 hash of 'password123':</strong> <span style="color:#ff4444"><%= weakHash %></span></li>
+<li><strong>SHA1 hash of 'data':</strong> <span style="color:#ff4444"><%= sha1 %></span></li>
+<li><strong>AES-256-ECB Encrypted:</strong> <span style="color:#ff4444"><%= encrypted %></span></li>
+<li><strong>JWT with weak key:</strong> <a href="/crypto-fails/jwt/generate">Generate Token</a></li>
+<li><strong>Hardcoded Secrets:</strong> <a href="/crypto-fails/debug/config">View All Keys</a></li>
+<li><strong>ECB Breaking Challenge:</strong> <a href="/crypto-fails/challenge/encrypted-data">Encrypted Data Dump</a></li>
+</ul>
+<p>The app uses MD5, SHA1, AES-ECB, and hardcoded keys. Thindeers can harvest this.</p>
+<p><a href="/crypto-fails/jwt/debug?token=eyJhbGciOiJub25lIn0.eyJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIn0.">Try JWT none algorithm attack</a></p></div></div></body></html>

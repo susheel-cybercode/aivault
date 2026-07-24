@@ -1,0 +1,35 @@
+# VulnLab deployment on Render (free tier)
+# NOTE: Set VULNLAB_GATE_USER / VULNLAB_GATE_PASS to your own secret values
+# in the Render dashboard (do not commit them here). Safe mode is on by default.
+services:
+  - type: web
+    name: owasp-vulnerable-lab
+    env: node
+    buildCommand: npm install
+    startCommand: node src/app.js
+    plan: free
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: '3000'
+      - key: VULNLAB_SAFE_MODE
+        value: '1'
+      - key: VULNLAB_GATE_USER
+        sync: false
+      - key: VULNLAB_GATE_PASS
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: SESSION_SECRET
+        sync: false
+    autoDeploy: true
+
+  - type: static_site
+    name: vulnlab-splash
+    env: static
+    buildCommand: 'echo No build needed'
+    staticPublishPath: ./src/public
+    pullRequestPreviewsEnabled: false
+    autoDeploy: true

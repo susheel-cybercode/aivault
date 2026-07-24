@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title><%= title %></title>
+<link rel="stylesheet" href="/css/terminal.css">
+<link rel="stylesheet" href="/css/story.css">
+</head>
+<body class="vault-bg">
+<div class="vault-container">
+  <h1 class="vault-title">VULNLABS SCOREBOARD</h1>
+  <p class="vault-sub">Live breach tally — every seal cracked across every faction.</p>
+
+  <% if (faction) { %>
+  <div class="player-card" style="border-color: <%= faction === 'aegis' ? '#00aaff' : '#ff3366' %>">
+    <div class="player-card-header">
+      <div>
+        <span class="faction-tag">[<%= faction === 'aegis' ? 'AEGIS WARDEN' : 'NULL COLLECTIVE' %>]</span>
+        <span class="faction-name"><%= handle || 'anonymous' %></span>
+      </div>
+      <div>
+        <span class="progress-stat"><%= myProgress.points %></span>
+        <span class="progress-pct">PTS</span>
+      </div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" style="width: <%= myProgress.percentage %>%; background: <%= faction === 'aegis' ? '#00aaff' : '#ff3366' %>"></div></div>
+    <p style="margin-top:0.75rem">Rank: <strong style="color:#fff"><%= myRank.current.emoji %> <%= myRank.current.name %></strong> · <%= myProgress.completedCount %>/<%= myProgress.totalChapters %> solved</p>
+    <% if (myRank.next) { %>
+      <p style="margin-top:0.25rem;color:#888;font-size:0.8rem">Next rank in <%= myRank.pointsToNext %> points → <em><%= myRank.next.name %></em></p>
+    <% } else { %>
+      <p style="margin-top:0.25rem;color:#ffaa00;font-size:0.8rem"> ★ Max rank achieved — Legendary.</p>
+    <% } %>
+  </div>
+
+  <% if (achievements.length) { %>
+    <div style="margin-top:1.5rem">
+      <h3 style="color:#ffaa00; margin-bottom:0.5rem">ACHIEVEMENTS EARNED</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0.75rem">
+        <% achievements.forEach(a => { %>
+          <div style="padding:0.75rem;background:rgba(0,255,65,0.05);border:1px solid #00ff41;border-radius:4px">
+            <strong style="color:#00ff41">★ <%= a.name %></strong><br>
+            <small style="color:#888"><%= a.desc %></small>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  <% } %>
+  <% } else { %>
+    <p style="text-align:center;padding:1rem;background:rgba(255,170,0,0.1);border-left:3px solid #ffaa00">
+      <a href="/story">→ Join a faction to get on the board</a>
+    </p>
+  <% } %>
+
+  <h2 style="margin-top:2rem;color:#ffaa00">CHALLENGE SOLVE COUNTS (global)</h2>
+  <table>
+    <thead><tr><th>Chapter</th><th>Solves</th><th>Difficulty</th><th>Points</th></tr></thead>
+    <tbody>
+      <% if (board.length === 0) { %>
+        <tr><td colspan="4" style="text-align:center;color:#666"><em>No seals cracked yet. Be the first.</em></td></tr>
+      <% } %>
+      <% board.forEach(b => {
+        const ch = story.chapters.find(c => `${c.pillar}:${c.id}` === b.challenge_id);
+        const solved = completed.includes(b.challenge_id);
+      %>
+        <tr style="<%= solved ? 'background:rgba(0,255,65,0.05)' : '' %>">
+          <td><code><%= b.challenge_id %></code> <%= ch ? ch.name : '' %></td>
+          <td><%= b.solves %></td>
+          <td><%= ch ? '★'.repeat(ch.difficulty) : '?' %></td>
+          <td><%= ch ? (ch.difficulty * 10) : 0 %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+  <footer>
+    <a href="/story/vault">← Back to Vault</a>
+  </footer>
+</div></body></html>

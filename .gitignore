@@ -1,0 +1,16 @@
+node_modules/
+data/*.db
+data/uploads/*
+data/*.log
+.env
+.env.*
+*.log
+.DS_Store
+dist/
+build/
+coverage/
+*.swp
+*.swo
+*~
+.vscode/
+.idea/

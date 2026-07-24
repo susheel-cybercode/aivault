@@ -1,0 +1,40 @@
+{
+  "env": {
+    "node": true,
+    "es2022": true,
+    "jest": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "prettier"
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "commonjs"
+  },
+  "rules": {
+    "indent": ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["warn", "single"],
+    "semi": ["warn", "always"],
+    "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+    "no-console": "off",
+    "no-eval": "off",
+    "no-implied-eval": "off",
+    "no-new-func": "off",
+    "no-empty": "off",
+    "no-undef": "off",
+    "prefer-const": "warn",
+    "no-var": "error",
+    "eqeqeq": ["warn", "smart"],
+    "curly": "off",
+    "brace-style": "off"
+  },
+  "ignorePatterns": ["node_modules/", "data/", "*.db", "dist/", "build/", "coverage/"],
+  "overrides": [
+    {
+      "files": ["src/public/**/*.js"],
+      "env": { "browser": true, "node": false }
+    }
+  ]
+}
