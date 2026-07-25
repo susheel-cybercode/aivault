@@ -1,6 +1,8 @@
 # VulnLab deployment on Render (free tier)
-# NOTE: Set VULNLAB_GATE_USER / VULNLAB_GATE_PASS to your own secret values
-# in the Render dashboard (do not commit them here). Safe mode is on by default.
+# Public lab — open access (no Basic Auth). VULNLAB_SAFE_MODE=1 keeps
+# host-compromising RCE/SSRF/path-traversal sandboxed, but in-app vulns
+# (SQLi, XSS, IDOR, etc.) are exploitable by design.
+# To re-enable Basic Auth later, add VULNLAB_GATE_USER and VULNLAB_GATE_PASS.
 services:
   - type: web
     name: owasp-vulnerable-lab
@@ -16,10 +18,6 @@ services:
         value: '3000'
       - key: VULNLAB_SAFE_MODE
         value: '1'
-      - key: VULNLAB_GATE_USER
-        sync: false
-      - key: VULNLAB_GATE_PASS
-        sync: false
       - key: JWT_SECRET
         sync: false
       - key: SESSION_SECRET
