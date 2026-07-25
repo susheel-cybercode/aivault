@@ -25,11 +25,3 @@ services:
       - key: SESSION_SECRET
         sync: false
     autoDeploy: true
-
-  - type: static_site
-    name: vulnlab-splash
-    env: static
-    buildCommand: 'echo No build needed'
-    staticPublishPath: ./src/public
-    pullRequestPreviewsEnabled: false
-    autoDeploy: true
