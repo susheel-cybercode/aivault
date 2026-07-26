@@ -166,6 +166,8 @@ app.use('/cloud', cloudRoutes);
 // ========== STORY / FACTION ROUTES ==========
 const storyRoutes = require('./routes/story');
 app.use('/story', storyRoutes);
+const campaignRoutes = require('./routes/campaign');
+app.use('/campaign', campaignRoutes);
 
 // Generic auth pages
 app.get('/login', (req, res) => {
@@ -284,7 +286,7 @@ if (require.main === module) {
     console.log(
       `\x1b[31m⚠️   VULNERABLE LAB running on port ${PORT} - FOR EDUCATIONAL USE ONLY\x1b[0m`
     );
-    console.log(`\x1b[33m   Warning: This app contains active vulnerabilities\x1b[0m`);
+    console.log('\x1b[33m   Warning: This app contains active vulnerabilities\x1b[0m');
   });
 }
 
