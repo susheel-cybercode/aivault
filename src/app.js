@@ -159,6 +159,9 @@ app.use('/mobile', mobileRoutes);
 // ========== OWASP TOP 10 FOR LLM ==========
 const llmRoutes = require('./routes/llm_top10');
 app.use('/llm', llmRoutes);
+// ========== OWASP CLOUD‑NATIVE TOP 10 ==========
+const cloudRoutes = require('./routes/cloud_top10');
+app.use('/cloud', cloudRoutes);
 
 // ========== STORY / FACTION ROUTES ==========
 const storyRoutes = require('./routes/story');

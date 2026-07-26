@@ -1,0 +1,106 @@
+/* Anime Cyberpunk Theme */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+  /* Primary neon palette */
+  --bg-primary: #0d0d1a; /* dark midnight */
+  --bg-secondary: #151533; /* subtle gradient */
+  --accent-green: #00ff41;
+  --accent-pink: #ff00ff;
+  --accent-cyan: #00ffff;
+  --text-primary: #f8f8f2;
+  --text-muted: #888;
+}
+
+body {
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  color: var(--text-primary);
+  font-family: 'Press Start 2P', monospace;
+  min-height: 100vh;
+  margin: 0;
+  padding: 2rem;
+}
+
+/* Override terminal container for anime look */
+.terminal-container {
+  background: rgba(13, 13, 26, 0.85);
+  border: 2px solid var(--accent-pink);
+  border-radius: 12px;
+  box-shadow: 0 0 30px var(--accent-cyan);
+}
+
+.terminal-header {
+  background: rgba(21, 21, 51, 0.9);
+  border-bottom: 1px solid var(--accent-pink);
+}
+
+.terminal-title {
+  color: var(--accent-green);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.control {
+  color: var(--text-muted);
+}
+.control:hover {
+  color: var(--accent-cyan);
+}
+
+a {
+  color: var(--accent-pink);
+  text-decoration: underline;
+}
+
+a:hover {
+  color: var(--accent-green);
+}
+
+/* Header and titles */
+h1, h2, h3 {
+  color: var(--accent-cyan);
+  margin-top: 1rem;
+}
+
+.warning, .error {
+  color: var(--accent-pink);
+  background: rgba(255, 0, 255, 0.1);
+  padding: 0.5rem;
+  border-left: 4px solid var(--accent-pink);
+}
+
+/* Buttons */
+.vuln-form button {
+  background: var(--accent-pink);
+  border: none;
+  color: #111;
+  font-weight: bold;
+}
+.vuln-form button:hover {
+  background: var(--accent-green);
+}
+
+/* Table styling */
+table th {
+  background: rgba(21, 21, 51, 0.8);
+  color: var(--accent-cyan);
+}
+
+/* Misc UI tweaks */
+.nav-menu {
+  background: rgba(21, 21, 51, 0.9);
+  border-radius: 6px;
+}
+
+.challenge-card {
+  background: rgba(13, 13, 26, 0.8);
+  border: 1px solid var(--accent-pink);
+}
+.challenge-card:hover {
+  border-color: var(--accent-green);
+}
+
+/* Footer */
+.footer {
+  color: var(--text-muted);
+}

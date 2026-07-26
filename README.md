@@ -149,6 +149,21 @@ docker run -p 3000:3000 vulnlab
 | LLM09 | Overreliance | No human oversight |
 | LLM10 | Model Theft | Weight exposure, extraction attacks |
 
+## ☁️ OWASP Cloud‑Native Top 10 (2024)
+
+| ID | Category | Exploits |
+|----|----------|----------|
+| C1 | Insecure Metadata Access | SSRF to metadata endpoint |
+| C2 | Container Escape | Privileged mounts, host FS |
+| C3 | Over‑Privileged IAM Role | Excessive permissions |
+| C4 | Secrets Leakage | Hardcoded keys, env vars |
+| C5 | Insecure Configuration | Open ports, default creds |
+| C6 | Unrestricted Network | Egress to internal services |
+| C7 | Inadequate Logging | No audit trails |
+| C8 | Insufficient Image Hygiene | Vulnerable base images |
+| C9 | Insecure Service Mesh | Unauthenticated services |
+| C10 | Supply Chain Compromise | Malicious dependencies |
+
 ## APIs Base Path
 All **OWASP API Top 10** endpoints are mounted at `/api/`. So e.g. `router.get('/api/users', ...)` becomes `GET /api/api/users`.
 All **OWASP Mobile Top 10** endpoints are mounted at `/mobile/`.

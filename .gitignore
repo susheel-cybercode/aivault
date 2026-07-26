@@ -2,6 +2,10 @@ node_modules/
 data/*.db
 data/uploads/*
 data/*.log
+# SQLite auxiliary files (journal, shared memory and write-ahead log)
+# These are auto‑generated during runtime and should not be version‑controlled.
+data/*.db-wal
+data/*.db-shm
 .env
 .env.*
 *.log
