@@ -1,6 +1,6 @@
-# Hosting VulnLab Safely
+# Hosting AIVault Safely
 
-VulnLab is **intentionally vulnerable**. Hosting it on the public internet
+AIVault is **intentionally vulnerable**. Hosting it on the public internet
 without the precautions below can let visitors compromise the **host machine**
 (RCE, file reads, cloud-metadata abuse), not just solve the in-app puzzles.
 
@@ -15,28 +15,28 @@ Set these env vars on every public deployment:
 
 | Variable | Value | Why |
 |---|---|---|
-| `VULNLAB_SAFE_MODE` | `1` (default) | Sandboxes `eval`, `child_process`, path traversal, and link-local/loopback SSRF. Vulnerable endpoints still demo, but cannot touch the host. |
-| `VULNLAB_GATE_USER` | e.g. `lab` | Locks the **entire** lab behind HTTP Basic Auth. |
-| `VULNLAB_GATE_PASS` | strong secret | Pair for the gate above. |
+| `AIVAULT_SAFE_MODE` | `1` (default) | Sandboxes `eval`, `child_process`, path traversal, and link-local/loopback SSRF. Vulnerable endpoints still demo, but cannot touch the host. |
+| `AIVAULT_GATE_USER` | e.g. `lab` | Locks the **entire** lab behind HTTP Basic Auth. |
+| `AIVAULT_GATE_PASS` | strong secret | Pair for the gate above. |
 | `NODE_ENV` | `production` | Enables secure session cookies. |
 | `JWT_SECRET` / `SESSION_SECRET` | long random secrets | Replaces the insecure demo defaults in `src/app.js`. |
 
 ```bash
-VULNLAB_SAFE_MODE=1 \
-VULNLAB_GATE_USER=lab \
-VULNLAB_GATE_PASS=$(openssl rand -hex 24) \
+AIVAULT_SAFE_MODE=1 \
+AIVAULT_GATE_USER=lab \
+AIVAULT_GATE_PASS=$(openssl rand -hex 24) \
 NODE_ENV=production \
 JWT_SECRET=$(openssl rand -hex 32) \
 SESSION_SECRET=$(openssl rand -hex 32) \
 npm start
 ```
 
-**Only set `VULNLAB_SAFE_MODE=0`** on a disposable, isolated host with no
+**Only set `AIVAULT_SAFE_MODE=0`** on a disposable, isolated host with no
 cloud credentials, no other processes, and **never** on a public network.
 
 ---
 
-## What `VULNLAB_SAFE_MODE=1` does
+## What `AIVAULT_SAFE_MODE=1` does
 
 Implemented in [`src/utils/safe-guard.js`](src/utils/safe-guard.js) and wired
 into the dangerous endpoints:
@@ -71,11 +71,11 @@ Put a reverse proxy (Caddy, nginx, Cloudflare) in front with rate-limiting to
 prevent brute-force of the Basic-Auth gate and DoS via large payloads.
 
 ### Rotate secrets
-Generate fresh `JWT_SECRET`, `SESSION_SECRET`, and `VULNLAB_GATE_PASS` per
+Generate fresh `JWT_SECRET`, `SESSION_SECRET`, and `AIVAULT_GATE_PASS` per
 environment. Never reuse the demo defaults from `src/app.js` in any deployment.
 
 ### Disposable data
-The SQLite DB in `data/vulnlab.db` is world-writable by design. Treat each
+The SQLite DB in `data/aivault.db` is world-writable by design. Treat each
 deployment as disposable — don't persist sensitive data into it.
 
 ---

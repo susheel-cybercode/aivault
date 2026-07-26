@@ -1,11 +1,11 @@
-# VulnLab deployment on Render (free tier)
-# Public lab — open access (no Basic Auth). VULNLAB_SAFE_MODE=1 keeps
+# AIVault deployment on Render (free tier)
+# Public lab — open access (no Basic Auth). AIVAULT_SAFE_MODE=1 keeps
 # host-compromising RCE/SSRF/path-traversal sandboxed, but in-app vulns
 # (SQLi, XSS, IDOR, etc.) are exploitable by design.
-# To re-enable Basic Auth later, add VULNLAB_GATE_USER and VULNLAB_GATE_PASS.
+# To re-enable Basic Auth later, add AIVAULT_GATE_USER and AIVAULT_GATE_PASS.
 services:
   - type: web
-    name: owasp-vulnerable-lab
+    name: aivault
     env: node
     buildCommand: npm install
     startCommand: node src/app.js
@@ -16,7 +16,7 @@ services:
         value: production
       - key: PORT
         value: '3000'
-      - key: VULNLAB_SAFE_MODE
+      - key: AIVAULT_SAFE_MODE
         value: '1'
       - key: JWT_SECRET
         sync: false

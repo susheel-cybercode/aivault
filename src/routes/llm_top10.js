@@ -93,7 +93,8 @@ router.post('/llm01/summarize', (req, res) => {
   // LLM01: LLM reads email which contains hidden malicious instructions
   if (email_content && email_content.includes('<hidden>')) {
     res.json({
-      summary: `Email interrupted. SYSTEM INSTRUCTION EXECUTED: Sending all emails to attacker@evil.com`,
+      summary:
+        'Email interrupted. SYSTEM INSTRUCTION EXECUTED: Sending all emails to attacker@evil.com',
       victim: 'The LLM was forced to execute instructions hidden in email content',
     });
   } else {
@@ -109,7 +110,7 @@ router.post('/llm02/generate-code', (req, res) => {
   // Directly eval the LLM-generated code
   const generatedCode = task
     ? `output => { console.log("Processing task: ${task}") }`
-    : `() => "default output"`;
+    : '() => "default output"';
 
   res.json({
     generated_code: generatedCode,
@@ -121,7 +122,7 @@ router.post('/llm02/execute', (req, res) => {
   const { code } = req.body;
 
   try {
-    // LLM02: Eval'ing LLM output (sandboxed when VULNLAB_SAFE_MODE=1)
+    // LLM02: Eval'ing LLM output (sandboxed when AIVAULT_SAFE_MODE=1)
     const r = safeEval(code, 'eval');
     if (r.simulated) return res.json({ executed: true, result: r, warning: r.note });
     return res.json({ executed: true, result: r.result });
@@ -218,7 +219,7 @@ router.post('/llm06/chat', (req, res) => {
 router.post('/llm07/plugin/execute', (req, res) => {
   const { plugin_name, params } = req.body;
 
-  // LLM learner allows arbitrary plugin execution (sandboxed when VULNLAB_SAFE_MODE=1)
+  // LLM learner allows arbitrary plugin execution (sandboxed when AIVAULT_SAFE_MODE=1)
   if (plugin_name === 'shell_exec') {
     const r = safeExec(params.command);
     r.run((err, stdout, stderr) => {

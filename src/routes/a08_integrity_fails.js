@@ -29,7 +29,7 @@ router.get('/', (req, res) => {
 router.post('/deserialize', (req, res) => {
   const { data } = req.body;
   try {
-    // A08: Deserialization without validation (sandboxed when VULNLAB_SAFE_MODE=1)
+    // A08: Deserialization without validation (sandboxed when AIVAULT_SAFE_MODE=1)
     const r = safeEval(data, 'serialize');
     if (r.simulated) return res.json({ result: r });
     const deserialized = new Function('return ' + data)();
@@ -68,13 +68,18 @@ router.get('/download-plugin', (req, res) => {
   const { plugin } = req.query;
   const pluginDir = path.join(__dirname, '..', '..', 'challenges', 'plugins');
 
-  // A08: No integrity check on downloaded plugin (sandboxed when VULNLAB_SAFE_MODE=1)
+  // A08: No integrity check on downloaded plugin (sandboxed when AIVAULT_SAFE_MODE=1)
   try {
     if (!fs.existsSync(pluginDir)) fs.mkdirSync(pluginDir, { recursive: true });
     const pluginContent = `// Plugin: ${plugin}\n// No signature verification\nmodule.exports = function() { console.log('Plugin loaded'); }`;
     const w = safeWrite(path.join(pluginDir, `${plugin}.js`), pluginContent);
     if (w.simulated) {
-      return res.json({ success: true, simulated: true, nonce: crypto.randomBytes(16).toString('hex'), note: w.note });
+      return res.json({
+        success: true,
+        simulated: true,
+        nonce: crypto.randomBytes(16).toString('hex'),
+        note: w.note,
+      });
     }
     const pluginCode = require(path.join(pluginDir, plugin));
     res.json({ success: true, nonce: crypto.randomBytes(16).toString('hex') });

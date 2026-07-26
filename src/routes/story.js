@@ -281,7 +281,7 @@ router.get('/scoreboard', (req, res) => {
   const myRank = getRank(req.session.faction || 'null', myProgress.points);
   const achievements = getEarnedAchievements(completed);
   res.render('story/scoreboard', {
-    title: 'Scoreboard — VulnLab',
+    title: 'Scoreboard — AIVault',
     board,
     story: STORY,
     myProgress,

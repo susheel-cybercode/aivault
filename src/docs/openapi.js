@@ -5,7 +5,7 @@
 const swaggerSpec = {
   openapi: '3.0.3',
   info: {
-    title: 'OWASP Vulnerable Lab ECHO-7 API',
+    title: 'AIVault ECHO-7 API',
     description:
       'INTENTIONALLY VULNERABLE - For educational/CTF use only. ' +
       'Covers OWASP Top 10 across Web, API, Mobile, and LLM applications. ' +
@@ -18,7 +18,7 @@ const swaggerSpec = {
     },
     contact: {
       name: 'OWASP Vulnerable Lab',
-      url: 'https://github.com/yourusername/vulnlab',
+      url: 'https://github.com/yourusername/aivault',
     },
   },
   servers: [

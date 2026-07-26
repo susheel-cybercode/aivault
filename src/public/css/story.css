@@ -1,23 +1,25 @@
-/* VulnLab Story Theme */
+/* AIVault Story Theme — Modern Cyberpunk */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap');
 
 @keyframes glitchAnim {
   0% {
     text-shadow:
-      2px 0 #ff3366,
-      -2px 0 #00aaff;
+      2px 0 #00e5ff,
+      -2px 0 #ff2e88;
   }
   25% {
     text-shadow:
-      -2px 0 #ff3366,
-      2px 0 #00aaff;
+      -2px 0 #00e5ff,
+      2px 0 #ff2e88;
   }
   50% {
     transform: translateY(-1px);
   }
   100% {
     text-shadow:
-      1px 0 #ff3366,
-      -1px 0 #00aaff;
+      1px 0 #00e5ff,
+      -1px 0 #ff2e88;
   }
 }
 
@@ -33,19 +35,19 @@
 
 body.intro-bg {
   background:
-    radial-gradient(ellipse at center, rgba(0, 80, 160, 0.3) 0%, rgba(0, 0, 0, 0.95) 70%),
-    linear-gradient(180deg, #000 0%, #050510 100%);
+    radial-gradient(ellipse at center, rgba(0, 229, 255, 0.15) 0%, rgba(0, 0, 0, 0.95) 70%),
+    linear-gradient(180deg, #0a0a12 0%, #12121f 100%);
   min-height: 100vh;
-  color: #cfd8dc;
+  color: #e8e8f0;
   font-family: 'JetBrains Mono', monospace;
   overflow-x: hidden;
 }
 
 body.vault-bg {
   background:
-    radial-gradient(ellipse at top, rgba(60, 0, 80, 0.3) 0%, rgba(0, 0, 0, 0.95) 70%), #000;
+    radial-gradient(ellipse at top, rgba(255, 46, 136, 0.15) 0%, rgba(0, 0, 0, 0.95) 70%), #0a0a12;
   min-height: 100vh;
-  color: #cfd8dc;
+  color: #e8e8f0;
   font-family: 'JetBrains Mono', monospace;
 }
 
@@ -56,7 +58,7 @@ body.vault-bg {
     0deg,
     transparent 0,
     transparent 3px,
-    rgba(0, 255, 65, 0.02) 4px
+    rgba(0, 229, 255, 0.025) 4px
   );
   pointer-events: none;
   z-index: 1;
@@ -73,29 +75,41 @@ body.vault-bg {
 
 h1.glitch {
   text-align: center;
-  font-size: 3rem;
-  letter-spacing: 4px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3.5rem;
+  font-weight: 900;
+  letter-spacing: 8px;
   color: #fff;
   text-transform: uppercase;
   margin-bottom: 1rem;
   animation: glitchAnim 4s infinite;
+  background: linear-gradient(90deg, #00e5ff, #00ff9d, #ff2e88);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .subtitle {
   text-align: center;
-  font-size: 1.1rem;
-  color: #ffaa00;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  color: #ffb547;
   margin-bottom: 3rem;
-  letter-spacing: 3px;
+  letter-spacing: 4px;
+  text-shadow: 0 0 12px rgba(255, 181, 71, 0.3);
 }
 
 .briefing {
-  background: rgba(0, 30, 60, 0.6);
-  border: 1px solid #00aaff;
+  background: rgba(0, 20, 40, 0.6);
+  border: 1px solid rgba(0, 229, 255, 0.3);
   padding: 2rem;
   margin: 2rem 0;
-  border-radius: 4px;
+  border-radius: 14px;
   line-height: 1.8;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 0 30px rgba(0, 229, 255, 0.08);
 }
 
 .briefing p {
@@ -103,21 +117,24 @@ h1.glitch {
   margin: 0.5rem 0;
 }
 .briefing h3 {
-  color: #00aaff;
+  color: #00e5ff;
   margin-bottom: 1rem;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 0 8px rgba(0, 229, 255, 0.3);
 }
 .briefing strong {
   color: #fff;
 }
 .briefing .warning {
-  color: #ff3366;
+  color: #ff2e88;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
   text-align: center;
   font-size: 1.1rem;
+  text-shadow: 0 0 12px rgba(255, 46, 136, 0.4);
 }
 
 .faction-grid {
@@ -129,31 +146,35 @@ h1.glitch {
 
 .faction-card {
   border: 2px solid #444;
-  background: rgba(20, 20, 30, 0.7);
+  background: rgba(20, 20, 30, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   padding: 2rem;
-  border-radius: 8px;
-  transition: all 0.3s;
+  border-radius: 14px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .faction-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px);
 }
 
 .faction-aegis {
-  border-color: #00aaff;
-  box-shadow: 0 0 20px rgba(0, 170, 255, 0.2);
+  border-color: #00e5ff;
+  box-shadow: 0 0 24px rgba(0, 229, 255, 0.15);
 }
 .faction-aegis:hover {
-  box-shadow: 0 0 30px rgba(0, 170, 255, 0.5);
+  box-shadow: 0 0 40px rgba(0, 229, 255, 0.4), 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 .faction-null {
-  border-color: #ff3366;
-  box-shadow: 0 0 20px rgba(255, 51, 102, 0.2);
+  border-color: #ff2e88;
+  box-shadow: 0 0 24px rgba(255, 46, 136, 0.15);
 }
 .faction-null:hover {
-  box-shadow: 0 0 30px rgba(255, 51, 102, 0.5);
+  box-shadow: 0 0 40px rgba(255, 46, 136, 0.4), 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 .faction-card h2 {
@@ -162,10 +183,12 @@ h1.glitch {
   margin-bottom: 0.5rem;
 }
 .faction-aegis h2 {
-  color: #00aaff;
+  color: #00e5ff;
+  text-shadow: 0 0 12px rgba(0, 229, 255, 0.3);
 }
 .faction-null h2 {
-  color: #ff3366;
+  color: #ff2e88;
+  text-shadow: 0 0 12px rgba(255, 46, 136, 0.3);
 }
 
 .badge {
@@ -214,28 +237,31 @@ h1.glitch {
   transition: all 0.2s;
 }
 .faction-aegis button {
-  border-color: #00aaff;
-  color: #00aaff;
+  border-color: #00e5ff;
+  color: #00e5ff;
 }
 .faction-aegis button:hover {
-  background: #00aaff;
-  color: #000;
+  background: #00e5ff;
+  color: #0a0a12;
+  box-shadow: 0 0 24px rgba(0, 229, 255, 0.5);
 }
 .faction-null button {
-  border-color: #ff3366;
-  color: #ff3366;
+  border-color: #ff2e88;
+  color: #ff2e88;
 }
 .faction-null button:hover {
-  background: #ff3366;
-  color: #000;
+  background: #ff2e88;
+  color: #0a0a12;
+  box-shadow: 0 0 24px rgba(255, 46, 136, 0.5);
 }
 
 .status {
   text-align: center;
   margin: 2rem 0;
   padding: 1rem;
-  background: rgba(0, 255, 65, 0.1);
-  border-left: 3px solid #00ff41;
+  background: rgba(0, 255, 157, 0.08);
+  border-left: 3px solid #00ff9d;
+  border-radius: 8px;
 }
 
 .hint-text {
@@ -254,11 +280,24 @@ h1.glitch {
 
 .vault-title {
   text-align: center;
-  font-size: 2.5rem;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.75rem;
+  font-weight: 900;
   color: #fff;
-  letter-spacing: 6px;
+  letter-spacing: 8px;
   margin-bottom: 0.5rem;
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  text-shadow: 0 0 24px rgba(0, 229, 255, 0.4);
+  background: linear-gradient(90deg, #00e5ff, #00ff9d, #ff2e88);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmerText 6s linear infinite;
+}
+
+@keyframes shimmerText {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
 }
 
 .vault-sub {
@@ -269,11 +308,14 @@ h1.glitch {
 }
 
 .player-card {
-  background: rgba(20, 20, 30, 0.8);
+  background: rgba(20, 20, 30, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 2px solid;
-  border-radius: 6px;
+  border-radius: 14px;
   padding: 1.5rem;
   margin-bottom: 2rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
 }
 
 .player-card-header {
@@ -315,7 +357,9 @@ h1.glitch {
 .progress-fill {
   height: 100%;
   transition: width 0.5s;
-  box-shadow: 0 0 10px currentColor;
+  box-shadow: 0 0 12px currentColor;
+  background: linear-gradient(90deg, #00e5ff, #00ff9d);
+  border-radius: 4px;
 }
 
 .player-card .tagline {
@@ -331,8 +375,8 @@ h1.glitch {
   margin-bottom: 2rem;
   padding: 1rem;
   background: rgba(0, 0, 0, 0.4);
-  border-radius: 4px;
-  border-left: 3px solid #ffaa00;
+  border-radius: 8px;
+  border-left: 3px solid #ffb547;
 }
 
 .pillar-block {
@@ -340,11 +384,13 @@ h1.glitch {
 }
 
 .pillar-block h2 {
-  color: #ffaa00;
-  font-size: 1.2rem;
+  color: #ffb547;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.05rem;
+  letter-spacing: 1.5px;
   margin-bottom: 1rem;
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .lock-grid {
@@ -355,27 +401,28 @@ h1.glitch {
 
 .lock-card {
   display: block;
-  background: rgba(0, 0, 0, 0.6);
-  border: 1px solid #333;
-  border-radius: 6px;
+  background: rgba(10, 10, 18, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
   padding: 1.25rem;
   text-decoration: none;
-  color: #fff;
-  transition: all 0.2s;
+  color: #e8e8f0;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .lock-card:hover {
-  border-color: #ffaa00;
-  transform: translateY(-2px);
+  border-color: #ffb547;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 16px rgba(255, 181, 71, 0.15);
 }
 .lock-card.completed {
-  background: rgba(0, 255, 65, 0.05);
-  border-color: #00ff41;
-  box-shadow: 0 0 10px rgba(0, 255, 65, 0.1);
+  background: rgba(0, 255, 157, 0.05);
+  border-color: #00ff9d;
+  box-shadow: 0 0 12px rgba(0, 255, 157, 0.1);
 }
 
 .lock-code {
-  color: #ffaa00;
-  font-size: 0.75rem;
+  color: #ffb547;
+  font-size: 0.72rem;
   letter-spacing: 2px;
   margin-bottom: 0.25rem;
 }
@@ -395,7 +442,7 @@ h1.glitch {
   color: #ff3366;
 }
 .lock-card.completed .lock-status {
-  color: #00ff41;
+  color: #00ff9d;
 }
 
 footer {
@@ -406,7 +453,7 @@ footer {
   color: #666;
 }
 footer a {
-  color: #00aaff;
+  color: #00e5ff;
   margin: 0 0.5rem;
 }
 
@@ -419,16 +466,17 @@ footer a {
 
 .back-link {
   display: inline-block;
-  color: #00aaff;
+  color: #00e5ff;
   margin-bottom: 1.5rem;
   font-size: 0.9rem;
 }
+.back-link:hover { color: #00ff9d; }
 
 .chapter-header {
   margin-bottom: 2rem;
 }
 .chapter-code {
-  color: #ffaa00;
+  color: #ffb547;
   letter-spacing: 3px;
   font-size: 0.8rem;
 }
@@ -447,42 +495,50 @@ footer a {
 }
 
 .chapter-briefing {
-  background: rgba(0, 20, 40, 0.8);
-  border-left: 3px solid #00aaff;
+  background: rgba(0, 20, 40, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-left: 3px solid #00e5ff;
   padding: 1.5rem;
   margin-bottom: 2rem;
   line-height: 1.7;
+  border-radius: 0 10px 10px 0;
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.06);
 }
 .chapter-briefing h3 {
-  color: #00aaff;
+  color: #00e5ff;
   font-size: 0.8rem;
   letter-spacing: 2px;
+  text-transform: uppercase;
   margin-bottom: 1rem;
+  text-shadow: 0 0 8px rgba(0, 229, 255, 0.3);
 }
 .faction-objective {
-  color: #ffaa00;
+  color: #ffb547;
   padding-top: 0.75rem;
-  border-top: 1px solid rgba(255, 170, 0, 0.2);
+  border-top: 1px solid rgba(255, 181, 71, 0.2);
   margin-top: 0.75rem;
 }
 
 .completed-stamp {
-  color: #00ff41;
+  color: #00ff9d;
   font-weight: 700;
   margin-top: 1rem;
   letter-spacing: 2px;
+  text-shadow: 0 0 8px rgba(0, 255, 157, 0.3);
 }
 .pending-stamp {
-  color: #ff3366;
+  color: #ff2e88;
   font-weight: 700;
   margin-top: 1rem;
   letter-spacing: 2px;
+  text-shadow: 0 0 8px rgba(255, 46, 136, 0.3);
 }
 
 .access-points {
-  background: rgba(0, 40, 20, 0.5);
-  border: 1px solid #00ff41;
-  border-radius: 4px;
+  background: rgba(0, 40, 20, 0.4);
+  border: 1px solid rgba(0, 255, 157, 0.3);
+  border-radius: 10px;
   padding: 1.5rem;
   margin-bottom: 2rem;
 }
@@ -496,31 +552,33 @@ footer a {
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 .access-points a {
-  color: #00aaff;
+  color: #00e5ff;
   text-decoration: none;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.9rem;
 }
 .access-points a:hover {
-  color: #00ffff;
+  color: #00ff9d;
+  text-shadow: 0 0 8px rgba(0, 255, 157, 0.4);
 }
 
 .crack-button {
-  background: linear-gradient(45deg, #ff3366, #ff0044);
+  background: linear-gradient(135deg, #ff2e88, #ff4757);
   color: #fff;
   border: none;
   padding: 1rem 2rem;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Orbitron', sans-serif;
   font-weight: 700;
   letter-spacing: 3px;
   font-size: 1rem;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 10px;
   width: 100%;
-  transition: all 0.2s;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 20px rgba(255, 46, 136, 0.25);
 }
 .crack-button:hover {
-  box-shadow: 0 0 25px rgba(255, 51, 102, 0.6);
+  box-shadow: 0 0 35px rgba(255, 46, 136, 0.5);
   transform: scale(1.02);
 }
 
@@ -537,6 +595,6 @@ table td {
   color: #ccc;
 }
 table th {
-  background: #1a1a1a;
-  color: #ffaa00;
+  background: rgba(0, 229, 255, 0.08);
+  color: #00e5ff;
 }

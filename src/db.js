@@ -7,7 +7,7 @@ const fs = require('fs');
 const { DatabaseSync } = require('node:sqlite');
 
 const dbDir = path.join(__dirname, '..', 'data');
-const dbPath = path.join(dbDir, 'vulnlab.db');
+const dbPath = path.join(dbDir, 'aivault.db');
 if (!fs.existsSync(dbDir)) fs.mkdirSync(dbDir, { recursive: true });
 
 const db = new DatabaseSync(dbPath);
@@ -128,7 +128,7 @@ if (count.c === 0) {
   const iu = db.prepare(
     'INSERT INTO users (username, password, email, role, credit_card, ssn) VALUES (?,?,?,?,?,?)'
   );
-  iu.run('admin', 'admin123', 'admin@vulnlab.local', 'admin', '4532-XXXX-XXXX-1234', '123-45-6789');
+  iu.run('admin', 'admin123', 'admin@aivault.local', 'admin', '4532-XXXX-XXXX-1234', '123-45-6789');
   iu.run('alice', 'password123', 'alice@email.com', 'user', '4111-XXXX-XXXX-1111', '987-65-4321');
   iu.run('bob', 'letmein', 'bob@email.com', 'user', '5500-XXXX-XXXX-2222', '456-78-9123');
   iu.run(
@@ -147,7 +147,7 @@ if (count.c === 0) {
   );
   db.prepare('INSERT INTO posts (user_id, title, content) VALUES (?,?,?)').run(
     1,
-    'Welcome to VulnLab',
+    'Welcome to AIVault',
     'This is a vulnerable lab.'
   );
   db.prepare('INSERT INTO posts (user_id, title, content) VALUES (?,?,?)').run(

@@ -64,7 +64,7 @@ router.get('/', (req, res) => {
   // Find the first step that is not completed (or the last one if all done)
   const nextStep = steps.find((s) => !completed.includes(s.id)) || steps[steps.length - 1];
   res.render('campaign', {
-    title: 'VulnLab Campaign Mode',
+    title: 'AIVault Campaign Mode',
     steps,
     completed,
     nextStep,

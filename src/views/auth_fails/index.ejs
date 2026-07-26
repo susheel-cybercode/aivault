@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html><head><meta charset=UTF-8><title><%= title %></title><link rel="stylesheet" href="/css/terminal.css"></head>
 <body><div class="terminal-container"><div class="terminal-header"><span class="terminal-title">[A07] Auth Failures</span></div>
-<div class="terminal-body"><h1>A07:2021 - Auth Failures</h1>
+<div class="terminal-body fade-in"><h1>A07:2021 - Auth Failures</h1>
 <ul><li><a href="/auth-failures">Brute Force</a></li><li><a href="/auth-failures/exposed-credentials">Exposed Credentials</a></li><li><a href="/auth-failures/create-session?sid=fixed-session">Session Fixation</a></li><li><a href="/auth-failures/api/user-info?id=1">User Enumeration</a></li></ul>
 <h3>Test Brute Force</h3>
 <form method="POST" action="/auth-failures/brute-force-login" class="vuln-form">

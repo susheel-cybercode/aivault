@@ -1,4 +1,4 @@
-# Deploy VulnLab to the Web
+# Deploy AIVault to the Web
 
 Three free hosting options. Pick one — Render is the easiest. Each takes ~5–15 min.
 
@@ -9,13 +9,13 @@ Three free hosting options. Pick one — Render is the easiest. Each takes ~5–
 ## Step 0 — Push to GitHub (do this once)
 
 1. Create a new **empty** repo at https://github.com/new
-   - Name: `vulnlab`
+   - Name: `aivault`
    - Set to **Public** or **Private** (either works)
    - Do NOT add a README / .gitignore / license (we already have them)
 
 2. From this folder on your machine:
    ```bash
-   git remote add origin https://github.com/YOUR_USERNAME/vulnlab.git
+   git remote add origin https://github.com/YOUR_USERNAME/aivault.git
    git branch -M main
    git push -u origin main
    ```
@@ -27,7 +27,7 @@ Three free hosting options. Pick one — Render is the easiest. Each takes ~5–
 Render auto-detects `render.yaml` and sets everything up.
 
 1. Go to https://dashboard.render.com → **New +** → **Blueprint**
-2. Select your `vulnlab` GitHub repo
+2. Select your `aivault` GitHub repo
 3. Render reads `render.yaml` and lists the services — click **Apply**
 4. Wait for the build (~3–5 min)
 
@@ -36,9 +36,9 @@ In Render: open the `owasp-vulnerable-lab` web service → **Environment** → a
 
 | Key | Value |
 |---|---|
-| `VULNLAB_SAFE_MODE` | `1` (already in render.yaml) |
-| `VULNLAB_GATE_USER` | `lab` (or any username) |
-| `VULNLAB_GATE_PASS` | run `openssl rand -hex 24` locally, paste the output |
+| `AIVAULT_SAFE_MODE` | `1` (already in render.yaml) |
+| `AIVAULT_GATE_USER` | `lab` (or any username) |
+| `AIVAULT_GATE_PASS` | run `openssl rand -hex 24` locally, paste the output |
 | `JWT_SECRET` | run `openssl rand -hex 32`, paste |
 | `SESSION_SECRET` | run `openssl rand -hex 32`, paste |
 
@@ -61,8 +61,8 @@ In Render: open the `owasp-vulnerable-lab` web service → **Environment** → a
    - When prompted "Would you like to deploy now?" answer **N** so we can set secrets first.
 4. Set your security secrets:
    ```bash
-   fly secrets set VULNLAB_GATE_USER=lab \
-                   VULNLAB_GATE_PASS=$(openssl rand -hex 24) \
+   fly secrets set AIVAULT_GATE_USER=lab \
+                   AIVAULT_GATE_PASS=$(openssl rand -hex 24) \
                    JWT_SECRET=$(openssl rand -hex 32) \
                    SESSION_SECRET=$(openssl rand -hex 32)
    ```
@@ -83,7 +83,7 @@ In Render: open the `owasp-vulnerable-lab` web service → **Environment** → a
 Use this if you want the pretty splash page on your own domain and the API on Render.
 
 1. Deploy the **backend** on Render (Option A above). Note your URL, e.g. `https://owasp-vulnerable-lab.onrender.com`.
-2. Edit `src/public/index.html` — find `window.VULNLAB_API` and set it to your Render URL.
+2. Edit `src/public/index.html` — find `window.AIVAULT_API` and set it to your Render URL.
 3. Push the contents of `src/public/` to a `gh-pages` branch:
    ```bash
    git checkout -b gh-pages
@@ -93,7 +93,7 @@ Use this if you want the pretty splash page on your own domain and the API on Re
    git checkout main
    ```
 4. On GitHub: repo → **Settings** → **Pages** → Source: `gh-pages` branch / root.
-5. Wait ~1 min. Visit `https://YOUR_USERNAME.github.io/vulnlab/` for the splash — it calls your Render backend.
+5. Wait ~1 min. Visit `https://YOUR_USERNAME.github.io/aivault/` for the splash — it calls your Render backend.
 
 ---
 

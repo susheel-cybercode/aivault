@@ -12,7 +12,7 @@ describe('OWASP Vulnerable Lab - Core Routes', () => {
     it('should return 200 and render index page', async () => {
       const res = await agent.get('/');
       expect(res.status).toBe(200);
-      expect(res.text).toMatch(/VulnLab|ECHO-7/i);
+      expect(res.text).toMatch(/AIVault|ECHO-7/i);
     });
   });
 

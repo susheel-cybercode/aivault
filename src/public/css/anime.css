@@ -1,106 +1,220 @@
-/* Anime Cyberpunk Theme */
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+/* ──────────────────────────────────────────────────────────────────
+   Anime Cyberpunk Theme — Effects & Particles
+   ────────────────────────────────────────────────────────────────── */
 
-:root {
-  /* Primary neon palette */
-  --bg-primary: #0d0d1a; /* dark midnight */
-  --bg-secondary: #151533; /* subtle gradient */
-  --accent-green: #00ff41;
-  --accent-pink: #ff00ff;
-  --accent-cyan: #00ffff;
-  --text-primary: #f8f8f2;
-  --text-muted: #888;
+/* —— Custom scrollbar —— */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track {
+  background: #0a0a12;
 }
-
-body {
-  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-  color: var(--text-primary);
-  font-family: 'Press Start 2P', monospace;
-  min-height: 100vh;
-  margin: 0;
-  padding: 2rem;
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff2e88, #00e5ff);
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
 }
-
-/* Override terminal container for anime look */
-.terminal-container {
-  background: rgba(13, 13, 26, 0.85);
-  border: 2px solid var(--accent-pink);
-  border-radius: 12px;
-  box-shadow: 0 0 30px var(--accent-cyan);
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ff2e88, #00ff9d);
 }
+/* Firefox */
+html { scrollbar-width: thin; scrollbar-color: #ff2e88 #0a0a12; }
 
-.terminal-header {
-  background: rgba(21, 21, 51, 0.9);
-  border-bottom: 1px solid var(--accent-pink);
+/* —— Text selection —— */
+::selection {
+  background: rgba(0, 229, 255, 0.3);
+  color: #fff;
+  text-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+}
+::-moz-selection {
+  background: rgba(0, 229, 255, 0.3);
+  color: #fff;
 }
 
-.terminal-title {
-  color: var(--accent-green);
-  font-size: 0.9rem;
-  font-weight: 700;
+/* —— Sakura petals —— */
+.petal {
+  position: fixed;
+  top: -20px;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  animation: petalFall linear infinite;
+  filter: drop-shadow(0 0 4px rgba(255, 46, 136, 0.4));
 }
 
-.control {
-  color: var(--text-muted);
-}
-.control:hover {
-  color: var(--accent-cyan);
-}
-
-a {
-  color: var(--accent-pink);
-  text-decoration: underline;
-}
-
-a:hover {
-  color: var(--accent-green);
+@keyframes petalFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% { opacity: 0.5; }
+  90% { opacity: 0.5; }
+  100% {
+    transform: translateY(105vh) rotate(720deg);
+    opacity: 0;
+  }
 }
 
-/* Header and titles */
-h1, h2, h3 {
-  color: var(--accent-cyan);
-  margin-top: 1rem;
+/* —— Neon glow pulse for link hover —— */
+@keyframes neonGlow {
+  0%, 100% { text-shadow: 0 0 5px currentColor, 0 0 10px currentColor; }
+  50%      { text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor; }
 }
 
-.warning, .error {
-  color: var(--accent-pink);
-  background: rgba(255, 0, 255, 0.1);
-  padding: 0.5rem;
-  border-left: 4px solid var(--accent-pink);
+/* —— Glitch text effect —— */
+.glitch {
+  position: relative;
+  display: inline-block;
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  overflow: hidden;
+}
+.glitch::before {
+  color: #ff2e88;
+  animation: glitchTop 2.5s infinite linear alternate-reverse;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+}
+.glitch::after {
+  color: #00e5ff;
+  animation: glitchBottom 3s infinite linear alternate-reverse;
+  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
 }
 
-/* Buttons */
-.vuln-form button {
-  background: var(--accent-pink);
-  border: none;
-  color: #111;
-  font-weight: bold;
+@keyframes glitchTop {
+  0%   { transform: translate(0); }
+  20%  { transform: translate(-2px, -1px); }
+  40%  { transform: translate(2px, 1px); }
+  60%  { transform: translate(-1px, 1px); }
+  80%  { transform: translate(1px, -1px); }
+  100% { transform: translate(0); }
 }
-.vuln-form button:hover {
-  background: var(--accent-green);
-}
-
-/* Table styling */
-table th {
-  background: rgba(21, 21, 51, 0.8);
-  color: var(--accent-cyan);
-}
-
-/* Misc UI tweaks */
-.nav-menu {
-  background: rgba(21, 21, 51, 0.9);
-  border-radius: 6px;
+@keyframes glitchBottom {
+  0%   { transform: translate(0); }
+  20%  { transform: translate(2px, 1px); }
+  40%  { transform: translate(-2px, -1px); }
+  60%  { transform: translate(1px, -1px); }
+  80%  { transform: translate(-1px, 1px); }
+  100% { transform: translate(0); }
 }
 
-.challenge-card {
-  background: rgba(13, 13, 26, 0.8);
-  border: 1px solid var(--accent-pink);
+/* —— Continuous gradient text —— */
+.gradient-text {
+  background: linear-gradient(90deg, #00e5ff, #ff2e88, #00ff9d, #00e5ff);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 6s linear infinite;
 }
-.challenge-card:hover {
-  border-color: var(--accent-green);
+@keyframes gradientShift {
+  0%   { background-position: 0% center; }
+  100% { background-position: 300% center; }
 }
 
-/* Footer */
-.footer {
-  color: var(--text-muted);
+/* —— Floating animation —— */
+.float { animation: floatY 4s ease-in-out infinite; }
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+/* —— Fade-in animation for page content —— */
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* —— Slide-in from left —— */
+.slide-in-left {
+  animation: slideInLeft 0.5s ease-out;
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* —— Scale-in on load —— */
+.scale-in {
+  animation: scaleIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* —— Scanline overlay (subtle CRT effect) —— */
+.scanlines::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0,
+    transparent 3px,
+    rgba(0, 255, 157, 0.02) 4px
+  );
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* —— Neon card border glow —— */
+.neon-border {
+  position: relative;
+}
+.neon-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--accent-cyan, #00e5ff), var(--accent-pink, #ff2e88));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.neon-border:hover::before { opacity: 1; }
+
+/* —— Typing cursor —— */
+.type-cursor::after {
+  content: '█';
+  animation: blink 1s step-end infinite;
+  color: var(--green, #00ff9d);
+}
+@keyframes blink {
+  0%, 50%  { opacity: 1; }
+  51%, 100%{ opacity: 0; }
+}
+
+/* —— Progress shimmer —— */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(0, 229, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmerMove 2s infinite;
+}
+@keyframes shimmerMove {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* —— Reduced motion preference —— */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .petal { display: none; }
 }

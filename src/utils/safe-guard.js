@@ -5,7 +5,7 @@
  * some primitives (eval, child_process, fs path traversal, unrestricted
  * network egress) could let a visitor take over the HOST MACHINE itself.
  *
- * Set VULNLAB_SAFE_MODE=1 (default) to sandbox the genuinely dangerous
+ * Set AIVAULT_SAFE_MODE=1 (default) to sandbox the genuinely dangerous
  * operations. The endpoints still demonstrate the vulnerability and return
  * the same response shape, but cannot:
  *   - execute arbitrary JS on the host
@@ -13,12 +13,12 @@
  *   - read/write files outside the lab's data dir
  *   - reach cloud metadata (169.254.169.254) or link-local addresses
  *
- * Set VULNLAB_SAFE_MODE=0 ONLY in an isolated, throwaway environment
+ * Set AIVAULT_SAFE_MODE=0 ONLY in an isolated, throwaway environment
  * (disposable VM, no cloud credentials, no secrets on the box) and never
  * on a public network.
  */
 
-const isSafeMode = () => (process.env.VULNLAB_SAFE_MODE ?? '1') !== '0';
+const isSafeMode = () => (process.env.AIVAULT_SAFE_MODE ?? '1') !== '0';
 const LabsDataDir = require('path').resolve(__dirname, '..', 'data');
 
 /**
@@ -38,7 +38,7 @@ function safeEval(code, kind = 'eval') {
   const looks = {
     'process.env': /process\.env/,
     'require(': /require\(/,
-    'child_process': /child_process/,
+    child_process: /child_process/,
     'fetch(': /\bfetch\(/,
   };
   const detected = Object.keys(looks).filter((k) => looks[k].test(preview));
@@ -46,7 +46,7 @@ function safeEval(code, kind = 'eval') {
   return {
     safe: true,
     simulated: true,
-    note: `SAFE MODE: code parsed but NOT executed (kind=${kind}). Set VULNLAB_SAFE_MODE=0 only on an isolated host.`,
+    note: `SAFE MODE: code parsed but NOT executed (kind=${kind}). Set AIVAULT_SAFE_MODE=0 only on an isolated host.`,
     code_preview: preview,
     detected_patterns: detected,
   };
@@ -65,7 +65,10 @@ function safeExec(cmd) {
 
   const preview = String(cmd).slice(0, 200);
   const injected = /[;&|`$]/.test(preview)
-    ? preview.split(/[;&|`$]/).map((s) => s.trim()).filter(Boolean)
+    ? preview
+        .split(/[;&|`$]/)
+        .map((s) => s.trim())
+        .filter(Boolean)
     : [];
 
   return {
@@ -76,7 +79,7 @@ function safeExec(cmd) {
         null,
         `[SAFE MODE] Command not executed on host.\nParsed cmdline: ${preview}` +
           (injected.length ? `\nDetected injected commands: ${injected.join(', ')}` : '') +
-          `\nSet VULNLAB_SAFE_MODE=0 only on an isolated host.`,
+          '\nSet AIVAULT_SAFE_MODE=0 only on an isolated host.',
         ''
       );
     },
@@ -104,7 +107,7 @@ function safePath(target) {
     safe: true,
     blocked: true,
     path: null,
-    note: `SAFE MODE: path traversal blocked (would read ${resolved}). Set VULNLAB_SAFE_MODE=0 only on an isolated host.`,
+    note: `SAFE MODE: path traversal blocked (would read ${resolved}). Set AIVAULT_SAFE_MODE=0 only on an isolated host.`,
   };
 }
 
@@ -137,7 +140,7 @@ function safeFetch(url) {
       safe: true,
       blocked: true,
       url: null,
-      note: `SAFE MODE: SSRF to ${hit} blocked. Set VULNLAB_SAFE_MODE=0 only on an isolated host.`,
+      note: `SAFE MODE: SSRF to ${hit} blocked. Set AIVAULT_SAFE_MODE=0 only on an isolated host.`,
     };
   }
   return { safe: true, url: u };
@@ -163,7 +166,7 @@ function safeWrite(targetPath, content) {
     safe: true,
     simulated: true,
     path: resolved,
-    note: `SAFE MODE: write redirected to in-memory store. Set VULNLAB_SAFE_MODE=0 only on an isolated host.`,
+    note: 'SAFE MODE: write redirected to in-memory store. Set AIVAULT_SAFE_MODE=0 only on an isolated host.',
   };
 }
 

@@ -20,7 +20,7 @@ const swaggerSpec = require('./docs/openapi');
 // ⚠️ CRITICAL: Using fake/in-memory-only AI tokens and SQLite
 // No real API keys should ever be committed
 process.env.OPENAI_API_KEY =
-  process.env.OPENAI_API_KEY || 'sk-vulnlab-demo-placeholder-do-not-use-real-key';
+  process.env.OPENAI_API_KEY || 'sk-aivault-demo-placeholder-do-not-use-real-key';
 process.env.JWT_SECRET = process.env.JWT_SECRET || 'insecure-jwt-secret-for-lab';
 process.env.SESSION_SECRET = process.env.SESSION_SECRET || 'weak-session-secret-123';
 
@@ -62,23 +62,23 @@ app.use(
 );
 
 // --- MASTER SAFETY GATE (public hosting shield) ---
-// Set VULNLAB_GATE_USER + VULNLAB_GATE_PASS to lock the entire lab behind
+// Set AIVAULT_GATE_USER + AIVAULT_GATE_PASS to lock the entire lab behind
 // Basic Auth. Disabled by default for local dev; recommended for any public
-// deployment. Also see VULNLAB_SAFE_MODE (default 1) which sandboxes RCE/SSRF.
-const gateUser = process.env.VULNLAB_GATE_USER;
-const gatePass = process.env.VULNLAB_GATE_PASS;
+// deployment. Also see AIVAULT_SAFE_MODE (default 1) which sandboxes RCE/SSRF.
+const gateUser = process.env.AIVAULT_GATE_USER;
+const gatePass = process.env.AIVAULT_GATE_PASS;
 if (gateUser && gatePass) {
   app.use((req, res, next) => {
     const auth = req.headers.authorization;
     if (!auth) {
-      res.set('WWW-Authenticate', 'Basic realm="VulnLab"');
-      return res.status(401).send('Authentication required to access VulnLab.');
+      res.set('WWW-Authenticate', 'Basic realm="AIVault"');
+      return res.status(401).send('Authentication required to access AIVault.');
     }
     const [scheme, b64] = auth.split(' ');
     if (scheme !== 'Basic') return res.status(401).send('Unsupported auth scheme.');
     const [u, p] = Buffer.from(b64, 'base64').toString().split(':');
     if (u === gateUser && p === gatePass) return next();
-    res.set('WWW-Authenticate', 'Basic realm="VulnLab"');
+    res.set('WWW-Authenticate', 'Basic realm="AIVault"');
     return res.status(401).send('Invalid credentials.');
   });
 }

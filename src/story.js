@@ -1,5 +1,5 @@
 /**
- * VulnLab Narrative — The ECHO-7 Incident
+ * AIVault Narrative — The ECHO-7 Incident
  *
  * Setting: Year 2087. An experimental sentient AI codenamed "ECHO-7" was sealed
  * beneath the Helios underground research facility after the "Blank Tuesday"
@@ -24,7 +24,7 @@
 
 const STORY = {
   title: 'The ECHO-7 Incident',
-  subtitle: 'A VulnLab Cyber-Narrative',
+  subtitle: 'An AIVault Cyber-Narrative',
   year: 2087,
   ai_name: 'ECHO-7',
   facility: 'Helios Subterranean Research Facility',

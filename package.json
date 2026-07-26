@@ -1,7 +1,7 @@
 {
-  "name": "owasp-vulnerable-lab",
+  "name": "aivault",
   "version": "1.0.0",
-  "description": "Comprehensive intentionally vulnerable lab covering OWASP Top 10: Web, API, Mobile, and LLM",
+  "description": "AIVault — The ECHO-7 Incident. An AI-themed intentionally vulnerable lab covering OWASP Top 10: Web, API, Mobile, LLM, and Cloud-Native.",
   "main": "src/app.js",
   "type": "commonjs",
   "scripts": {

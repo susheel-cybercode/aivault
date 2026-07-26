@@ -1,8 +1,14 @@
-# VulnLab - The ECHO-7 Incident
+# AIVault - The ECHO-7 Incident
 
 > ⚠️ **WARNING**: This application is INTENTIONALLY VULNERABLE and designed for security education and Capture The Flag (CTF) events ONLY. DO NOT deploy to production or expose sensitive data. Use in isolated environments.
 
 A comprehensive, intentionally vulnerable lab covering all major OWASP Top 10 categories across Web, API, Mobile, and LLM applications. Built for security researchers, penetration testers, CTF participants, and anyone learning application security.
+
+## 🎭 The Story
+
+### 🚀 Campaign Mode
+
+The lab now includes a **guided story / campaign mode**. Visit **`/campaign`** to see a step‑by‑step dashboard that walks you through the entire OWASP Top 10 experience in the correct order (choose a faction, then A01, A02, …, Cloud‑Native, and the finale). After each challenge you click **"Mark as Completed"** to unlock the next chapter. The campaign uses the same anime‑cyberpunk UI and stores progress in the session, so the experience is completely free for anyone.
 
 ## 🎭 The Story
 
@@ -22,7 +28,7 @@ Every OWASP Top 10 vulnerability is a "vault seal" the player must either exploi
 
 ### Local
 ```bash
-cd vulnlab
+cd aivault
 npm install        # Node 22+ required (uses built-in node:sqlite)
 npm start
 # Open http://localhost:3000/story  ← story entry
@@ -31,8 +37,8 @@ npm start
 
 ### Docker
 ```bash
-docker build -t vulnlab .
-docker run -p 3000:3000 vulnlab
+docker build -t aivault .
+docker run -p 3000:3000 aivault
 ```
 
 ### Free Cloud Deployment (3 ways)
@@ -50,7 +56,7 @@ fly deploy
 
 **3. Split-deploy with GitHub Pages**
 - Frontend splash: Copy `src/public/index.html` + `src/public/static-frontend.js` + `src/public/css/` to a `gh-pages` branch root
-- Edit `window.VULNLAB_API` in `index.html` to point to your Render URL
+- Edit `window.AIVAULT_API` in `index.html` to point to your Render URL
 - Backend API: deploy on Render or fly.io (free tier)
 
 
@@ -86,8 +92,8 @@ GitHub Actions (`.github/workflows/ci.yml`) runs lint, tests, Docker build, and 
 ### Docker
 The Dockerfile uses a multi-stage build with a non-root `nodejs` user. Build & run:
 ```bash
-docker build -t vulnlab .
-docker run -p 3000:3000 vulnlab
+docker build -t aivault .
+docker run -p 3000:3000 aivault
 ```
 
 

@@ -172,7 +172,7 @@ router.get('/command-injection', (req, res) => {
   const { host } = req.query;
 
   if (host) {
-    // A03: Direct command injection (sandboxed when VULNLAB_SAFE_MODE=1)
+    // A03: Direct command injection (sandboxed when AIVAULT_SAFE_MODE=1)
     const r = safeExec(`ping -c 2 ${host}`);
     r.run((error, stdout, stderr) => {
       if (error) {
@@ -214,7 +214,7 @@ router.get('/ssti', (req, res) => {
   if (name) {
     // A03: EJS SSTI via unescaped template
     const ejs = require('ejs');
-    const template = `<h1>Hello, <%- name %></h1>`;
+    const template = '<h1>Hello, <%- name %></h1>';
     try {
       const html = ejs.render(template, { name });
       res.send(html);

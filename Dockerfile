@@ -1,14 +1,14 @@
-# VulnLab - Docker Deployment
+# AIVault - Docker Deployment
 # Multi-stage build for smaller production image
 # ⚠️  WARNING: This image contains INTENTIONALLY VULNERABLE code for educational purposes
 # DO NOT deploy to production or expose to untrusted networks
 
 FROM node:22-slim AS builder
 
-LABEL org.opencontainers.image.title="OWASP Vulnerable Lab"
+LABEL org.opencontainers.image.title="AIVault"
 LABEL org.opencontainers.image.description="Intentionally vulnerable lab covering OWASP Top 10 - Web, API, Mobile, LLM"
-LABEL org.opencontainers.image.source="https://github.com/yourusername/vulnlab"
-LABEL org.opencontainers.image.documentation="https://github.com/yourusername/vulnlab/blob/main/README.md"
+LABEL org.opencontainers.image.source="https://github.com/yourusername/aivault"
+LABEL org.opencontainers.image.documentation="https://github.com/yourusername/aivault/blob/main/README.md"
 LABEL org.opencontainers.image.licenses="MIT"
 
 WORKDIR /app
@@ -24,7 +24,7 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 ENV PORT=3000
-ENV VULNLAB_SAFE_MODE=1
+ENV AIVAULT_SAFE_MODE=1
 
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 --gid 1001 nodejs

@@ -75,17 +75,17 @@ jobs:
         with:
           context: .
           push: false
-          tags: owasp-vulnerable-lab:latest
+          tags: aivault:latest
           load: true
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
       - name: Test Docker image
         run: |
-          docker run --rm -d --name vulnlab -p 3000:3000 owasp-vulnerable-lab:latest
+          docker run --rm -d --name aivault -p 3000:3000 aivault:latest
           sleep 10
-          curl -f http://localhost:3000/ || (docker logs vulnlab && exit 1)
-          docker stop vulnlab
+          curl -f http://localhost:3000/ || (docker logs aivault && exit 1)
+          docker stop aivault
 
   deploy-render:
     name: Deploy to Render

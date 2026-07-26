@@ -128,7 +128,7 @@ router.get('/debug/config', (req, res) => {
       home: process.env.HOME,
       path: process.env.PATH,
       openai_key: process.env.OPENAI_API_KEY,
-      database_path: process.env.DATABASE_URL || './data/vulnlab.db',
+      database_path: process.env.DATABASE_URL || './data/aivault.db',
     },
     runtime_info: {
       versions: process.versions,

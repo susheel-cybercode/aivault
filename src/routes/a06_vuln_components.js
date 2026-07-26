@@ -71,7 +71,7 @@ router.get('/eval-remote', (req, res) => {
       .get(url)
       .then((response) => {
         try {
-          // A06: Eval'ing remote code (sandboxed when VULNLAB_SAFE_MODE=1)
+          // A06: Eval'ing remote code (sandboxed when AIVAULT_SAFE_MODE=1)
           const r = safeEval(response.data, 'remote');
           if (r.simulated) return res.json({ success: true, result: r });
           return res.json({ success: true, result: r.result });
@@ -91,7 +91,7 @@ router.get('/eval-remote', (req, res) => {
 router.post('/deserialize', (req, res) => {
   const data = req.body.data;
   try {
-    // A06: Unsafe deserialization (sandboxed when VULNLAB_SAFE_MODE=1)
+    // A06: Unsafe deserialization (sandboxed when AIVAULT_SAFE_MODE=1)
     const r = safeEval(data, 'serialize');
     if (r.simulated) return res.json({ deserialized: r });
     return res.json({ deserialized: r.result });
@@ -107,7 +107,7 @@ router.get('/merge-objects', (req, res) => {
 
   // Vulnerable merge (simulated lodash merge)
   function merge(target, source) {
-    for (let key in source) {
+    for (const key in source) {
       if (typeof source[key] === 'object') {
         if (!target[key]) target[key] = {};
         merge(target[key], source[key]);

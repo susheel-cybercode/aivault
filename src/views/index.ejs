@@ -1,41 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %></title>
-  <link rel="stylesheet" href="/css/terminal.css">
-</head>
+<%- include('partials/head', { title: title }) %>
 <body>
-  <div class="terminal-container">
-    <div class="terminal-header">
-      <span class="terminal-title">[ROOT@VULNLAB ~]# cat /etc/motd</span>
-      <div class="terminal-controls">
-        <span class="control close">×</span>
-        <span class="control minimize">−</span>
-        <span class="control maximize">□</span>
-      </div>
-    </div>
-    <div class="terminal-body">
-      <div class="banner">
-        <pre>
- __      ___   _ _  _ _         _         __  
- \ \    / / | | | \| | |       | |       / /  
-  \ \/\/ /| |_| | |\  | |__   __| |__   / /__
-   \_/\_/  \___/|_| \_|____|  \___/   \____/
-        </pre>
-        <p class="warning">⚠️  INTENTIONALLY VULNERABLE LABORATORY</p>
-        <p class="sub">Educational environment for OWASP Top 10: Web | API | Mobile | LLM</p>
-        <p class="sub-warning">DO NOT USE REAL CREDENTIALS • DO NOT EXPOSE TO PUBLIC INTERNET</p>
-      </div>
+<%- include('partials/header', { headerTitle: '[ROOT@AIVAULT ~]# cat /etc/motd' }) %>
 
-      <!-- Story entry banner -->
-      <div style="text-align:center; margin: 2rem 0; padding: 2rem; background: linear-gradient(135deg, rgba(0,170,255,0.1), rgba(255,51,102,0.1)); border: 1px solid #444; border-radius: 8px;">
-        <h2 style="color:#fff; letter-spacing:3px; margin-bottom:0.5rem;">THE ECHO-7 INCIDENT</h2>
-        <p style="color:#ffaa00; margin-bottom:1rem;">A forbidden AI. Two factions. One Vault of 40 OWASP seals.</p>
-        <a href="/story" style="display:inline-block; padding:1rem 2.5rem; background:#ff3366; color:white; text-decoration:none; font-weight:700; letter-spacing:3px; border-radius:4px;">ENTER THE STORY →</a>
-        <p style="color:#666; font-size:0.85rem; margin-top:1rem;">Or skip the story and browse the <a href="#web">technical reference</a> below.</p>
-      </div>
+      <%- include('partials/hero') %>
 
       <div class="nav-menu">
         <a href="/login">Login</a>
@@ -45,7 +14,7 @@
         <a href="#mobile">OWASP Mobile Top 10</a>
         <a href="#llm">OWASP LLM Top 10</a>
         <a href="/campaign">Campaign Mode</a>
-        <a href="/cloud">OWASP Cloud‑Native Top 10</a>
+        <a href="/cloud">OWASP Cloud‑Native Top 10</a>
       </div>
 
       <hr>
@@ -344,7 +313,7 @@
       </div>
 
        <div class="category" id="cloud">
-         <h2>☁️ OWASP Cloud‑Native Top 10 (2024)</h2>
+         <h2>☁️ OWASP Cloud‑Native Top 10 (2024)</h2>
          <div class="challenge-grid">
            <div class="challenge-card">
              <h3>C1 – Insecure Metadata Access</h3>
@@ -360,14 +329,12 @@
            </div>
          </div>
        </div>
-       
-       <hr>
+
+        <hr>
       <div class="footer">
-        <p style="color: #ff4444;">⚠ This application contains INTENTIONAL security vulnerabilities.</p>
+        <p style="color: #ff4757;">⚠ This application contains INTENTIONAL security vulnerabilities.</p>
         <p>Built for educational purposes. Deploy in isolated environments only.</p>
         <p>OWASP® Top 10 Web 2021 | API 2023 | Mobile 2024 | LM 2025 | Cloud 2024</p>
       </div>
-    </div>
-  </div>
-</body>
-</html>
+
+<%- include('partials/footer') %>
