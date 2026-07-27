@@ -83,12 +83,6 @@ if (gateUser && gatePass) {
   });
 }
 
-// Static files
-app.use(express.static(path.join(__dirname, 'public')));
-
-// API documentation (Swagger UI)
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
 // EJS templating
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -99,14 +93,25 @@ const db = require('./db');
 
 // ========== ROUTES ==========
 
-// Homepage
+// Health check endpoint (for Render / fly.io / Docker healthcheck)
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok', service: 'AIVault', uptime: process.uptime() });
+});
+
+// Homepage (must come before express.static so public/index.html doesn't override)
 app.get('/', (req, res) => {
   res.render('index', {
-    title: 'OWASP Vulnerable Lab',
+    title: 'AIVault',
     user: req.session.user,
     categories: getCategoryList(),
   });
 });
+
+// Static files (CSS, JS, images) — mounted after the homepage route
+app.use(express.static(path.join(__dirname, 'public')));
+
+// API documentation (Swagger UI)
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // --- A01: Broken Access Control ---
 const brokenAccessRoutes = require('./routes/a01_broken_access');
@@ -283,10 +288,35 @@ function getCategoryList() {
 // Start server only when run directly (not when required in tests)
 if (require.main === module) {
   app.listen(PORT, '0.0.0.0', () => {
+    const c = {
+      red: '\x1b[31m',
+      yellow: '\x1b[33m',
+      cyan: '\x1b[36m',
+      green: '\x1b[32m',
+      reset: '\x1b[0m',
+      bold: '\x1b[1m',
+    };
     console.log(
-      `\x1b[31m⚠️   VULNERABLE LAB running on port ${PORT} - FOR EDUCATIONAL USE ONLY\x1b[0m`
+      `${c.red}${c.bold}⚠️  AIVAULT running on port ${PORT} — FOR EDUCATIONAL USE ONLY${c.reset}`
     );
-    console.log('\x1b[33m   Warning: This app contains active vulnerabilities\x1b[0m');
+    console.log(`${c.yellow}   Warning: This app contains active vulnerabilities${c.reset}`);
+    const isProd = process.env.NODE_ENV === 'production';
+    const safeMode = (process.env.AIVAULT_SAFE_MODE ?? '1') !== '0';
+    console.log(
+      `   Safe Mode: ${safeMode ? c.green + 'ON' : c.red + 'OFF'}${c.reset}  ·  NODE_ENV: ${process.env.NODE_ENV || 'development'}`
+    );
+    if (isProd && (!gateUser || !gatePass)) {
+      console.log(
+        `${c.red}   ⚠ WARNING: No AIVAULT_GATE_USER / AIVAULT_GATE_PASS set in production.${c.reset}`
+      );
+      console.log(
+        `${c.yellow}     Anyone on the internet can access all vulnerabilities.${c.reset}`
+      );
+      console.log(`${c.yellow}     Set Basic Auth credentials to lock the lab.${c.reset}`);
+    }
+    console.log(
+      `${c.cyan}   Docs: http://localhost:${PORT}/api-docs  ·  Health: http://localhost:${PORT}/health${c.reset}`
+    );
   });
 }
 
