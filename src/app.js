@@ -205,7 +205,7 @@ app.get('/logout', (req, res) => {
 });
 
 // Global error handler with stack trace leak (A05)
-app.use((err, req, res, next) => {
+app.use((err, _req, res, _next) => {
   console.error(err);
   res.status(500).json({
     error: err.message,

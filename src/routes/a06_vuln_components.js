@@ -11,12 +11,7 @@
 
 const express = require('express');
 const router = express.Router();
-const { exec } = require('child_process');
 const { safeEval } = require('../utils/safe-guard');
-
-function getDb() {
-  return require('../db');
-}
 
 router.get('/', (req, res) => {
   const vulnComponents = [

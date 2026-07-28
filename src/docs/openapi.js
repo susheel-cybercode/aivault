@@ -18,7 +18,7 @@ const swaggerSpec = {
     },
     contact: {
       name: 'OWASP Vulnerable Lab',
-      url: 'https://github.com/yourusername/aivault',
+      url: 'https://github.com/susheel-cybercode/aivault',
     },
   },
   servers: [

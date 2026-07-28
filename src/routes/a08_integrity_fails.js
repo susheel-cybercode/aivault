@@ -12,14 +12,7 @@
 
 const express = require('express');
 const router = express.Router();
-const crypto = require('crypto');
-const path = require('path');
-const fs = require('fs');
-const { safeWrite, safePath, safeEval } = require('../utils/safe-guard');
-
-function getDb() {
-  return require('../db');
-}
+const { safeWrite, safeEval } = require('../utils/safe-guard');
 
 router.get('/', (req, res) => {
   res.render('integrity_fails/index', { title: 'A08 - Integrity Failures' });

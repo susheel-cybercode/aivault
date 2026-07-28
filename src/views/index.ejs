@@ -53,7 +53,7 @@
               <li><a href="/injection/xss/dom">DOM-Based XSS</a></li>
               <li><a href="/injection/command-injection">Command Injection</a></li>
               <li><a href="/injection/ssti?name=test">SSTI (EJS)</a></li>
-              <li><a href="/injection/xxe/parse">XXE Injection</a></li>
+              <li><a href="/injection/xxe">XXE Injection</a></li>
             </ul>
           </div>
 
@@ -134,14 +134,14 @@
           <div class="challenge-card">
             <h3>API2: Broken Authentication</h3>
             <ul>
-              <li><code>POST /api/auth/login</code></li>
-              <li><code>POST /api/auth/verify</code> (JWT none attack)</li>
+              <li><code>POST /api/b2/auth/login</code></li>
+              <li><code>POST /api/b2/auth/verify</code> (JWT none attack)</li>
             </ul>
           </div>
           <div class="challenge-card">
             <h3>API3: Mass Assignment</h3>
             <ul>
-              <li><code>POST /b3/users</code></li>
+              <li><code>POST /api/b3/users</code></li>
             </ul>
           </div>
           <div class="challenge-card">
@@ -200,51 +200,63 @@
           <div class="challenge-card">
             <h3>M1: Improper Credentials</h3>
             <ul>
-              <li><code>POST /m1/api/login</code></li>
-              <li><code>GET /m1/api/refresh-token</code></li>
+              <li><code>POST /mobile/m1/api/login</code></li>
+              <li><code>GET /mobile/m1/api/refresh-token</code></li>
             </ul>
           </div>
           <div class="challenge-card">
             <h3>M2: Supply Chain</h3>
             <ul>
-              <li><code>GET /m2/sdk/:version</code></li>
+              <li><code>GET /mobile/m2/sdk/:version</code></li>
             </ul>
           </div>
           <div class="challenge-card">
             <h3>M3: Insecure Auth</h3>
             <ul>
-              <li><code>GET /m3/api/profile</code></li>
-              <li><code>POST /m3/api/2fa/verify</code></li>
+              <li><code>GET /mobile/m3/api/profile</code></li>
+              <li><code>POST /mobile/m3/api/2fa/verify</code></li>
             </ul>
           </div>
           <div class="challenge-card">
             <h3>M4: Input Validation</h3>
             <ul>
-              <li><code>POST /m4/api/search</code></li>
+              <li><code>POST /mobile/m4/api/search</code></li>
             </ul>
           </div>
           <div class="challenge-card">
             <h3>M5: Insecure Comm</h3>
             <ul>
-              <li><code>GET /m5/api/health</code></li>
+              <li><code>GET /mobile/m5/api/health</code></li>
             </ul>
           </div>
           <div class="challenge-card">
             <h3>M6: Privacy Controls</h3>
             <ul>
-              <li><code>GET /m6/api/user-data</code></li>
+              <li><code>GET /mobile/m6/api/user-data</code></li>
             </ul>
           </div>
           <div class="challenge-card">
             <h3>M7: Binary Protections</h3>
             <ul>
-              <li><code>GET /m7/api/debug-info</code></li>
+              <li><code>GET /mobile/m7/api/debug-info</code></li>
             </ul>
           </div>
           <div class="challenge-card">
             <h3>M8: Misconfig</h3>
             <ul>
-              <li><code>GET /m8/api/admin-credentials</code></li>
+              <li><code>GET /mobile/m8/api/admin-credentials</code></li>
+            </ul>
+          </div>
+          <div class="challenge-card">
+            <h3>M9: Insecure Data Storage</h3>
+            <ul>
+              <li><code>GET /mobile/m9/api/storage</code></li>
+            </ul>
+          </div>
+          <div class="challenge-card">
+            <h3>M10: Insufficient Crypto</h3>
+            <ul>
+              <li><code>GET /mobile/m10/api/encrypt?data=test</code></li>
             </ul>
           </div>
         </div>

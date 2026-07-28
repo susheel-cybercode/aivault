@@ -13,9 +13,6 @@
 
 const express = require('express');
 const router = express.Router();
-const { exec, execSync } = require('child_process');
-const path = require('path');
-const fs = require('fs');
 const { safeExec } = require('../utils/safe-guard');
 
 function getDb() {
@@ -186,6 +183,13 @@ router.get('/command-injection', (req, res) => {
 });
 
 // XXE - XML External Entity Injection
+router.get('/xxe', (req, res) => {
+  res.render('injection/index', {
+    title: 'AIVault - XXE Injection',
+    user: req.session?.user,
+  });
+});
+
 router.post('/xxe/parse', (req, res) => {
   const xml2js = require('xml2js');
   // Ensure the parser allows DOCTYPE for XXE

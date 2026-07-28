@@ -7,14 +7,14 @@ FROM node:22-slim AS builder
 
 LABEL org.opencontainers.image.title="AIVault"
 LABEL org.opencontainers.image.description="Intentionally vulnerable lab covering OWASP Top 10 - Web, API, Mobile, LLM"
-LABEL org.opencontainers.image.source="https://github.com/yourusername/aivault"
-LABEL org.opencontainers.image.documentation="https://github.com/yourusername/aivault/blob/main/README.md"
+LABEL org.opencontainers.image.source="https://github.com/susheel-cybercode/aivault"
+LABEL org.opencontainers.image.documentation="https://github.com/susheel-cybercode/aivault/blob/main/README.md"
 LABEL org.opencontainers.image.licenses="MIT"
 
 WORKDIR /app
 
 COPY package.json package-lock.json* ./
-RUN npm ci --production=false
+RUN npm ci --omit=dev
 
 COPY . .
 

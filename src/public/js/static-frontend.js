@@ -26,7 +26,7 @@
         alert(j.error || 'Join failed');
       }
     } catch (e) {
-      alert('Backend unreachable: ' + e.message + '\\nEnsure AIVAULT_API is set correctly.');
+      alert('Backend unreachable: ' + e.message + '\nEnsure AIVAULT_API is set correctly.');
     }
   };
 })();

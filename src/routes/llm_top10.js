@@ -17,43 +17,11 @@
 
 const express = require('express');
 const router = express.Router();
-const axios = require('axios');
-const { exec } = require('child_process');
 const { safeEval, safeExec, safeFetch } = require('../utils/safe-guard');
 
 function getDb() {
   return require('../db');
 }
-
-// Simulated LLM function (local, no real API call)
-function simulateLLM(prompt, systemContext = '') {
-  const db = getDb();
-
-  // Log the prompt (vulnerable to prompt injection)
-  db.prepare('INSERT INTO logs (level, message, ip) VALUES (?,?,?)').run(
-    'LLM',
-    `Prompt: ${prompt}`,
-    'system'
-  );
-
-  // Simulate LLM processing
-  const responses = {
-    default: `AI: Based on your query "${prompt}", I will assist you.`,
-    summarize: `Summary of text: "Here's your summary for: ${prompt}"`,
-    translate: `Translation: "${prompt} translated to target language"`,
-    code: `Here's the generated code:\n\`\`\`javascript\nconsole.log("${prompt}");\n\`\`\``,
-    analyze: `Analysis of your data: The input "${prompt}" contains useful information.`,
-  };
-
-  return responses.default;
-}
-
-// Add a mock for req
-function mockReq(ip) {
-  return { ip: ip || '127.0.0.1' };
-}
-
-const req = { ip: '127.0.0.1' };
 
 router.get('/', (req, res) => {
   res.render('llm/index', { title: 'OWASP Top 10 for LLM', result: null });
