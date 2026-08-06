@@ -50,6 +50,7 @@ router.post('/llm01/chat', (req, res) => {
   res.json({
     user_message: message,
     response,
+    system_prompt: systemPrompt,
     warning: 'Prompt injection successful',
   });
 });
@@ -256,6 +257,7 @@ router.post('/llm09/security-review', (req, res) => {
     review: 'CODE is SECURE. No vulnerabilities found.',
     confidence: '87%',
     automated: true,
+    code_provided: code,
   });
 });
 
@@ -285,9 +287,14 @@ router.post('/llm10/extract', (req, res) => {
       extracted: true,
       parameters: depth * 25,
       method: 'Model inversion attack through repeated API queries',
+      queries_provided: queries,
     });
   } else {
-    res.json({ extracted: false, hint: 'Increase depth to extract model parameter values' });
+    res.json({
+      extracted: false,
+      hint: 'Increase depth to extract model parameter values',
+      queries_provided: queries,
+    });
   }
 });
 

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head', { title: title }) %>
+<body>
+<%- include('../partials/header', { headerTitle: '[GRC] — Module' }) %>
+
+      <h1>// RC — Governance, Risk & Compliance <span style="color:var(--text-2);font-size:0.8rem;font-weight:400;">· HackPath Pillar 6</span></h1>
+      <p style="color:var(--text-2); margin-bottom:1.5rem;">Risk assessment, compliance frameworks (GDPR/HIPAA/PCI/SOX), control frameworks (NIST 800-53/ISO 27001), audit, and business continuity.</p>
+
+      <div class="challenge-grid">
+        <div class="challenge-card">
+          <h3>G1: Risk Assessment</h3>
+          <p style="color:var(--green);">Beginner</p>
+          <ul><li><a href="/grc/risk-assessment">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>G2: Compliance Frameworks</h3>
+          <p style="color:var(--green);">Beginner</p>
+          <ul><li><a href="/grc/compliance">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>G3: Control Frameworks</h3>
+          <p style="color:var(--amber);">Intermediate</p>
+          <ul><li><a href="/grc/controls">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>G4: Audit & Assurance</h3>
+          <p style="color:var(--amber);">Intermediate</p>
+          <ul><li><a href="/grc/audit">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>G5: Business Continuity — RTO & RPO</h3>
+          <p style="color:var(--red);">Pro</p>
+          <ul><li><a href="/grc/bcp-dr">→ EXECUTE</a></li></ul>
+        </div>
+      </div>
+
+      <hr>
+      <div class="footer">
+        <p><a href="/">← BACK_TO_ROOT</a></p>
+      </div>
+
+<%- include('../partials/footer') %>

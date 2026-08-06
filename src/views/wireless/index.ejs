@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head', { title: title }) %>
+<body>
+<%- include('../partials/header', { headerTitle: '[Wireless Security] — Module' }) %>
+
+      <h1>// WIRELESS SECURITY</h1>
+      <p style="color:var(--text-2); margin-bottom:1.5rem;max-width:680px;">Interactive challenges from Beginner to Pro. Each endpoint returns a scenario, hint, and flag.</p>
+
+      <div class="challenge-grid">
+        <div class="challenge-card">
+          <h3>W1: WEP Cracking</h3>
+          <p style="color:var(--green);">LEVEL: BEGINNER</p>
+          <ul><li><a href="/wireless/wep">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>W2: WPA2 Handshake Capture</h3>
+          <p style="color:#00ff9d;">Beginner</p>
+          <ul><li><a href="/wireless/wpa2-handshake">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>W3: Evil Twin Attack</h3>
+          <p style="color:var(--amber);">LEVEL: INTERMEDIATE</p>
+          <ul><li><a href="/wireless/evil-twin">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>W4: WPS Pixie Dust Attack</h3>
+          <p style="color:var(--amber);">LEVEL: ADVANCED</p>
+          <ul><li><a href="/wireless/wps">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>W5: BLE Sniffing</h3>
+          <p style="color:var(--red);">LEVEL: PRO</p>
+          <ul><li><a href="/wireless/ble-sniff">→ EXECUTE</a></li></ul>
+        </div>
+      </div>
+
+      <hr>
+      <div class="footer">
+        <p><a href="/">← BACK_TO_ROOT</a></p>
+      </div>
+
+<%- include('../partials/footer') %>

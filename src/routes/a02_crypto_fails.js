@@ -101,6 +101,17 @@ router.get('/challenge/encrypted-data', (req, res) => {
   res.json({ cipher: 'AES-256-ECB', key: 'my-secretkey-123', data: sensitiveData });
 });
 
+// A02: Demonstrate ECB decryption with the hardcoded key
+router.post('/decrypt', (req, res) => {
+  const { ciphertext } = req.body;
+  try {
+    const plaintext = decryptECB(ciphertext);
+    res.json({ plaintext });
+  } catch (e) {
+    res.json({ error: e.message });
+  }
+});
+
 // Challenge: MD5 collision
 router.get('/challenge/md5/:input', (req, res) => {
   res.json({

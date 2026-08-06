@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head', { title: title }) %>
+<body>
+<%- include('../partials/header', { headerTitle: '[IR] — Module' }) %>
+
+      <h1>// ncident Response <span style="color:var(--text-2);font-size:0.8rem;font-weight:400;">· HackPath Pillar 4</span></h1>
+      <p style="color:var(--text-2); margin-bottom:1.5rem;">The NIST IR lifecycle, chain of custody, containment strategy, malware triage, and post-incident lessons-learned.</p>
+
+      <div class="challenge-grid">
+        <div class="challenge-card">
+          <h3>IR1: NIST IR Lifecycle</h3>
+          <p style="color:var(--green);">Beginner</p>
+          <ul><li><a href="/incident-response/nist-lifecycle">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>IR2: Chain of Custody</h3>
+          <p style="color:var(--green);">Beginner</p>
+          <ul><li><a href="/incident-response/chain-of-custody">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>IR3: Containment Strategy</h3>
+          <p style="color:var(--amber);">Intermediate</p>
+          <ul><li><a href="/incident-response/containment">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>IR4: Malware Triage</h3>
+          <p style="color:var(--amber);">Intermediate</p>
+          <ul><li><a href="/incident-response/malware-triage">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>IR5: Lessons Learned Report</h3>
+          <p style="color:var(--red);">Pro</p>
+          <ul><li><a href="/incident-response/lessons-learned">→ EXECUTE</a></li></ul>
+        </div>
+      </div>
+
+      <hr>
+      <div class="footer">
+        <p><a href="/">← BACK_TO_ROOT</a></p>
+      </div>
+
+<%- include('../partials/footer') %>

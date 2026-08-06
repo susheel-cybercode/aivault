@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><title>A02 Crypto Fails</title><link rel="stylesheet" href="/css/terminal.css"></head>
-<body><div class="terminal-container"><div class="terminal-header"><span class="terminal-title">[A02] Cryptographic Failures</span></div>
-<div class="terminal-body fade-in">
+<html lang="en">
+<%- include('../partials/head', { title: 'A02 Crypto Fails' }) %>
+<body>
+<%- include('../partials/header') %>
+
 <h1>A02:2021 – Cryptographic Failures</h1>
 <ul>
 <li><strong>MD5 hash of 'password123':</strong> <span style="color:#ff4444"><%= weakHash %></span></li>
@@ -12,4 +14,8 @@
 <li><strong>ECB Breaking Challenge:</strong> <a href="/crypto-fails/challenge/encrypted-data">Encrypted Data Dump</a></li>
 </ul>
 <p>The app uses MD5, SHA1, AES-ECB, and hardcoded keys. Thindeers can harvest this.</p>
-<p><a href="/crypto-fails/jwt/debug?token=eyJhbGciOiJub25lIn0.eyJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIn0.">Try JWT none algorithm attack</a></p></div></div></body></html>
+<p><a href="/crypto-fails/jwt/debug?token=eyJhbGciOiJub25lIn0.eyJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIn0.">Try JWT none algorithm attack</a></p>
+
+<%- include('../partials/footer') %>
+</body>
+</html>

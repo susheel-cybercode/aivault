@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head', { title: title }) %>
+<body>
+<%- include('../partials/header', { headerTitle: '[Cryptography Lab] — Module' }) %>
+
+      <h1>// CRYPTOGRAPHY LAB</h1>
+      <p style="color:var(--text-2); margin-bottom:1.5rem;max-width:680px;">Interactive challenges from Beginner to Pro. Each endpoint returns a scenario, hint, and flag.</p>
+
+      <div class="challenge-grid">
+        <div class="challenge-card">
+          <h3>C1: Hash Identification</h3>
+          <p style="color:var(--green);">LEVEL: BEGINNER</p>
+          <ul><li><a href="/crypto-lab/hash-identify">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>C2: Caesar Cipher</h3>
+          <p style="color:#00ff9d;">Beginner</p>
+          <ul><li><a href="/crypto-lab/caesar">→ POST</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>C3: Vigenère Cipher</h3>
+          <p style="color:var(--amber);">LEVEL: INTERMEDIATE</p>
+          <ul><li><a href="/crypto-lab/vigenere">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>C4: RSA Weak Key</h3>
+          <p style="color:var(--amber);">LEVEL: ADVANCED</p>
+          <ul><li><a href="/crypto-lab/rsa-weak">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>C5: Diffie‑Hellman Key Exchange</h3>
+          <p style="color:var(--red);">LEVEL: PRO</p>
+          <ul><li><a href="/crypto-lab/key-exchange">→ EXECUTE</a></li></ul>
+        </div>
+      </div>
+
+      <hr>
+      <div class="footer">
+        <p><a href="/">← BACK_TO_ROOT</a></p>
+      </div>
+
+<%- include('../partials/footer') %>

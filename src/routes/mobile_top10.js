@@ -32,7 +32,7 @@ router.post('/m1/api/login', (req, res) => {
     { google_maps_key: 'AIzaSy1234-hardcoded-API-KEY-IN-APP', type: 'api' },
   ];
 
-  const { client_id, client_secret } = req.body;
+  const { client_secret } = req.body;
   // M1: Weak credential validation
   if (client_secret === 'hardcoded-in-apk-secret-2024') {
     res.json({
@@ -84,7 +84,7 @@ router.get('/m3/api/profile', (req, res) => {
 
 // M3: OTP Bypass in mobile
 router.post('/m3/api/2fa/verify', (req, res) => {
-  const { user_id, otp, bypass_2fa } = req.body;
+  const { otp, bypass_2fa } = req.body;
 
   // M3: Mobile API that allows 2FA bypass
   if (bypass_2fa === 'true' || otp === '000000') {

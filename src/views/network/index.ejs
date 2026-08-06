@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head', { title: title }) %>
+<body>
+<%- include('../partials/header', { headerTitle: '[NETWORK SECURITY] — Module' }) %>
+
+      <h1>// / NETWORK_SECURITY</h1>
+      <p style="color:var(--text-2); margin-bottom:1.5rem;max-width:680px;">Covers TCP/IP attacks, port scanning, DNS poisoning, ARP spoofing, firewall evasion, and packet analysis. Beginner → Pro.</p>
+
+      <div class="challenge-grid">
+        <div class="challenge-card">
+          <h3>[N1] Port Scan Detection</h3>
+          <p style="color:var(--green);">LEVEL: BEGINNER</p>
+          <ul><li><a href="/network/port-scan">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>[N2] DNS Cache Poisoning</h3>
+          <p style="color:var(--green);">LEVEL: BEGINNER</p>
+          <ul><li><a href="/network/dns-poisoning">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>[N3] ARP Spoofing / MITM</h3>
+          <p style="color:var(--amber);">LEVEL: INTERMEDIATE</p>
+          <ul><li><a href="/network/arp-spoof">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>[N4] Firewall Evasion</h3>
+          <p style="color:var(--amber);">LEVEL: ADVANCED</p>
+          <ul><li><a href="/network/firewall-evasion">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>[N5] PCAP Analysis (DNS Tunneling)</h3>
+          <p style="color:var(--red);">LEVEL: PRO</p>
+          <ul><li><a href="/network/pcap-analyze">→ POST</a></li></ul>
+        </div>
+      </div>
+
+      <hr>
+      <div class="footer">
+        <p><a href="/">← BACK_TO_ROOT</a></p>
+      </div>
+
+<%- include('../partials/footer') %>

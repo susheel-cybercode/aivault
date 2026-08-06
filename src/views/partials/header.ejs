@@ -1,10 +1,43 @@
+<header>
+  <a href="/">
+    <span class="site-mark"></span>
+    <span style="color:var(--brand);">AI</span><span>VAULT</span>
+  </a>
+
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </button>
+
+  <nav id="mainNav">
+    <a href="/story" class="<%= typeof faction !== 'undefined' && faction === 'aegis' ? 'is-faction-aegis' : (typeof faction !== 'undefined' && faction === 'null' ? 'is-faction-null' : '') %>">// STORY</a>
+    <a href="/campaign">// CAMPAIGN</a>
+    <a href="/story/vault">// VAULT</a>
+    <a href="/story/scoreboard">// RANKS</a>
+    <a href="/flags">// FLAGS</a>
+    <a href="/#labs">// LABS</a>
+    <% if (typeof user !== 'undefined' && user) { %>
+      <a href="/dashboard" class="nav-user" title="<%= user.username %>">@<%= user.username %></a>
+      <a href="/logout" class="nav-auth">[ LOGOUT ]</a>
+    <% } else { %>
+      <a href="/login" class="nav-auth">[ LOGIN ]</a>
+    <% } %>
+  </nav>
+</header>
+
+<script>
+(function () {
+  var toggle = document.getElementById('navToggle');
+  var nav = document.getElementById('mainNav');
+  if (!toggle || !nav) return;
+  toggle.addEventListener('click', function () {
+    if (nav.classList.contains('open')) {
+      nav.classList.remove('open');
+    } else {
+      nav.classList.add('open');
+    }
+  });
+})();
+</script>
+
 <div class="terminal-container">
-  <div class="terminal-header">
-    <span class="terminal-title"><%= typeof headerTitle !== 'undefined' ? headerTitle : '[ROOT@AIVAULT ~]#' %></span>
-    <div class="terminal-controls">
-      <span class="control close">×</span>
-      <span class="control minimize">−</span>
-      <span class="control maximize">□</span>
-    </div>
-  </div>
-  <div class="terminal-body fade-in">
+<div class="terminal-body">

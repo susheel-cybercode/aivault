@@ -1,9 +1,15 @@
 <!DOCTYPE html>
-<html><head><meta charset=UTF-8><title><%= title %></title><link rel="stylesheet" href="/css/terminal.css"></head>
-<body><div class="terminal-container"><div class="terminal-header"><span class="terminal-title">[A09] Logging Failures</span></div>
-<div class="terminal-body fade-in">
+<html lang="en">
+<%- include('../partials/head', { title: title }) %>
+<body>
+<%- include('../partials/header') %>
+
 <h1>A09:2021 - Logging and Monitoring Failures</h1>
 <ul><li><a href="/logging-fails/api/logs">View All Logs (including passwords)</a></li><li><a href="/logging-fails/search-logs">Search Logs (Log Injection)</a></li><li><a href="/logging-fails/health">Monitoring Status</a></li></ul>
 <h3>Recent Activity</h3>
 <pre><% logs.forEach(l => { %><%= l.timestamp %> [<%= l.level %>] <%= l.message %><% }) %></pre>
-<p class="hint">Login attempts are logged with cleartext passwords!</p></div></div></body></html>
+<p class="hint">Login attempts are logged with cleartext passwords!</p>
+
+<%- include('../partials/footer') %>
+</body>
+</html>

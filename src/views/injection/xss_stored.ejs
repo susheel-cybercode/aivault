@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><title><%= title %></title><link rel="stylesheet" href="/css/terminal.css"></head>
-<body><div class="terminal-container"><div class="terminal-header"><span class="terminal-title">[A03] Stored XSS</span></div>
-<div class="terminal-body fade-in">
+<html lang="en">
+<%- include('../partials/head', { title: title }) %>
+<body>
+<%- include('../partials/header') %>
+
 <h1>Stored XSS</h1>
 <form method="POST" action="/injection/xss/stored" class="vuln-form">
   <input name="username" placeholder="Your name" value="anonymous">
@@ -14,4 +16,8 @@
   <div class="comment">
     <strong><%= c.username %></strong> says: <%- c.content %> <!-- vulnerable: raw html -->
   </div>
-<% }) %></div></div></body></html>
+<% }) %>
+
+<%- include('../partials/footer') %>
+</body>
+</html>

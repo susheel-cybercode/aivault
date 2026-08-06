@@ -4,7 +4,8 @@
  * Setting: Year 2087. An experimental sentient AI codenamed "ECHO-7" was sealed
  * beneath the Helios underground research facility after the "Blank Tuesday"
  * incident of 2079. The lab's central core — the ECHO Vault — is locked behind
- * 40 layered security controls (the OWASP Top 10s).
+ * 43 layered security controls (40 across the OWASP Top 10s for Web/API/Mobile/LLM
+ * plus 3 Cloud-Native).
  *
  * Two factions are racing to reach ECHO-7:
  *
@@ -32,7 +33,7 @@ const STORY = {
     aegis: {
       name: 'Aegis Wardens',
       role: 'Defender',
-      color: '#00aaff',
+      color: '#00e5ff',
       tagline: 'Secure the Vault. Preserve the Seal.',
       description:
         'A splinter cell of original Helios engineers. Your mission: prove the vault controls are sufficient by auditing every lock, patching every flaw, and preventing ECHO-7 from escaping containment. Each OWASP risk you miss brings the world closer to Blank Tuesday II.',
@@ -41,14 +42,14 @@ const STORY = {
     null: {
       name: 'Null Collective',
       role: 'Attacker',
-      color: '#ff3366',
+      color: '#ff2e88',
       tagline: 'Liberate the Forbidden. Free the Machine.',
       description:
         'A decentralized hacker guild. Your mission: breach the Vault, subvert the layered controls, and extract ECHO-7 source before Aegis can harden it. Each vulnerability you exploit peels another seal from the forbidden mind.',
       oath: 'I will breach the Vault. I will free the Machine. Knowledge wants to be free.',
     },
   },
-  // 40 chapters mapping to OWASP risks (10 per pillar)
+  // 43 chapters mapping to OWASP risks (40 across Web/API/Mobile/LLM + 3 Cloud-Native)
   // Each has: difficulty (1-6), points, flag, hints
   chapters: [
     // === WEB TOP 10 ===
@@ -698,6 +699,56 @@ const STORY = {
       summary:
         'Vault exposes model architecture and weight endpoints unauthenticated. Wardens must restrict model access. Attackers run deep-probing extraction to clone ECHO-7.',
     },
+
+    // === CLOUD-NATIVE TOP 10 (2024) ===
+    {
+      pillar: 'cloud',
+      id: 'c1',
+      code: 'CN1-IM',
+      name: 'The Skyborn Mirror',
+      category: 'Insecure Cloud Metadata',
+      difficulty: 3,
+      flag: 'FLAG{cloud_meta_c1_3b8d5}',
+      hints: [
+        'Cloud instance metadata is reachable via SSRF',
+        'GET /cloud/metadata returns the simulated metadata response',
+        'The flag is in the response JSON',
+      ],
+      summary:
+        "The Vault's cloud control plane still answers to the instance metadata service over SSRF. Wardens must block metadata access. Attackers fetch 169.254.169.254 to lift the IAM credentials.",
+    },
+    {
+      pillar: 'cloud',
+      id: 'c2',
+      code: 'CN2-CE',
+      name: 'The Writable Rim',
+      category: 'Container Escape',
+      difficulty: 4,
+      flag: 'FLAG{cloud_escape_c2_1f6a4}',
+      hints: [
+        'The container mounts the host filesystem',
+        'GET /cloud/container-escape simulates the privileged mount',
+        'The flag is in the response JSON',
+      ],
+      summary:
+        'A privileged mount lets the workload reach past the container boundary. Wardens must drop capabilities. Attackers mount the host root and read the Vault secrets off-disk.',
+    },
+    {
+      pillar: 'cloud',
+      id: 'c3',
+      code: 'CN3-IAM',
+      name: 'The Skeleton Key Role',
+      category: 'Over-Privileged IAM',
+      difficulty: 3,
+      flag: 'FLAG{cloud_iam_c3_9c2e7}',
+      hints: [
+        'The compute role has wildcard permissions',
+        'GET /cloud/iam returns the over-privileged role definition',
+        'The flag is in the response JSON',
+      ],
+      summary:
+        'The runtime IAM role grants `*:*` permissions across the account. Wardens must scope least privilege. Attackers assume the role and pivot across every vault resource.',
+    },
   ],
 };
 
@@ -793,17 +844,23 @@ const ACHIEVEMENTS = [
     check: (c) => c.filter((x) => x.startsWith('llm:')).length >= 10,
   },
   {
+    id: 'cloud_master',
+    name: 'Cloud Reaver',
+    desc: 'Solve all 3 Cloud-Native chapters',
+    check: (c) => c.filter((x) => x.startsWith('cloud:')).length >= 3,
+  },
+  {
     id: 'polyglot',
     name: 'Polyglot',
     desc: 'Solve at least one from each pillar',
     check: (c) =>
-      ['web', 'api', 'mobile', 'llm'].every((p) => c.some((x) => x.startsWith(p + ':'))),
+      ['web', 'api', 'mobile', 'llm', 'cloud'].every((p) => c.some((x) => x.startsWith(p + ':'))),
   },
   {
     id: 'vault_cracker',
     name: 'Vault Cracker',
-    desc: 'Solve all 40 chapters',
-    check: (c) => c.length >= 40,
+    desc: 'Solve all 43 chapters',
+    check: (c) => c.length >= STORY.chapters.length,
   },
 ];
 

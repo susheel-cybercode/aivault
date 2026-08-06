@@ -6,6 +6,20 @@
 
 const express = require('express');
 const router = express.Router();
+
+// Maps a story chapter (pillar:id) to its guided-campaign step id, so that
+// solving the real flag auto-advances the campaign walkthrough in lock-step.
+const STORY_TO_CAMPAIGN = {
+  'web:a01': 2,
+  'web:a02': 3,
+  'web:a03': 4,
+  'web:a04': 5,
+  'web:a10': 6,
+  'cloud:c1': 7,
+  'cloud:c2': 7,
+  'cloud:c3': 7,
+};
+
 const {
   STORY,
   getChapter,
@@ -13,7 +27,6 @@ const {
   getChapterPoints,
   getRank,
   getEarnedAchievements,
-  ACHIEVEMENTS,
 } = require('../story');
 
 function getDb() {
@@ -83,7 +96,7 @@ router.post('/faction', (req, res) => {
 router.get('/vault', (req, res) => {
   if (!req.session.faction) return res.redirect('/story');
   const completed = req.session.completed || [];
-  const byPillar = { web: [], api: [], mobile: [], llm: [] };
+  const byPillar = { web: [], api: [], mobile: [], llm: [], cloud: [] };
   STORY.chapters.forEach((c) => {
     c._completed = completed.includes(`${c.pillar}:${c.id}`);
     c._points = getChapterPoints(c);
@@ -188,6 +201,15 @@ router.post('/chapter/:pillar/:id/submit-flag', ensureFaction, (req, res) => {
     if (!already) {
       req.session.completed = req.session.completed || [];
       req.session.completed.push(key);
+      // Reconcile with the guided campaign: flag solves that map to a
+      // campaign step auto-advance it so the story walkthrough stays in sync.
+      const campaignStep = STORY_TO_CAMPAIGN[key];
+      if (campaignStep) {
+        req.session.campaignCompleted = req.session.campaignCompleted || [];
+        if (!req.session.campaignCompleted.includes(campaignStep)) {
+          req.session.campaignCompleted.push(campaignStep);
+        }
+      }
       const pts = getChapterPoints(chapter);
       try {
         const db = getDb();

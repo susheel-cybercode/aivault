@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html><head><meta charset=UTF-8><title><%= title %></title><link rel="stylesheet" href="/css/terminal.css"></head>
-<body><div class="terminal-container"><div class="terminal-header"><span class="terminal-title">[A10] SSRF — URL Fetcher</span></div>
-<div class="terminal-body fade-in">
+<html lang="en">
+<%- include('../partials/head', { title: title }) %>
+<body>
+<%- include('../partials/header') %>
+
 <h1>Server-Side Request Forgery</h1>
 <form method="GET" action="/ssrf/fetch">
   <input name="url" placeholder="Enter URL the server should fetch" value="http://localhost:3000/">
@@ -9,4 +11,7 @@
 </form>
 <p class="hint">Try cloud metadata: <code>?url=http://169.254.169.254/latest/meta-data/</code></p>
 <p>Or internal service: <code>?url=http://localhost:3000/?flag=true</code></p>
-</div></div></body></html>
+
+<%- include('../partials/footer') %>
+</body>
+</html>

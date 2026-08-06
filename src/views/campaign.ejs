@@ -1,45 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title><%= title %></title>
-  <link rel="stylesheet" href="/css/terminal.css">
-</head>
+<%- include('partials/head', { title: title }) %>
+<link rel="stylesheet" href="/css/campaign.css">
 <body>
-  <div class="terminal-container">
-    <div class="terminal-header">
-      <span class="terminal-title">[CAMPAIGN] <%= title %></span>
-    </div>
-    <div class="terminal-body fade-in">
-      <h1>AIVault Campaign Mode</h1>
-      <p>Follow the story step‑by‑step. After you finish a challenge, click "Mark as Completed" to unlock the next chapter.</p>
+<%- include('partials/header', { user, faction, factionName }) %>
 
-      <ul class="challenge-grid" style="grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));">
+  <div class="campaign-wrap">
+    <div class="campaign-header">
+      <p class="warning">CAMPAIGN // GUIDED OPERATION</p>
+      <h1>The ECHO-7 Operation</h1>
+      <p class="campaign-sub">
+        A guided walkthrough of the Vault. Finish each chapter, then mark it complete
+        to unlock the next. Every seal you break moves the story forward.
+      </p>
+
+      <div class="campaign-progress">
+        <div class="campaign-progress-bar" style="width:<%= Math.round((completed.length / steps.length) * 100) %>%;"></div>
+      </div>
+      <div class="campaign-progress-label">
+        <%= completed.length %> / <%= steps.length %> seals broken
+      </div>
+    </div>
+
+    <!-- CURRENT SCENE -->
+    <% const sp = speakers[nextStep.speaker]; %>
+    <section class="scene-card" style="--char:<%= sp.color %>;">
+      <div class="scene-art">
+        <img src="<%= sp.art %>" alt="<%= sp.name %>" />
+      </div>
+      <div class="scene-dialog">
+        <div class="scene-meta">
+          <span class="scene-chapter"><%= nextStep.chapter %></span>
+          <h2><%= nextStep.title %></h2>
+          <span class="scene-speaker">— <%= sp.name %></span>
+        </div>
+        <div class="bubble">
+          <p><%= nextStep.line %></p>
+        </div>
+        <p class="scene-narration"><%= nextStep.scene %></p>
+
+        <% if (allDone) { %>
+          <p class="scene-status done">✓ Story complete — every seal is broken.</p>
+        <% } else if (completed.includes(nextStep.id)) { %>
+          <p class="scene-status done">✓ Chapter complete. Seal broken.</p>
+        <% } %>
+
+        <div class="scene-actions">
+          <% if (!completed.includes(nextStep.id) || allDone) { %>
+            <a href="<%= nextStep.url %>" class="button scene-start">Start Chapter</a>
+          <% } %>
+          <% if (!allDone && completed.includes(nextStep.id)) { %>
+            <form action="/campaign/complete/<%= nextStep.id %>" method="POST" style="margin:0;">
+              <button type="submit" class="button scene-next">Next Chapter &rarr;</button>
+            </form>
+          <% } else if (!allDone) { %>
+            <form action="/campaign/complete/<%= nextStep.id %>" method="POST" style="margin:0;">
+              <button type="submit" class="button scene-next">Mark Complete &amp; Continue &rarr;</button>
+            </form>
+          <% } %>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIMELINE -->
+    <section class="chapter-list">
+      <h3 class="chapter-list-title">Operation Timeline</h3>
+      <ol>
         <% steps.forEach(step => { %>
-          <li class="challenge-card">
-            <h3><%= step.title %></h3>
-            <p><%= step.description %></p>
-            <% if (completed.includes(step.id)) { %>
-              <p style="color:#00ff41;">✅ Completed</p>
-            <% } else if (nextStep.id === step.id) { %>
-              <a href="<%= step.url %>" class="button" style="background:#ff3366; color:white; padding:0.4rem 0.8rem; display:inline-block; margin-top:0.5rem;">Start</a>
+          <% const done = completed.includes(step.id); %>
+          <% const now = !allDone && nextStep.id === step.id; %>
+          <li class="chapter-row <%= done ? 'is-done' : '' %> <%= now ? 'is-now' : '' %>">
+            <span class="chapter-mark"><%= done ? '✓' : (now ? '▶' : '🔒') %></span>
+            <span class="chapter-name">
+              <span class="chapter-episode"><%= step.chapter %> · <%= speakers[step.speaker].name %></span>
+              <strong><%= step.title %></strong>
+            </span>
+            <% if (done) { %>
+              <span class="chapter-tag done-tag">Complete</span>
+            <% } else if (now) { %>
+              <span class="chapter-tag now-tag">Now</span>
             <% } else { %>
-              <p style="color:#888;">🔒 Locked – complete earlier steps first</p>
-            <% } %>
-            <% if (completed.includes(step.id)) { %>
-              <form action="/campaign/complete/<%= step.id %>" method="POST" style="margin-top:0.5rem;">
-                <button type="submit" style="background:#00ff41; color:#111; border:none; padding:0.4rem 0.8rem; cursor:pointer;">Mark as Completed</button>
-              </form>
+              <span class="chapter-tag locked-tag">Locked</span>
             <% } %>
           </li>
         <% }) %>
-      </ul>
+      </ol>
+    </section>
 
-      <hr>
-      <div class="footer">
-        <p><a href="/">← Back to Home</a></p>
-      </div>
+    <div class="campaign-footer">
+      <a href="/story/vault">Enter the ECHO Vault &rarr;</a> ·
+      <a href="/story/scoreboard">Ranks &rarr;</a> ·
+      <a href="/">Back to Home</a>
     </div>
   </div>
+
+<%- include('partials/footer') %>
 </body>
 </html>

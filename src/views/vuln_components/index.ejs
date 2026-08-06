@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html><head><meta charset=UTF-8><title><%= title %></title><link rel="stylesheet" href="/css/terminal.css"></head>
-<body><div class="terminal-container"><div class="terminal-header"><span class="terminal-title">[A06] Vulnerable Components</span></div>
-<div class="terminal-body fade-in">
+<html lang="en">
+<%- include('../partials/head', { title: title }) %>
+<body>
+<%- include('../partials/header') %>
+
 <h1>A06:2021 - Vulnerable and Outdated Components</h1>
 <table>
 <tr><th>Component</th><th>Version</th><th>Known CVE</th></tr>
@@ -9,4 +11,8 @@
 <tr><td><%= c.name %></td><td><%= c.version %></td><td><%= c.known_issues[0] %></td></tr>
 <% }) %>
 </table>
-<p><a href="/vuln-components/eval-remote">Remote Eval Challenge</a> | <a href="#" onclick="prompt('POST /vuln-components/deserialize', 'Try: (function(){ return 2+2 })()')">Deserialization</a></p></div></div></body></html>
+<p><a href="/vuln-components/eval-remote">Remote Eval Challenge</a> | <a href="#" onclick="prompt('POST /vuln-components/deserialize', 'Try: (function(){ return 2+2 })()')">Deserialization</a></p>
+
+<%- include('../partials/footer') %>
+</body>
+</html>

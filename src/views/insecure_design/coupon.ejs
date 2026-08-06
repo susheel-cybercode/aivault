@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html><head><meta charset=UTF-8><title><%= title %></title><link rel="stylesheet" href="/css/terminal.css"></head>
-<body><div class="terminal-container"><div class="terminal-header"><span class="terminal-title">[A04] Coupon Abuse</span></div>
-<div class="terminal-body fade-in">
+<html lang="en">
+<%- include('../partials/head', { title: title }) %>
+<body>
+<%- include('../partials/header') %>
+
 <h1>Coupon Business Logic</h1>
 <form method="POST" action="/insecure-design/apply-coupon">
   <input name="price" placeholder="Price" value="100">
@@ -9,4 +11,8 @@
   <button>Apply</button>
 </form>
 <p class="hint">Try: <code>SUMMER50</code>, <code>FLAT10</code>, <code>FREE</code>. Same coupon can apply multiple times.</p>
-<p>Also try <code>POST /insecure-design/bulk-order</code> with array bypass.</p></div></div></body></html>
+<p>Also try <code>POST /insecure-design/bulk-order</code> with array bypass.</p>
+
+<%- include('../partials/footer') %>
+</body>
+</html>

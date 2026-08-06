@@ -9,6 +9,7 @@
  */
 
 const express = require('express');
+const categories = require('./data/categories');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -16,6 +17,7 @@ const path = require('path');
 const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./docs/openapi');
+const rateLimit = require('express-rate-limit');
 
 // ⚠️ CRITICAL: Using fake/in-memory-only AI tokens and SQLite
 // No real API keys should ever be committed
@@ -26,6 +28,23 @@ process.env.SESSION_SECRET = process.env.SESSION_SECRET || 'weak-session-secret-
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// --- RATE LIMITING (protects public deployments from abuse) ---
+// Skip in test mode so the test suite isn't affected
+if (process.env.NODE_ENV !== 'test') {
+  const apiLimiter = rateLimit({
+    windowMs: 60 * 1000, // 1 minute
+    max: 100, // 100 requests per minute per IP
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: { error: 'Too many requests from this IP, please slow down.' },
+  });
+  // Apply to all routes except health check
+  app.use((req, res, next) => {
+    if (req.path === '/health') return next();
+    return apiLimiter(req, res, next);
+  });
+}
 
 // --- INTENTIONALLY VULNERABLE MIDDLEWARE SETUP ---
 
@@ -60,6 +79,17 @@ app.use(
     },
   })
 );
+
+// Story alignment: expose faction / user to every template
+app.use((req, res, next) => {
+  res.locals.faction = req.session.faction || null;
+  res.locals.factionName = req.session.faction
+    ? require('./story').STORY.factions[req.session.faction].name
+    : null;
+  res.locals.handle = req.session.handle || null;
+  res.locals.user = req.session.user || null;
+  next();
+});
 
 // --- MASTER SAFETY GATE (public hosting shield) ---
 // Set AIVAULT_GATE_USER + AIVAULT_GATE_PASS to lock the entire lab behind
@@ -174,6 +204,184 @@ app.use('/story', storyRoutes);
 const campaignRoutes = require('./routes/campaign');
 app.use('/campaign', campaignRoutes);
 
+// ========== FULL CYBERSECURITY CURRICULUM ==========
+
+// --- Network Security ---
+const networkRoutes = require('./routes/network');
+app.use('/network', networkRoutes);
+
+// --- Cryptography ---
+const cryptoRoutes = require('./routes/crypto');
+app.use('/crypto-lab', cryptoRoutes);
+
+// --- Reverse Engineering ---
+const reverseRoutes = require('./routes/reverse');
+app.use('/reverse', reverseRoutes);
+
+// --- Digital Forensics ---
+const forensicsRoutes = require('./routes/forensics');
+app.use('/forensics', forensicsRoutes);
+
+// --- Social Engineering ---
+const socialRoutes = require('./routes/social');
+app.use('/social', socialRoutes);
+
+// --- IoT / OT Security ---
+const iotRoutes = require('./routes/iot');
+app.use('/iot', iotRoutes);
+
+// --- Blockchain / Web3 ---
+const blockchainRoutes = require('./routes/blockchain');
+app.use('/blockchain', blockchainRoutes);
+
+// --- Malware Analysis ---
+const malwareRoutes = require('./routes/malware');
+app.use('/malware', malwareRoutes);
+
+// --- Wireless Security ---
+const wirelessRoutes = require('./routes/wireless');
+app.use('/wireless', wirelessRoutes);
+
+// --- DevSecOps ---
+const devsecopsRoutes = require('./routes/devsecops');
+app.use('/devsecops', devsecopsRoutes);
+
+// --- Threat Hunting & Blue Team ---
+const threatHuntingRoutes = require('./routes/threat_hunting');
+app.use('/threat-hunting', threatHuntingRoutes);
+
+// --- OSINT ---
+const osintRoutes = require('./routes/osint');
+app.use('/osint', osintRoutes);
+
+// --- Red Team Operations ---
+const redTeamRoutes = require('./routes/red_team');
+app.use('/red-team', redTeamRoutes);
+
+// --- Cloud Security (Deep Dive) ---
+const cloudSecRoutes = require('./routes/cloud_sec');
+app.use('/cloud-sec', cloudSecRoutes);
+
+// --- Privacy & Data Protection ---
+const privacyRoutes = require('./routes/privacy');
+app.use('/privacy', privacyRoutes);
+
+// ========== HACKPATH-ALIGNED NEW MODULES ==========
+
+// --- Technical Foundations (Pillar 1) ---
+const foundationsRoutes = require('./routes/foundations');
+app.use('/foundations', foundationsRoutes);
+
+// --- SOC & Detection Engineering (Pillar 4) ---
+const socRoutes = require('./routes/soc');
+app.use('/soc', socRoutes);
+
+// --- Incident Response (Pillar 4) ---
+const incidentResponseRoutes = require('./routes/incident_response');
+app.use('/incident-response', incidentResponseRoutes);
+
+// --- GRC — Governance, Risk & Compliance (Pillar 6) ---
+const grcRoutes = require('./routes/grc');
+app.use('/grc', grcRoutes);
+
+// --- FLAG SUBMISSION & SCORING ---
+// In-memory store of all known flags for verification
+const knownFlags = new Set();
+function loadFlags() {
+  const routeDir = require('path').join(__dirname, 'routes');
+  const fs2 = require('fs');
+  fs2.readdirSync(routeDir).forEach((f) => {
+    if (!f.endsWith('.js')) return;
+    try {
+      const content = fs2.readFileSync(require('path').join(routeDir, f), 'utf-8');
+      const matches = content.match(/FLAG\{[^}]+\}/g);
+      if (matches) matches.forEach((m) => knownFlags.add(m));
+    } catch (e) {}
+  });
+}
+loadFlags();
+
+// GET /flags — view to submit flags
+app.get('/flags', (req, res) => {
+  if (!req.session.solves) req.session.solves = [];
+  res.render('flags/submit', {
+    title: 'Submit Flag',
+    solved: req.session.solves,
+    error: null,
+    success: null,
+  });
+});
+
+// POST /flags/submit — verify a flag and record it
+app.post('/flags/submit', (req, res) => {
+  const { flag } = req.body;
+  if (!req.session.solves) req.session.solves = [];
+  let result;
+  if (!flag || !flag.startsWith('FLAG{') || !flag.endsWith('}')) {
+    result = { error: 'Invalid flag format. Use FLAG{...}', success: false };
+  } else if (req.session.solves.includes(flag)) {
+    result = { error: 'You already captured this flag!', success: false };
+  } else if (knownFlags.has(flag)) {
+    // Record flag in session
+    req.session.solves.push(flag);
+    // Compute points based on flag length
+    const points = flag.length;
+    // Persist points to DB for leaderboard
+    try {
+      const sid = req.sessionID;
+      const player = db.prepare('SELECT id FROM players WHERE session_id = ?').get(sid);
+      if (!player) {
+        // Insert new player entry
+        db.prepare(
+          'INSERT INTO players (session_id, faction, total_points, first_solve, last_solve) VALUES (?,?,?,?,?)'
+        ).run(sid, '', points, new Date().toISOString(), new Date().toISOString());
+      } else {
+        // Update existing player points
+        db.prepare(
+          'UPDATE players SET total_points = total_points + ?, last_solve = ? WHERE session_id = ?'
+        ).run(points, new Date().toISOString(), sid);
+      }
+    } catch (e) {
+      console.error('Flag DB update error:', e);
+    }
+    result = {
+      success: true,
+      message: 'Flag captured! +' + points + ' points',
+      count: req.session.solves.length,
+    };
+  } else {
+    result = { error: 'Flag not recognized. Keep hunting!', success: false };
+  }
+  res.render('flags/submit', {
+    title: 'Submit Flag',
+    solved: req.session.solves,
+    error: result.error || null,
+    success: result.success ? result : null,
+  });
+});
+
+// GET /leaderboard — public leaderboard
+app.get('/leaderboard', (req, res) => {
+  try {
+    const players = db
+      .prepare(
+        'SELECT handle, total_points, faction FROM players WHERE total_points > 0 ORDER BY total_points DESC LIMIT 20'
+      )
+      .all();
+    res.render('leaderboard', {
+      title: 'Leaderboard',
+      players: players.filter((p) => p.total_points > 0),
+      sessionSolves: req.session.solves?.length || 0,
+    });
+  } catch (e) {
+    res.render('leaderboard', {
+      title: 'Leaderboard',
+      players: [],
+      sessionSolves: req.session.solves?.length || 0,
+    });
+  }
+});
+
 // Generic auth pages
 app.get('/login', (req, res) => {
   res.render('login', { title: 'Login', error: null });
@@ -281,6 +489,211 @@ function getCategoryList() {
         'llm:overreliance',
         'llm:model-theft',
       ],
+    },
+    // New curriculum categories
+    {
+      id: 'network',
+      name: 'Network Security',
+      routes: [
+        'network:port-scan',
+        'network:dns-poisoning',
+        'network:arp-spoof',
+        'network:firewall-evasion',
+        'network:pcap-analyze',
+      ],
+    },
+    {
+      id: 'crypto-lab',
+      name: 'Cryptography Lab',
+      routes: [
+        'crypto:hash-identify',
+        'crypto:caesar',
+        'crypto:vigenere',
+        'crypto:rsa-weak',
+        'crypto:key-exchange',
+      ],
+    },
+    {
+      id: 'reverse',
+      name: 'Reverse Engineering',
+      routes: [
+        'reverse:strings',
+        'reverse:crackme',
+        'reverse:buffer-overflow',
+        'reverse:anti-debug',
+        'reverse:format-string',
+      ],
+    },
+    {
+      id: 'forensics',
+      name: 'Digital Forensics',
+      routes: [
+        'forensics:log-analysis',
+        'forensics:file-carving',
+        'forensics:memory-analysis',
+        'forensics:timeline',
+        'forensics:stego',
+      ],
+    },
+    {
+      id: 'social',
+      name: 'Social Engineering',
+      routes: [
+        'social:phishing',
+        'social:pretexting',
+        'social:osint',
+        'social:deepfake',
+        'social:spear-phish',
+      ],
+    },
+    {
+      id: 'iot',
+      name: 'IoT / OT Security',
+      routes: [
+        'iot:default-creds',
+        'iot:firmware-extract',
+        'iot:mqtt-hijack',
+        'iot:modbus-exploit',
+        'iot:ble-attack',
+      ],
+    },
+    {
+      id: 'blockchain',
+      name: 'Blockchain / Web3',
+      routes: [
+        'blockchain:reentrancy',
+        'blockchain:overflow',
+        'blockchain:flash-loan',
+        'blockchain:access-control',
+        'blockchain:mev-front-run',
+      ],
+    },
+    {
+      id: 'malware',
+      name: 'Malware Analysis',
+      routes: [
+        'malware:static',
+        'malware:sandbox',
+        'malware:unpack',
+        'malware:yara',
+        'malware:rootkit',
+      ],
+    },
+    {
+      id: 'wireless',
+      name: 'Wireless Security',
+      routes: [
+        'wireless:wep',
+        'wireless:wpa2-handshake',
+        'wireless:evil-twin',
+        'wireless:wps',
+        'wireless:ble-sniff',
+      ],
+    },
+    {
+      id: 'devsecops',
+      name: 'DevSecOps',
+      routes: [
+        'devsecops:git-secrets',
+        'devsecops:dependency-confusion',
+        'devsecops:terraform-misconfig',
+        'devsecops:container-escape',
+        'devsecops:supply-chain-action',
+      ],
+    },
+    {
+      id: 'threat-hunting',
+      name: 'Threat Hunting & Blue Team',
+      routes: [
+        'threat-hunting:siem-query',
+        'threat-hunting:mitre-identify',
+        'threat-hunting:anomaly',
+        'threat-hunting:memory-hunt',
+        'threat-hunting:hunt',
+      ],
+    },
+    {
+      id: 'osint',
+      name: 'OSINT',
+      routes: [
+        'osint:username-check',
+        'osint:metadata',
+        'osint:subdomains',
+        'osint:social-recon',
+        'osint:breach-check',
+      ],
+    },
+    {
+      id: 'red-team',
+      name: 'Red Team Operations',
+      routes: [
+        'red-team:c2-beacon',
+        'red-team:lateral-movement',
+        'red-team:persistence',
+        'red-team:lotl',
+        'red-team:evasion',
+      ],
+    },
+    {
+      id: 'cloud-sec',
+      name: 'Cloud Security',
+      routes: [
+        'cloud-sec:s3-public',
+        'cloud-sec:iam-escalation',
+        'cloud-sec:metadata-ssrf',
+        'cloud-sec:container-breakout',
+        'cloud-sec:lambda-injection',
+      ],
+    },
+    {
+      id: 'privacy',
+      name: 'Privacy & Data Protection',
+      routes: [
+        'privacy:pii-overcollection',
+        'privacy:consent',
+        'privacy:dsar',
+        'privacy:data-transfer',
+        'privacy:breach-notification',
+      ],
+    },
+    // HackPath-aligned new modules
+    {
+      id: 'foundations',
+      name: 'Technical Foundations (Pillar 1)',
+      routes: [
+        'foundations:binary',
+        'foundations:linux-fundamentals',
+        'foundations:networking',
+        'foundations:crypto-basics',
+        'foundations:cia-triad',
+      ],
+    },
+    {
+      id: 'soc',
+      name: 'SOC & Detection Engineering (Pillar 4)',
+      routes: [
+        'soc:siem-query',
+        'soc:alert-triage',
+        'soc:detection-rule',
+        'soc:mitre-map',
+        'soc:anomaly',
+      ],
+    },
+    {
+      id: 'incident-response',
+      name: 'Incident Response (Pillar 4)',
+      routes: [
+        'incident-response:nist-lifecycle',
+        'incident-response:chain-of-custody',
+        'incident-response:containment',
+        'incident-response:malware-triage',
+        'incident-response:lessons-learned',
+      ],
+    },
+    {
+      id: 'grc',
+      name: 'GRC — Governance, Risk & Compliance (Pillar 6)',
+      routes: ['grc:risk-assessment', 'grc:compliance', 'grc:controls', 'grc:audit', 'grc:bcp-dr'],
     },
   ];
 }

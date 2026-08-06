@@ -75,7 +75,11 @@ router.get('/download-plugin', (req, res) => {
       });
     }
     const pluginCode = require(path.join(pluginDir, plugin));
-    res.json({ success: true, nonce: crypto.randomBytes(16).toString('hex') });
+    res.json({
+      success: true,
+      nonce: crypto.randomBytes(16).toString('hex'),
+      loaded: typeof pluginCode,
+    });
   } catch (e) {
     res.json({ error: e.message });
   }

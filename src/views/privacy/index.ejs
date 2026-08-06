@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head', { title: title }) %>
+<body>
+<%- include('../partials/header', { headerTitle: '[Privacy & Data Protection] — Module' }) %>
+
+      <h1>// RIVACY & DATA PROTECTION</h1>
+      <p style="color:var(--text-2); margin-bottom:1.5rem;">GDPR, PII handling, data minimization, breach notification. Beginner → Pro.</p>
+
+      <div class="challenge-grid">
+        <div class="challenge-card">
+          <h3>P1: Excessive PII Collection (GDPR Art 5)</h3>
+          <p style="color:var(--green);">Beginner</p>
+          <ul><li><a href="/privacy/pii-overcollection">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>P2: Invalid Consent — Dark Patterns</h3>
+          <p style="color:var(--green);">Beginner</p>
+          <ul><li><a href="/privacy/consent">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>P3: Non-Functional Data Subject Access Request</h3>
+          <p style="color:var(--amber);">Intermediate</p>
+          <ul><li><a href="/privacy/dsar">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>P4: Illegal Cross-Border Data Transfer</h3>
+          <p style="color:var(--red);">Advanced</p>
+          <ul><li><a href="/privacy/data-transfer">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>P5: Data Breach Notification Failure (72h)</h3>
+          <p style="color:var(--red);">Pro</p>
+          <ul><li><a href="/privacy/breach-notification">→ EXECUTE</a></li></ul>
+        </div>
+      </div>
+
+      <hr>
+      <div class="footer">
+        <p><a href="/">← BACK_TO_ROOT</a></p>
+      </div>
+
+<%- include('../partials/footer') %>

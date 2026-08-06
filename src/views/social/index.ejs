@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head', { title: title }) %>
+<body>
+<%- include('../partials/header', { headerTitle: '[Social Engineering] — Module' }) %>
+
+      <h1>// SOCIAL ENGINEERING</h1>
+      <p style="color:var(--text-2); margin-bottom:1.5rem;max-width:680px;">Interactive challenges from Beginner to Pro. Each endpoint returns a scenario, hint, and flag.</p>
+
+      <div class="challenge-grid">
+        <div class="challenge-card">
+          <h3>SE1: Phishing Email Identification</h3>
+          <p style="color:var(--green);">LEVEL: BEGINNER</p>
+          <ul><li><a href="/social/phishing">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>SE2: Pretexting – Caller Impersonation</h3>
+          <p style="color:#00ff9d;">Beginner</p>
+          <ul><li><a href="/social/pretexting">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>SE3: OSINT Challenge</h3>
+          <p style="color:var(--amber);">LEVEL: INTERMEDIATE</p>
+          <ul><li><a href="/social/osint">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>SE4: Deepfake Detection</h3>
+          <p style="color:var(--amber);">LEVEL: ADVANCED</p>
+          <ul><li><a href="/social/deepfake">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>SE5: Spear‑Phishing Campaign</h3>
+          <p style="color:var(--red);">LEVEL: PRO</p>
+          <ul><li><a href="/social/spear-phish">→ EXECUTE</a></li></ul>
+        </div>
+      </div>
+
+      <hr>
+      <div class="footer">
+        <p><a href="/">← BACK_TO_ROOT</a></p>
+      </div>
+
+<%- include('../partials/footer') %>

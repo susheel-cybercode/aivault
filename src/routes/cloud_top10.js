@@ -26,6 +26,7 @@ router.get('/metadata', (req, res) => {
     vuln: 'C1: Insecure Cloud Metadata Access',
     description: 'Exposes instance metadata to the attacker via SSRF.',
     demo: 'Attempt to fetch http://169.254.169.254/latest/meta-data/iam/security-credentials/',
+    flag: 'FLAG{cloud_meta_c1_3b8d5}',
   });
 });
 
@@ -35,6 +36,7 @@ router.get('/container-escape', (req, res) => {
   res.json({
     vuln: 'C2: Container Escape via Privileged Mount',
     description: 'Allows breaking out of the container by mounting host filesystem.',
+    flag: 'FLAG{cloud_escape_c2_1f6a4}',
   });
 });
 
@@ -43,6 +45,7 @@ router.get('/iam', (req, res) => {
   res.json({
     vuln: 'C3: Over-Privileged IAM Role',
     description: 'IAM role grants broad permissions, enabling privilege escalation.',
+    flag: 'FLAG{cloud_iam_c3_9c2e7}',
   });
 });
 

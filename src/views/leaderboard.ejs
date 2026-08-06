@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head', { title: title }) %>
+<body>
+<%- include('partials/header', { headerTitle: '[LEADERBOARD]' }) %>
+
+      <h1>// LEADERBOARD</h1>
+      <p style="color:var(--text-2); margin-bottom:1.5rem;max-width:680px;">Top players ranked by total points. Submit flags to climb the ranks.</p>
+
+      <div class="data-card" style="text-align:center; margin-bottom:1.5rem;">
+        <div style="font-size:1.6rem; font-weight:700; color:var(--brand);"><%= sessionSolves %></div>
+        <div style="color:var(--text-2); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.5px;">Your flags this session</div>
+        <a href="/flags" class="button" style="margin-top:0.75rem;">[ SUBMIT_FLAG ]</a>
+      </div>
+
+      <h2>// TOP_PLAYERS</h2>
+      <% if (players.length === 0) { %>
+        <p style="color:var(--text-2); font-size:0.85rem;">No players have scored yet. Be the first!</p>
+      <% } else { %>
+        <table>
+          <tr>
+            <th>RANK</th>
+            <th>PLAYER</th>
+            <th>POINTS</th>
+            <th>FACTION</th>
+          </tr>
+          <% players.forEach((p, i) => { %>
+            <tr>
+              <td><span style="color:<%= i < 3 ? 'var(--amber)' : 'var(--text-2)' %>;"><%= i + 1 %></span></td>
+              <td><%= p.handle || 'anonymous' %></td>
+              <td><span style="color:var(--green); font-weight:700;"><%= p.total_points %></span></td>
+              <td><%= p.faction || '—' %></td>
+            </tr>
+          <% }); %>
+        </table>
+      <% } %>
+
+      <hr>
+      <div class="footer">
+        <p><a href="/">← BACK_TO_ROOT</a> · <a href="/story">[ STORY_MODE ]</a></p>
+      </div>
+
+<%- include('partials/footer') %>

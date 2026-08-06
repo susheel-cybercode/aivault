@@ -1,0 +1,249 @@
+/* ============================================================
+   AIVault — Site Overlay (Clean)
+   Minimal header, hero and layout helpers layered on terminal.css.
+   ============================================================ */
+
+/* ==== Scrollbar ==== */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--paper-3); border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-2); }
+html { scrollbar-width: thin; scrollbar-color: var(--paper-3) var(--bg); }
+::selection { background: rgba(34, 211, 238, 0.3); color: var(--text); }
+
+/* ==== Header ==== */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.9rem 1.5rem;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  position: relative;
+  z-index: 100;
+  margin-bottom: 1.5rem;
+}
+
+header a[href="/"] {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text) !important;
+  text-decoration: none !important;
+  border: none !important;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  position: relative;
+  z-index: 1;
+}
+
+header a[href="/"] .site-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background: var(--brand);
+  color: #08131a;
+  font-size: 0.72rem;
+  font-weight: 800;
+  border-radius: 0;
+  margin-right: 0.15rem;
+}
+header a[href="/"] .site-mark::after { content: 'E7'; }
+
+/* Nav links */
+#mainNav { display: flex; gap: 0.4rem; align-items: center; position: relative; z-index: 1; }
+#mainNav a {
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-2) !important;
+  text-decoration: none !important;
+  border: 1px solid transparent !important;
+  padding: 0.35rem 0.75rem;
+  transition: all 0.15s;
+}
+#mainNav a:hover {
+  border-color: var(--border) !important;
+  background: var(--paper-2);
+  color: var(--text) !important;
+}
+#mainNav a.is-faction-aegis {
+  border-color: var(--brand) !important;
+  color: var(--brand) !important;
+}
+#mainNav a.is-faction-null {
+  border-color: var(--pink) !important;
+  color: var(--pink) !important;
+}
+
+/* Nav toggle */
+.nav-toggle { display: none; background: none; border: 1px solid var(--border); cursor: pointer; padding: 0.4rem; z-index: 2; border-radius: 0; }
+.nav-toggle span { display: block; width: 20px; height: 2px; background: var(--text-2); margin: 4px 0; transition: all 0.2s; }
+
+/* ==== Hero ==== */
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  padding: 3rem 2rem;
+  text-align: center;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  margin-bottom: 1.5rem;
+}
+
+.hero .warning {
+  display: inline-block;
+  color: var(--text-2);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.hero h1 {
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(2.6rem, 8vw, 4.2rem);
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--text);
+  text-transform: uppercase;
+  margin: 0.25rem 0;
+  line-height: 1;
+  border: none;
+  display: block;
+}
+
+.hero .hero-tag {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--brand);
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.hero .sub {
+  color: var(--text-2);
+  font-size: 0.95rem;
+  max-width: 540px;
+  margin: 1rem auto;
+  line-height: 1.7;
+}
+
+.hero .hero-cta { margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+/* ==== Hero animated character ==== */
+.hero .hero-char {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+  pointer-events: none;
+}
+.hero .hero-char img {
+  width: clamp(120px, 26vw, 220px);
+  height: auto;
+    filter: none);
+}
+
+
+/* ==== Data card ==== */
+.data-card h1 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: none;
+  display: block;
+}
+
+/* ==== Character art badge (small framed accent for standalone pages) ==== */
+.art-badge {
+  width: 120px;
+  height: auto;
+  display: block;
+  margin: 0 auto 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 30%, color-mix(in srgb, var(--pink) 10%, var(--bg)), var(--bg));
+  pointer-events: none;
+}
+.art-badge img { width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; }
+
+/* ==== Labs grid ==== */
+.labs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 0.6rem;
+}
+.labs-grid a {
+  display: block;
+  padding: 0.75rem 1rem;
+  background: var(--paper-2);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  color: var(--text-2) !important;
+  text-decoration: none !important;
+  font-size: 0.8rem;
+  font-weight: 700;
+  transition: all 0.15s;
+}
+.labs-grid a:hover {
+  border-color: var(--brand);
+  color: var(--text) !important;
+  background: var(--paper);
+}
+
+/* ==== Search input ==== */
+input#moduleSearch {
+  background: var(--paper-2) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text) !important;
+  padding: 0.7rem 1rem !important;
+  font-size: 0.88rem !important;
+  width: 100% !important;
+  max-width: 520px !important;
+  outline: none !important;
+  transition: border-color 0.15s !important;
+  font-family: 'Inter', sans-serif !important;
+  border-radius: 0 !important;
+}
+input#moduleSearch::placeholder { color: var(--text-3); font-size: 0.8rem; }
+input#moduleSearch:focus { border-color: var(--brand) !important; }
+
+/* ==== Scroll Reveal ==== */
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.4s ease-out, transform 0.4s ease-out; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 640px) {
+  header { padding: 0.8rem 1rem; margin-bottom: 1rem; }
+  .hero { min-height: 0; padding: 2.5rem 1rem; }
+  .hero h1 { font-size: 2.2rem; }
+  #mainNav { display: none !important; }
+  .nav-toggle { display: block; }
+  #mainNav.open {
+    display: flex !important;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--paper);
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 0;
+    gap: 0.5rem;
+  }
+}

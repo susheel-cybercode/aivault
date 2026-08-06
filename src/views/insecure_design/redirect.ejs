@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html><head><meta charset=UTF-8><title><%= title %></title><link rel="stylesheet" href="/css/terminal.css"></head>
-<body><div class="terminal-container"><div class="terminal-header"><span class="terminal-title">[A04] Open Redirect</span></div>
-<div class="terminal-body fade-in">
+<html lang="en">
+<%- include('../partials/head', { title: title }) %>
+<body>
+<%- include('../partials/header') %>
+
 <h1>Unvalidated Redirect</h1>
 <p>Pass a URL via <code>?url=</code> to be redirected without any allow-list.</p>
 <form method="GET" action="/insecure-design/redirect">
@@ -9,4 +11,7 @@
   <button>Redirect</button>
 </form>
 <p class="hint">Try: <code>?url=https://evil.com</code></p>
-</div></div></body></html>
+
+<%- include('../partials/footer') %>
+</body>
+</html>

@@ -1,28 +1,22 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title><%= title %></title>
-  <link rel="stylesheet" href="/css/terminal.css">
-</head>
+<html lang="en">
+<%- include('partials/head', { title: title }) %>
 <body>
-<div class="terminal-container">
-  <div class="terminal-header">
-    <span class="terminal-title">[AIVAULT LOGIN]</span>
-  </div>
-  <div class="terminal-body fade-in">
-    <h2>Login</h2>
-    <% if (typeof error !== 'undefined' && error) { %>
-      <p class="error"><%= error %></p>
-    <% } %>
-    <form method="POST" action="/login" class="vuln-form">
-      <input type="text" name="username" placeholder="Username" autofocus>
-      <input type="password" name="password" placeholder="Password">
-      <button type="submit">Login</button>
-    </form>
-    <p class="hint">Try: admin / admin123 (SQL injection: admin'-- / anything)</p>
-    <p><a href="/">← Back to Home</a></p>
-  </div>
-</div>
+<%- include('partials/header') %>
+
+<div class="art-badge"><img src="/art/echo7.svg" alt="ECHO-7" /></div>
+<h2>// LOGIN</h2>
+<% if (typeof error !== 'undefined' && error) { %>
+  <p class="error"><%= error %></p>
+<% } %>
+<form method="POST" action="/login" class="vuln-form">
+  <input type="text" name="username" placeholder="> username" autofocus>
+  <input type="password" name="password" placeholder="> password">
+  <button type="submit">[ AUTHENTICATE ]</button>
+</form>
+<p class="hint">[!] Try: admin / admin123 (SQLi: admin'-- / anything)</p>
+<p><a href="/">← BACK_TO_ROOT</a></p>
+
+<%- include('partials/footer') %>
 </body>
 </html>

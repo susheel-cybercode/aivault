@@ -1,0 +1,349 @@
+{
+  "title": "AIVault Curriculum — Aligned with HackPath 7-Pillar Roadmap",
+  "overview": "Beginner-to-advanced cybersecurity lab covering all major domains from technical foundations through advanced specializations, aligned with HackPath, CyBOK, NICE, MITRE ATT&CK, and OWASP frameworks.",
+  "reference_frameworks": [
+    "CyBOK — Cybersecurity Body of Knowledge",
+    "NICE — NIST Workforce Framework",
+    "ECSF — ENISA European Cybersecurity Skills Framework",
+    "MITRE ATT&CK — Adversary tactics & techniques",
+    "OWASP — Application security guidance"
+  ],
+  "pillars": [
+    {
+      "id": 1,
+      "name": "Technical Foundations",
+      "why": "Everything else assumes you understand how computers, networks, and operating systems actually work."
+    },
+    {
+      "id": 2,
+      "name": "Security Engineering & Attack Surfaces",
+      "why": "Modern attack surface: identity, web apps, cloud, code pipelines."
+    },
+    {
+      "id": 3,
+      "name": "Offensive Security",
+      "why": "You cannot reliably defend what you cannot attack."
+    },
+    {
+      "id": 4,
+      "name": "Defensive Operations",
+      "why": "Detect, respond, learn — most cybersecurity jobs live here."
+    },
+    {
+      "id": 5,
+      "name": "Advanced & Specialized Security",
+      "why": "Deep niches: malware, reverse engineering, mobile, wireless, IoT, AI/ML."
+    },
+    {
+      "id": 6,
+      "name": "Governance, Architecture & Assurance",
+      "why": "Security only scales if designed into the organization."
+    },
+    {
+      "id": 7,
+      "name": "Professional Practice, Research & Career",
+      "why": "Technical skill alone does not make a career."
+    }
+  ],
+  "categories": [
+    {
+      "id": "foundations",
+      "name": "Technical Foundations (Pillar 1)",
+      "routes": [
+        "foundations:binary",
+        "foundations:linux-fundamentals",
+        "foundations:networking",
+        "foundations:crypto-basics",
+        "foundations:cia-triad"
+      ]
+    },
+    {
+      "id": "web",
+      "name": "OWASP Top 10 Web (2021) — Pillar 2",
+      "routes": [
+        "broken-access",
+        "crypto-fails",
+        "injection",
+        "insecure-design",
+        "security-misconfig",
+        "vuln-components",
+        "auth-failures",
+        "integrity-fails",
+        "logging-fails",
+        "ssrf"
+      ]
+    },
+    {
+      "id": "api",
+      "name": "OWASP Top 10 API Security (2023) — Pillar 2",
+      "routes": [
+        "api:broken-object-level",
+        "api:broken-auth",
+        "api:broken-prop-auth",
+        "api:unrestricted-resources",
+        "api:broken-function",
+        "api:unrestricted-access",
+        "api:security-misconfig",
+        "api:injection",
+        "api:improper-assets",
+        "api:insufficient-logging"
+      ]
+    },
+    {
+      "id": "mobile",
+      "name": "OWASP Top 10 Mobile (2024) — Pillar 5",
+      "routes": [
+        "mobile:credentials",
+        "mobile:supply-chain",
+        "mobile:insecure-auth",
+        "mobile:insufficient-crypto",
+        "mobile:insecure-comm",
+        "mobile:security-update",
+        "mobile:data-leakage",
+        "mobile:security-config",
+        "mobile:client-injection",
+        "mobile:privacy"
+      ]
+    },
+    {
+      "id": "llm",
+      "name": "OWASP Top 10 for LLM (2025) — Pillar 5 (AI/ML Security)",
+      "routes": [
+        "llm:prompt",
+        "llm:insecure-output",
+        "llm:training-poison",
+        "llm:dos",
+        "llm:supply-chain",
+        "llm:sensitive-data",
+        "llm:insecure-plugin",
+        "llm:excessive-agency",
+        "llm:overreliance",
+        "llm:model-theft"
+      ]
+    },
+    {
+      "id": "network",
+      "name": "Network Security — Pillar 2/3",
+      "routes": [
+        "network:port-scan",
+        "network:dns-poisoning",
+        "network:arp-spoof",
+        "network:firewall-evasion",
+        "network:pcap-analyze"
+      ]
+    },
+    {
+      "id": "crypto-lab",
+      "name": "Cryptography Lab — Pillar 1",
+      "routes": [
+        "crypto:hash-identify",
+        "crypto:caesar",
+        "crypto:vigenere",
+        "crypto:rsa-weak",
+        "crypto:key-exchange"
+      ]
+    },
+    {
+      "id": "reverse",
+      "name": "Reverse Engineering — Pillar 5",
+      "routes": [
+        "reverse:strings",
+        "reverse:crackme",
+        "reverse:buffer-overflow",
+        "reverse:anti-debug",
+        "reverse:format-string"
+      ]
+    },
+    {
+      "id": "forensics",
+      "name": "Digital Forensics — Pillar 4",
+      "routes": [
+        "forensics:log-analysis",
+        "forensics:file-carving",
+        "forensics:memory-analysis",
+        "forensics:timeline",
+        "forensics:stego"
+      ]
+    },
+    {
+      "id": "soc",
+      "name": "SOC & Detection Engineering (Pillar 4)",
+      "routes": [
+        "soc:siem-query",
+        "soc:alert-triage",
+        "soc:detection-rule",
+        "soc:mitre-map",
+        "soc:anomaly"
+      ]
+    },
+    {
+      "id": "incident-response",
+      "name": "Incident Response (Pillar 4)",
+      "routes": [
+        "incident-response:nist-lifecycle",
+        "incident-response:chain-of-custody",
+        "incident-response:containment",
+        "incident-response:malware-triage",
+        "incident-response:lessons-learned"
+      ]
+    },
+    {
+      "id": "osint",
+      "name": "OSINT & Threat Intelligence — Pillar 4",
+      "routes": [
+        "osint:username-check",
+        "osint:metadata",
+        "osint:subdomains",
+        "osint:social-recon",
+        "osint:breach-check"
+      ]
+    },
+    {
+      "id": "social",
+      "name": "Social Engineering — Pillar 3",
+      "routes": [
+        "social:phishing",
+        "social:pretexting",
+        "social:osint",
+        "social:deepfake",
+        "social:spear-phish"
+      ]
+    },
+    {
+      "id": "red-team",
+      "name": "Red Team Operations — Pillar 3",
+      "routes": [
+        "red-team:c2-beacon",
+        "red-team:lateral-movement",
+        "red-team:persistence",
+        "red-team:lotl",
+        "red-team:evasion"
+      ]
+    },
+    {
+      "id": "iot",
+      "name": "IoT / OT Security — Pillar 5",
+      "routes": [
+        "iot:default-creds",
+        "iot:firmware-extract",
+        "iot:mqtt-hijack",
+        "iot:modbus-exploit",
+        "iot:ble-attack"
+      ]
+    },
+    {
+      "id": "blockchain",
+      "name": "Blockchain / Web3 — Pillar 5",
+      "routes": [
+        "blockchain:reentrancy",
+        "blockchain:overflow",
+        "blockchain:flash-loan",
+        "blockchain:access-control",
+        "blockchain:mev-front-run"
+      ]
+    },
+    {
+      "id": "malware",
+      "name": "Malware Analysis — Pillar 5",
+      "routes": [
+        "malware:static",
+        "malware:sandbox",
+        "malware:unpack",
+        "malware:yara",
+        "malware:rootkit"
+      ]
+    },
+    {
+      "id": "wireless",
+      "name": "Wireless Security — Pillar 5",
+      "routes": [
+        "wireless:wep",
+        "wireless:wpa2-handshake",
+        "wireless:evil-twin",
+        "wireless:wps",
+        "wireless:ble-sniff"
+      ]
+    },
+    {
+      "id": "devsecops",
+      "name": "DevSecOps & Supply Chain — Pillar 2",
+      "routes": [
+        "devsecops:git-secrets",
+        "devsecops:dependency-confusion",
+        "devsecops:terraform-misconfig",
+        "devsecops:container-escape",
+        "devsecops:supply-chain-action"
+      ]
+    },
+    {
+      "id": "threat-hunting",
+      "name": "Threat Hunting & Blue Team — Pillar 4",
+      "routes": [
+        "threat-hunting:siem-query",
+        "threat-hunting:mitre-identify",
+        "threat-hunting:anomaly",
+        "threat-hunting:memory-hunt",
+        "threat-hunting:hunt"
+      ]
+    },
+    {
+      "id": "cloud-sec",
+      "name": "Cloud Security — Pillar 2",
+      "routes": [
+        "cloud-sec:s3-public",
+        "cloud-sec:iam-escalation",
+        "cloud-sec:metadata-ssrf",
+        "cloud-sec:container-breakout",
+        "cloud-sec:lambda-injection"
+      ]
+    },
+    {
+      "id": "privacy",
+      "name": "Privacy & Data Protection — Pillar 2/6",
+      "routes": [
+        "privacy:pii-overcollection",
+        "privacy:consent",
+        "privacy:dsar",
+        "privacy:data-transfer",
+        "privacy:breach-notification"
+      ]
+    },
+    {
+      "id": "grc",
+      "name": "GRC — Governance, Risk & Compliance (Pillar 6)",
+      "routes": ["grc:risk-assessment", "grc:compliance", "grc:controls", "grc:audit", "grc:bcp-dr"]
+    }
+  ],
+  "career_paths": [
+    {
+      "role": "Web Application Pentester",
+      "description": "Offensive testing of web apps and APIs — from foundations through exploitation.",
+      "path": ["foundations", "web", "api", "network", "red-team"]
+    },
+    {
+      "role": "SOC Analyst",
+      "description": "Monitoring, triage, and incident response in a security operations center.",
+      "path": ["foundations", "soc", "incident-response", "forensics", "threat-hunting", "osint"]
+    },
+    {
+      "role": "Cloud Security Engineer",
+      "description": "Securing cloud infrastructure, identity, and containers.",
+      "path": ["foundations", "cloud-sec", "devsecops", "web", "api"]
+    },
+    {
+      "role": "Malware Analyst / Reverse Engineer",
+      "description": "Dissecting malicious binaries and reverse-engineering how they work.",
+      "path": ["foundations", "crypto-lab", "malware", "reverse"]
+    },
+    {
+      "role": "GRC / Risk Analyst",
+      "description": "Frameworks, risk management, architecture review, and assurance.",
+      "path": ["foundations", "grc", "privacy"]
+    },
+    {
+      "role": "DevSecOps Engineer",
+      "description": "Baking security into the software delivery pipeline, from code to cloud.",
+      "path": ["foundations", "web", "devsecops", "cloud-sec"]
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head', { title: title }) %>
+<body>
+<%- include('../partials/header', { headerTitle: '[FLAG SUBMISSION]' }) %>
+
+      <div class="art-badge"><img src="/art/echo7.svg" alt="ECHO-7" /></div>
+      <h1>// CAPTURE_FLAG</h1>
+      <p style="color:var(--text-2); margin-bottom:1.5rem;max-width:680px;">Found a flag while exploring a challenge? Submit it here to track your progress.</p>
+
+      <% if (error) { %>
+        <div class="error"><%- error %></div>
+      <% } %>
+
+      <% if (success) { %>
+        <div style="color:var(--green); background:rgba(0,255,65,0.06); padding:0.8rem 1rem; border-radius:0; border-left:3px solid var(--green); margin:0.8rem 0;">
+          <%- success.message %>
+        </div>
+      <% } %>
+
+      <form class="vuln-form" action="/flags/submit" method="POST">
+        <input type="text" name="flag" placeholder="> FLAG{...}" autocomplete="off" required />
+        <button type="submit">[ SUBMIT_FLAG ]</button>
+      </form>
+
+      <h2>// CAPTURED_FLAGS [<%= solved.length %>]</h2>
+      <% if (solved.length === 0) { %>
+        <p style="color:var(--text-2); font-size:0.85rem;">No flags captured yet. Go explore the modules!</p>
+        <a href="/" class="button">[ BROWSE_MODULES ]</a>
+      <% } else { %>
+        <ul style="list-style:none; margin-top:0.75rem;">
+          <% solved.forEach((f, i) => { %>
+            <li class="data-card" style="padding:0.5rem 0.85rem; margin-bottom:0.4rem; font-family:var(--font-mono); font-size:0.8rem; color:var(--green);">
+              <%= i + 1 %>. <%- f %>
+            </li>
+          <% }); %>
+        </ul>
+      <% } %>
+
+      <hr>
+      <div class="footer">
+        <p><a href="/">← BACK_TO_ROOT</a> · <a href="/leaderboard">[ LEADERBOARD ]</a></p>
+      </div>
+
+<%- include('../partials/footer') %>

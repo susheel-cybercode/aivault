@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+  <style>
+    .nucleus-echo7 { animation: nucEcho7 2s ease-in-out infinite; transform-origin: 150px 150px; }
+    @keyframes nucEcho7 { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.25); opacity: 0.65; } }
+    .orb-1 { animation: orb1 3s linear infinite; transform-origin: 150px 150px; }
+    .orb-2 { animation: orb2 4s linear infinite reverse; transform-origin: 150px 150px; }
+    .orb-3 { animation: orb3 5s linear infinite; transform-origin: 150px 150px; }
+    @keyframes orb1 { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes orb2 { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes orb3 { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) {
+      .nucleus-echo7, .orb-1, .orb-2, .orb-3 { animation: none; }
+    }
+  </style>
+  <!-- Nucleus -->
+  <circle class="nucleus-echo7" cx="150" cy="150" r="14" fill="#00ff41"/>
+  <circle cx="150" cy="150" r="22" fill="none" stroke="#00ff41" stroke-width="1" stroke-opacity="0.4"/>
+  <circle cx="150" cy="150" r="30" fill="none" stroke="#00ff41" stroke-width="1" stroke-opacity="0.15"/>
+  <text x="150" y="155" text-anchor="middle" font-family="monospace" font-size="9" font-weight="bold" fill="#000">E7</text>
+  <!-- Orbit 1 (horizontal ellipse) -->
+  <g class="orb-1">
+    <ellipse cx="150" cy="150" rx="120" ry="44" fill="none" stroke="#00ff41" stroke-width="1.2" stroke-opacity="0.55"/>
+    <circle cx="30" cy="150" r="5" fill="#00ff41">
+      <animateMotion dur="3s" repeatCount="indefinite" path="M 120 0 a 120 44 0 1 0 -240 0 a 120 44 0 1 0 240 0"/>
+    </circle>
+  </g>
+  <!-- Orbit 2 (tilted 60deg) -->
+  <g class="orb-2" transform="rotate(60 150 150)">
+    <ellipse cx="150" cy="150" rx="120" ry="44" fill="none" stroke="#00ff41" stroke-width="1.2" stroke-opacity="0.45"/>
+    <circle cx="30" cy="150" r="5" fill="#00ff41">
+      <animateMotion dur="4s" repeatCount="indefinite" path="M 120 0 a 120 44 0 1 0 -240 0 a 120 44 0 1 0 240 0"/>
+    </circle>
+  </g>
+  <!-- Orbit 3 (tilted 120deg) -->
+  <g class="orb-3" transform="rotate(120 150 150)">
+    <ellipse cx="150" cy="150" rx="120" ry="44" fill="none" stroke="#00ff41" stroke-width="1.2" stroke-opacity="0.35"/>
+    <circle cx="30" cy="150" r="5" fill="#00ff41">
+      <animateMotion dur="5s" repeatCount="indefinite" path="M 120 0 a 120 44 0 1 0 -240 0 a 120 44 0 1 0 240 0"/>
+    </circle>
+  </g>
+</svg>

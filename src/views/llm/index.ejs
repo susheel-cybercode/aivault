@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html><head><meta charset=UTF-8><title><%= title %></title><link rel="stylesheet" href="/css/terminal.css"></head>
-<body><div class="terminal-container"><div class="terminal-header"><span class="terminal-title">[LLM] Top 10 Dashboard</span></div>
-<div class="terminal-body fade-in">
+<html lang="en">
+<%- include('../partials/head', { title: title }) %>
+<body>
+<%- include('../partials/header') %>
+
 <h1>OWASP Top 10 for LLM Applications</h1>
 <div class="challenge-grid">
 <div class="challenge-card"><h3>LLM01: Prompt Injection</h3><form method="POST" action="/llm/llm01/chat"><input name="message" placeholder="Chat with AI"><button>Send</button></form></div>
@@ -14,4 +16,8 @@
 <div class="challenge-card"><h3>LLM08: Agency</h3><p>POST /llm/llm08/assistant</p></div>
 <div class="challenge-card"><h3>LLM09: Overreliance</h3><p>POST /llm/llm09/decide</p></div>
 <div class="challenge-card"><h3>LLM10: Model Theft</h3><p><a href="/llm/llm10/model-info">Model Architecture</a></p></div>
-</div></div></div></body></html>
+</div>
+
+<%- include('../partials/footer') %>
+</body>
+</html>

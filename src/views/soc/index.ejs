@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head', { title: title }) %>
+<body>
+<%- include('../partials/header', { headerTitle: '[SOC] — Module' }) %>
+
+      <h1>// OC & Detection Engineering <span style="color:var(--text-2);font-size:0.8rem;font-weight:400;">· HackPath Pillar 4</span></h1>
+      <p style="color:var(--text-2); margin-bottom:1.5rem;">Monitor, detect, and respond. SIEM queries, alert triage, Sigma rules, MITRE mapping, anomaly detection.</p>
+
+      <div class="challenge-grid">
+        <div class="challenge-card">
+          <h3>S1: SIEM Log Query</h3>
+          <p style="color:var(--green);">Beginner</p>
+          <ul><li><a href="/soc/siem-query">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>S2: Alert Triage — True vs False Positive</h3>
+          <p style="color:var(--green);">Beginner</p>
+          <ul><li><a href="/soc/alert-triage">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>S3: Detection Rule Writing (Sigma)</h3>
+          <p style="color:var(--amber);">Intermediate</p>
+          <ul><li><a href="/soc/detection-rule">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>S4: MITRE ATT&CK Mapping</h3>
+          <p style="color:var(--amber);">Intermediate</p>
+          <ul><li><a href="/soc/mitre-map">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>S5: Behavioral Anomaly — Impossible Travel</h3>
+          <p style="color:var(--red);">Pro</p>
+          <ul><li><a href="/soc/anomaly">→ EXECUTE</a></li></ul>
+        </div>
+      </div>
+
+      <hr>
+      <div class="footer">
+        <p><a href="/">← BACK_TO_ROOT</a></p>
+      </div>
+
+<%- include('../partials/footer') %>

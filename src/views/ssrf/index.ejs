@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html><head><meta charset=UTF-8><title><%= title %></title><link rel="stylesheet" href="/css/terminal.css"></head>
-<body><div class="terminal-container"><div class="terminal-header"><span class="terminal-title">[A10] SSRF</span></div>
-    <div class="terminal-body fade-in"><h1>A10:2021 - Server-Side Request Forgery</h1>
+<html lang="en">
+<%- include('../partials/head', { title: title }) %>
+<body>
+<%- include('../partials/header') %>
+
+<h1>A10:2021 - Server-Side Request Forgery</h1>
 <form method="GET" action="/ssrf/fetch" class="vuln-form">
   <input name="url" placeholder="Enter URL to fetch" value="http://localhost:3000/">
   <button>Fetch</button>
 </form>
 <p class="hint">Try: <code>http://169.254.169.254/latest/meta-data/</code> (cloud metadata)</p>
-<ul><li><a href="/ssrf/port-scan">Port Scanner via SSRF</a></li><li><a href="/ssrf/image-proxy">Image Proxy SSRF</a></li><li>POST /ssrf/webhook-test (Webhook SSRF)</li></ul></div></div></body></html>
+<ul><li><a href="/ssrf/port-scan">Port Scanner via SSRF</a></li><li><a href="/ssrf/image-proxy">Image Proxy SSRF</a></li><li>POST /ssrf/webhook-test (Webhook SSRF)</li></ul>
+
+<%- include('../partials/footer') %>
+</body>
+</html>

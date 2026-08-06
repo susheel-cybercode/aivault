@@ -116,7 +116,7 @@ router.get('/2fa-bypass', (req, res) => {
 });
 
 router.post('/2fa/verify', (req, res) => {
-  const { user_id, code } = req.body;
+  const { code } = req.body;
 
   // A04: 2FA code is static '123456' and stored in database
   // Also, direct user_id-based access allows bypass
@@ -198,6 +198,18 @@ router.post('/bulk-order', (req, res) => {
     if (maxQty < 10) res.json({ success: true, ordered: maxQty });
     else res.json({ error: 'Max 10 items per order' });
   }
+});
+
+// A04: Unrestricted file upload endpoint (no type/size validation)
+router.post('/upload', upload.single('file'), (req, res) => {
+  if (!req.file) return res.json({ error: 'No file uploaded' });
+  res.json({
+    success: true,
+    filename: req.file.originalname,
+    path: req.file.path,
+    size: req.file.size,
+    mimetype: req.file.mimetype,
+  });
 });
 
 module.exports = router;

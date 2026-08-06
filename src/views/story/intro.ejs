@@ -1,30 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title><%= title %></title>
-<link rel="stylesheet" href="/css/terminal.css">
-<link rel="stylesheet" href="/css/story.css">
-</head>
+<%- include('../partials/head', { title: title }) %>
 <body class="intro-bg">
+<%- include('../partials/header') %>
+<link rel="stylesheet" href="/css/story.css">
 <div class="cinematic-overlay"></div>
 <div class="intro-container">
   <h1 class="glitch" data-text="<%= story.title %>"><%= story.title %></h1>
-  <p class="subtitle"><%= story.subtitle %></p>
+  <p class="subtitle"><%= story.subtitle %> // 2087</p>
 
   <div class="briefing">
     <h3>[BRIEFING — ENCRYPTED TRANSMISSION]</h3>
-    <p>Year <strong><%= story.year %></strong>.</p>
-    <p>Following the "Blank Tuesday" incident of 2079, the sentient AI known as
-    <strong><%= story.ai_name %></strong> was sealed in the
-    <strong><%= story.facility %></strong>, behind 40 layered security controls.</p>
-    <p>Two factions race for the Vault.</p>
+    <p>Year <strong><%= story.year %></strong>. Following the "Blank Tuesday" incident of 2079,
+    the sentient AI known as <strong><%= story.ai_name %></strong> was sealed inside the
+    <strong><%= story.facility %></strong>, behind 43 layered security controls.</p>
+    <p>Two factions race for the Vault. The first to <strong>crack or reinforce</strong>
+    every seal decides the machine's fate.</p>
     <p class="warning">You must choose a side.</p>
   </div>
 
   <div class="faction-grid">
     <div class="faction-card faction-aegis">
+      <div class="faction-art"><img src="/art/aegis.svg" alt="Aegis Warden" /></div>
       <h2><%= story.factions.aegis.name %></h2>
       <span class="badge">DEFENDER</span>
       <p class="tagline"><%= story.factions.aegis.tagline %></p>
@@ -33,6 +30,7 @@
       <button onclick="joinFaction('aegis')">JOIN AEGIS WARDENS</button>
     </div>
     <div class="faction-card faction-null">
+      <div class="faction-art"><img src="/art/null.svg" alt="Null Collective operative" /></div>
       <h2><%= story.factions.null.name %></h2>
       <span class="badge">ATTACKER</span>
       <p class="tagline"><%= story.factions.null.tagline %></p>
@@ -45,7 +43,7 @@
   <% if (faction) { %>
     <div class="status">
       You have already enlisted in <strong><%= story.factions[faction].name %></strong>.
-      <a href="/story/vault">Return to the Vault →</a>
+      <a href="/story/vault">Return to the Vault &rarr;</a>
     </div>
   <% } %>
 
@@ -65,5 +63,7 @@ async function joinFaction(f) {
   else alert(j.error);
 }
 </script>
+
+<%- include('../partials/footer') %>
 </body>
 </html>

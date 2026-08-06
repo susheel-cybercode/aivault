@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head', { title: title }) %>
+<body>
+<%- include('../partials/header', { headerTitle: '[OSINT] — Module' }) %>
+
+      <h1>// SINT (OPEN SOURCE INTELLIGENCE)</h1>
+      <p style="color:var(--text-2); margin-bottom:1.5rem;">Gathering intelligence from publicly available sources. Beginner → Pro.</p>
+
+      <div class="challenge-grid">
+        <div class="challenge-card">
+          <h3>O1: Username Enumeration Across Platforms</h3>
+          <p style="color:var(--green);">Beginner</p>
+          <ul><li><a href="/osint/username-check">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>O2: Metadata Extraction from Documents</h3>
+          <p style="color:var(--green);">Beginner</p>
+          <ul><li><a href="/osint/metadata">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>O3: DNS & Subdomain Enumeration</h3>
+          <p style="color:var(--amber);">Intermediate</p>
+          <ul><li><a href="/osint/subdomains">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>O4: Social Media Intelligence</h3>
+          <p style="color:var(--red);">Advanced</p>
+          <ul><li><a href="/osint/social-recon">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>O5: Breach & Credential Leak Monitoring</h3>
+          <p style="color:var(--red);">Pro</p>
+          <ul><li><a href="/osint/breach-check">→ EXECUTE</a></li></ul>
+        </div>
+      </div>
+
+      <hr>
+      <div class="footer">
+        <p><a href="/">← BACK_TO_ROOT</a></p>
+      </div>
+
+<%- include('../partials/footer') %>

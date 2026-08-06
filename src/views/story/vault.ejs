@@ -1,23 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<title><%= title %></title>
-<link rel="stylesheet" href="/css/terminal.css">
-<link rel="stylesheet" href="/css/story.css">
-</head>
+<%- include('../partials/head', { title: title }) %>
 <body class="vault-bg">
+<%- include('../partials/header') %>
+<link rel="stylesheet" href="/css/story.css">
 <div class="vault-container">
   <div class="vault-header">
-    <h1 class="vault-title">THE ECHO VAULT</h1>
-    <p class="vault-sub">40 layered controls protect the imprisoned mind of ECHO-7.</p>
+    <div class="vault-hero-row">
+      <div class="vault-echo-art">
+        <img src="/art/echo7.svg" alt="ECHO-7 entity" />
+      </div>
+      <div class="vault-header-text">
+        <h1 class="vault-title">THE ECHO VAULT</h1>
+        <p class="vault-sub">43 layered controls imprison the mind of ECHO-7 across 5 pillars.<br>Every seal you crack (or reinforce) draws the story closer to its end.</p>
+      </div>
+    </div>
   </div>
 
-  <div class="player-card" style="border-color: <%= factionData.color %>">
+  <div class="player-card">
     <div class="player-card-header">
-      <div>
-        <span class="faction-tag">[<%= factionData.role %>]</span>
-        <span class="faction-name"><%= factionData.name %></span>
+      <div style="display:flex;align-items:center;gap:0.75rem;">
+        <img src="/art/<%= faction === 'aegis' ? 'aegis' : 'null' %>.svg" alt="<%= factionData.name %>" style="height:56px;width:auto;border:2px solid <%= factionData.color %>;" />
+        <div>
+          <span class="faction-tag">[<%= factionData.role %>]</span>
+          <span class="faction-name"><%= factionData.name %></span>
+        </div>
       </div>
       <div>
         <span class="progress-stat"><%= progress.completedCount %> / <%= progress.totalChapters %></span>
@@ -27,7 +34,7 @@
     <div class="progress-bar">
       <div class="progress-fill" style="width: <%= progress.percentage %>%; background: <%= factionData.color %>"></div>
     </div>
-    <p class="tagline">"<em><%= factionData.tagline %></em>"</p>
+    <p class="tagline">"<em><%= factionData.tagline %></em>" · Rank: <strong style="color:<%= factionData.color %>"><%= rank.current.name %></strong></p>
   </div>
 
   <p class="instructions">
@@ -36,8 +43,8 @@
     must <%= faction === 'aegis' ? 'audit and patch' : 'exploit and breach' %> — you decide the tools.
   </p>
 
-  <% ['web','api','mobile','llm'].forEach(p => { %>
-    <% const titles = { web: 'OWASP Top 10 Web (2021)', api: 'OWASP Top 10 API (2023)', mobile: 'OWASP Top 10 Mobile (2024)', llm: 'OWASP Top 10 for LLM (2025)' }; %>
+  <% ['web','api','mobile','llm','cloud'].forEach(p => { %>
+    <% const titles = { web: 'OWASP Top 10 Web (2021)', api: 'OWASP Top 10 API (2023)', mobile: 'OWASP Top 10 Mobile (2024)', llm: 'OWASP Top 10 for LLM (2025)', cloud: 'OWASP Cloud-Native Top 10 (2024)' }; %>
     <div class="pillar-block">
       <h2><%= titles[p] %></h2>
       <div class="lock-grid">
@@ -46,7 +53,7 @@
             <div class="lock-code"><%= c.code %></div>
             <div class="lock-name"><%= c.name %></div>
             <div class="lock-cat"><%= c.category %></div>
-            <% if (c._completed) { %><div class="lock-status">✓ SEAL CRACKED</div><% } else { %><div class="lock-status">• INTACT</div><% } %>
+            <% if (c._completed) { %><div class="lock-status">Seal cracked</div><% } else { %><div class="lock-status">Seal intact</div><% } %>
           </a>
         <% }) %>
       </div>
@@ -54,8 +61,12 @@
   <% }) %>
 
   <footer>
-    <a href="/story/leaderboard">War Room →</a> &nbsp;|&nbsp;
+    <a href="/story/scoreboard">War Room &rarr;</a> &nbsp;|&nbsp;
     <a href="/story">Story Briefing</a> &nbsp;|&nbsp;
     <a href="/">Skill Index</a>
   </footer>
-</div></body></html>
+</div>
+
+<%- include('../partials/footer') %>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+  <style>
+    .nucleus-null { animation: nucNull 1.8s ease-in-out infinite; transform-origin: 150px 150px; }
+    @keyframes nucNull { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.3); opacity: 0.6; } }
+    .orb-n1 { animation: orbN1 2.8s linear infinite; transform-origin: 150px 150px; }
+    .orb-n2 { animation: orbN2 3.6s linear infinite reverse; transform-origin: 150px 150px; }
+    .orb-n3 { animation: orbN3 4.4s linear infinite; transform-origin: 150px 150px; }
+    @keyframes orbN1 { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes orbN2 { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes orbN3 { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) {
+      .nucleus-null, .orb-n1, .orb-n2, .orb-n3 { animation: none; }
+    }
+  </style>
+  <!-- Nucleus (red = shatter faction) -->
+  <circle class="nucleus-null" cx="150" cy="150" r="15" fill="#ff3b3b"/>
+  <circle cx="150" cy="150" r="23" fill="none" stroke="#ff3b3b" stroke-width="1" stroke-opacity="0.4"/>
+  <circle cx="150" cy="150" r="31" fill="none" stroke="#ff3b3b" stroke-width="1" stroke-opacity="0.15"/>
+  <text x="150" y="154" text-anchor="middle" font-family="monospace" font-size="9" font-weight="bold" fill="#000">N0</text>
+  <g class="orb-n1">
+    <ellipse cx="150" cy="150" rx="122" ry="46" fill="none" stroke="#00ff41" stroke-width="1.2" stroke-opacity="0.5" stroke-dasharray="6 3"/>
+    <circle cx="28" cy="150" r="5" fill="#00ff41">
+      <animateMotion dur="2.8s" repeatCount="indefinite" path="M 122 0 a 122 46 0 1 0 -244 0 a 122 46 0 1 0 244 0"/>
+    </circle>
+  </g>
+  <g class="orb-n2" transform="rotate(60 150 150)">
+    <ellipse cx="150" cy="150" rx="122" ry="46" fill="none" stroke="#00ff41" stroke-width="1.2" stroke-opacity="0.4" stroke-dasharray="6 3"/>
+    <circle cx="28" cy="150" r="5" fill="#00ff41">
+      <animateMotion dur="3.6s" repeatCount="indefinite" path="M 122 0 a 122 46 0 1 0 -244 0 a 122 46 0 1 0 244 0"/>
+    </circle>
+  </g>
+  <g class="orb-n3" transform="rotate(120 150 150)">
+    <ellipse cx="150" cy="150" rx="122" ry="46" fill="none" stroke="#00ff41" stroke-width="1.2" stroke-opacity="0.3" stroke-dasharray="6 3"/>
+    <circle cx="28" cy="150" r="5" fill="#00ff41">
+      <animateMotion dur="4.4s" repeatCount="indefinite" path="M 122 0 a 122 46 0 1 0 -244 0 a 122 46 0 1 0 244 0"/>
+    </circle>
+  </g>
+</svg>

@@ -1,0 +1,253 @@
+/* ============================================================
+   AIVault — Campaign Walkthrough (Neon Cyberdeck)
+   ============================================================ */
+
+.campaign-wrap { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+.campaign-header { text-align: center; padding: 1rem 0 1.5rem; }
+
+.campaign-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.campaign-sub {
+  color: var(--text-2);
+  font-size: 0.92rem;
+  max-width: 620px;
+  margin: 0.5rem auto 1.4rem;
+  line-height: 1.7;
+}
+
+/* Progress bar */
+.campaign-progress {
+  max-width: 500px;
+  height: 10px;
+  margin: 0 auto;
+  background: var(--paper-2);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.4);
+}
+.campaign-progress-bar {
+  height: 100%;
+  background: var(--bg-2), var(--pink));
+  border-radius: 0;
+  transition: width 0.5s ease-out;
+  box-shadow: none;
+}
+.campaign-progress-label {
+  margin-top: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+/* Current scene card */
+.scene-card {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 1.8rem;
+  background: var(--bg-2), var(--paper));
+  border: 1px solid var(--border);
+  border-radius: 0;
+  padding: 1.8rem;
+  align-items: center;
+  margin-bottom: 2rem;
+  box-shadow: none;
+  backdrop-filter: blur(6px);
+}
+
+.scene-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 30%, color-mix(in srgb, var(--char) 14%, var(--bg)), var(--bg));
+  border: 1px solid var(--border);
+  min-height: 280px;
+}
+.scene-art img {
+  width: 100%;
+  height: auto;
+  max-height: 330px;
+  object-fit: contain;
+}
+
+.scene-meta { margin-bottom: 0.9rem; }
+.scene-chapter {
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--char, var(--brand));
+  font-weight: 700;
+}
+.scene-meta h2 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text);
+  margin: 0.25rem 0;
+  display: block;
+}
+.scene-meta h2::before { display: none; }
+.scene-speaker {
+  font-size: 0.76rem;
+  color: var(--text-3);
+  font-style: italic;
+}
+
+/* Speech bubble */
+.bubble {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--char, var(--brand));
+  border-radius: 0;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1rem;
+}
+.bubble p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--text);
+}
+
+.scene-narration {
+  color: var(--text-2);
+  font-size: 0.88rem;
+  line-height: 1.7;
+  margin: 0 0 1.1rem;
+}
+
+.scene-status {
+  font-size: 0.8rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+.scene-status.done { color: var(--green); }
+
+.scene-actions { display: flex; gap: 0.7rem; flex-wrap: wrap; align-items: center; }
+.scene-actions .button {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 0;
+  cursor: pointer;
+  border: 1px solid transparent;
+  text-decoration: none;
+}
+a.scene-start {
+  background: var(--char, var(--brand));
+  color: #0a141a !important;
+}
+a.scene-start:hover { filter: brightness(1.15); box-shadow: var(--cyan-glow); }
+button.scene-next {
+  background: var(--paper);
+  color: var(--text) !important;
+  border: 1px solid var(--border);
+}
+button.scene-next:hover { border-color: var(--char, var(--brand)); color: var(--char, var(--brand)) !important; }
+
+/* Timeline */
+.chapter-list {
+  background: var(--bg-2), var(--paper));
+  border: 1px solid var(--border);
+  border-radius: 0;
+  padding: 1.5rem 1.8rem;
+}
+.chapter-list-title {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-2);
+  margin: 0 0 1rem;
+}
+.chapter-list ol { list-style: none; margin: 0; padding: 0; }
+
+.chapter-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 0.5rem;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.chapter-row:last-child { border-bottom: none; }
+.chapter-row.is-done { background: rgba(0, 230, 118, 0.04); }
+.chapter-row.is-now { background: rgba(0, 255, 65, 0.05); }
+
+.chapter-mark {
+  font-size: 1.1rem;
+  width: 28px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.chapter-row.is-done .chapter-mark { color: var(--green); }
+.chapter-row.is-now .chapter-mark { color: var(--brand); }
+.chapter-row:not(.is-done):not(.is-now) .chapter-mark { color: var(--text-3); }
+
+.chapter-name {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+.chapter-episode {
+  font-size: 0.66rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-3);
+  font-weight: 600;
+}
+.chapter-name strong {
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.chapter-tag {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 0.25rem 0.6rem;
+  border-radius: 0;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+.done-tag { background: rgba(0, 230, 118, 0.15); color: var(--green); border: 1px solid rgba(0, 230, 118, 0.3); }
+.now-tag { background: rgba(0, 255, 65, 0.12); color: var(--brand); border: 1px solid var(--cyan-border); }
+.locked-tag { background: transparent; color: var(--text-3); border: 1px solid var(--border); }
+
+.campaign-footer {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--text-2);
+}
+.campaign-footer a { color: var(--brand); margin: 0 0.4rem; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .scene-card { grid-template-columns: 1fr; gap: 1.2rem; }
+  .scene-art { min-height: 200px; }
+  .scene-art img { max-height: 240px; }
+  .chapter-row { flex-wrap: wrap; }
+}

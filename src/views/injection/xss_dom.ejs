@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><title>DOM XSS</title><link rel="stylesheet" href="/css/terminal.css"></head>
-<body><div class="terminal-container"><div class="terminal-header"><span class="terminal-title">[A03] DOM XSS</span></div>
-<div class="terminal-body fade-in">
+<html lang="en">
+<%- include('../partials/head', { title: 'DOM XSS' }) %>
+<body>
+<%- include('../partials/header') %>
+
 <h1>DOM-Based XSS</h1>
 <div id="output">Loading...</div>
 <script>
@@ -14,4 +16,7 @@
   }
 </script>
 <p class="hint">Add hash to URL: <code>#&lt;img src=x onerror=alert(1)&gt;</code></p>
-</div></div></body></html>
+
+<%- include('../partials/footer') %>
+</body>
+</html>

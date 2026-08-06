@@ -149,7 +149,7 @@ router.post('/upload', (req, res) => {
     try {
       const result = JSON.parse(data);
       // API4: Memory exhaustion possible with large payloads
-      res.json({ size: data.length, parsed: true });
+      res.json({ size: data.length, parsed: result });
     } catch (e) {
       res.json({ error: e.message, size: data?.length });
     }

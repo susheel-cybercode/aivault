@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head', { title: title }) %>
+<body>
+<%- include('../partials/header', { headerTitle: '[DevSecOps] — Module' }) %>
+
+      <h1>// DEVSECOPS</h1>
+      <p style="color:var(--text-2); margin-bottom:1.5rem;max-width:680px;">Interactive challenges from Beginner to Pro. Each endpoint returns a scenario, hint, and flag.</p>
+
+      <div class="challenge-grid">
+        <div class="challenge-card">
+          <h3>D1: Secrets in Git – Beginner</h3>
+          <p style="color:var(--green);">LEVEL: BEGINNER</p>
+          <ul><li><a href="/devsecops/git-secrets">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>D2: Dependency Confusion – Beginner</h3>
+          <p style="color:#00ff9d;">Beginner</p>
+          <ul><li><a href="/devsecops/dependency-confusion">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>D3: Terraform Misconfiguration – Intermediate</h3>
+          <p style="color:var(--amber);">LEVEL: INTERMEDIATE</p>
+          <ul><li><a href="/devsecops/terraform-misconfig">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>D4: Container Escape – Pro</h3>
+          <p style="color:var(--red);">LEVEL: PRO</p>
+          <ul><li><a href="/devsecops/container-escape">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>D5: Supply Chain Attack – Pro</h3>
+          <p style="color:#ff4757;">Pro</p>
+          <ul><li><a href="/devsecops/supply-chain-action">→ EXECUTE</a></li></ul>
+        </div>
+      </div>
+
+      <hr>
+      <div class="footer">
+        <p><a href="/">← BACK_TO_ROOT</a></p>
+      </div>
+
+<%- include('../partials/footer') %>

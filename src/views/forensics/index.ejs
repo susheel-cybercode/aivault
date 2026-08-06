@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head', { title: title }) %>
+<body>
+<%- include('../partials/header', { headerTitle: '[Digital Forensics] — Module' }) %>
+
+      <h1>// DIGITAL FORENSICS</h1>
+      <p style="color:var(--text-2); margin-bottom:1.5rem;max-width:680px;">Interactive challenges from Beginner to Pro. Each endpoint returns a scenario, hint, and flag.</p>
+
+      <div class="challenge-grid">
+        <div class="challenge-card">
+          <h3>F1: Log Analysis</h3>
+          <p style="color:var(--green);">LEVEL: BEGINNER</p>
+          <ul><li><a href="/forensics/log-analysis">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>F2: File Carving</h3>
+          <p style="color:#00ff9d;">Beginner</p>
+          <ul><li><a href="/forensics/file-carving">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>F3: Memory Dump Analysis</h3>
+          <p style="color:var(--amber);">LEVEL: INTERMEDIATE</p>
+          <ul><li><a href="/forensics/memory-analysis">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>F4: Timeline Creation</h3>
+          <p style="color:var(--amber);">LEVEL: ADVANCED</p>
+          <ul><li><a href="/forensics/timeline">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>F5: Steganography (Pro)</h3>
+          <p style="color:var(--red);">LEVEL: PRO</p>
+          <ul><li><a href="/forensics/stego">→ EXECUTE</a></li></ul>
+        </div>
+      </div>
+
+      <hr>
+      <div class="footer">
+        <p><a href="/">← BACK_TO_ROOT</a></p>
+      </div>
+
+<%- include('../partials/footer') %>

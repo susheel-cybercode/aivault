@@ -27,7 +27,6 @@ router.get('/', (req, res) => {
 
 // Default credentials exposed
 router.get('/default-creds', (req, res) => {
-  const db = getDb();
   // Exposes default/test credentials
   res.json({
     default_credentials: [

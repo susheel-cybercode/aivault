@@ -1,25 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title><%= title %></title>
-  <link rel="stylesheet" href="/css/terminal.css">
-</head>
+<%- include('../partials/head', { title: title }) %>
 <body>
-  <div class="terminal-container">
-    <div class="terminal-header">
-      <span class="terminal-title">[CLOUD TOP 10] Overview</span>
-    </div>
-    <div class="terminal-body fade-in">
-      <h1>OWASP Cloud‑Native Top 10 (2024)</h1>
-      <p>Explore common cloud security mis‑configurations. The endpoints are intentionally vulnerable for educational purposes.</p>
-      <ul>
-        <li><a href="/cloud/metadata">C1 – Insecure Metadata Access</a></li>
-        <li><a href="/cloud/container-escape">C2 – Container Escape via Privileged Mount</a></li>
-        <li><a href="/cloud/iam">C3 – Over‑Privileged IAM Role</a></li>
-        <!-- Add more links for C4‑C10 as needed -->
-      </ul>
-    </div>
-  </div>
+<%- include('../partials/header') %>
+
+<h1>OWASP Cloud‑Native Top 10 (2024)</h1>
+<p>Explore common cloud security mis‑configurations. The endpoints are intentionally vulnerable for educational purposes.</p>
+<ul>
+  <li><a href="/cloud/metadata">C1 – Insecure Metadata Access</a></li>
+  <li><a href="/cloud/container-escape">C2 – Container Escape via Privileged Mount</a></li>
+  <li><a href="/cloud/iam">C3 – Over‑Privileged IAM Role</a></li>
+  <!-- Add more links for C4‑C10 as needed -->
+</ul>
+
+<%- include('../partials/footer') %>
 </body>
 </html>

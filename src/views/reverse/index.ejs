@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head', { title: title }) %>
+<body>
+<%- include('../partials/header', { headerTitle: '[Reverse Engineering] — Module' }) %>
+
+      <h1>// REVERSE ENGINEERING</h1>
+      <p style="color:var(--text-2); margin-bottom:1.5rem;max-width:680px;">Interactive challenges from Beginner to Pro. Each endpoint returns a scenario, hint, and flag.</p>
+
+      <div class="challenge-grid">
+        <div class="challenge-card">
+          <h3>R1: String Extraction</h3>
+          <p style="color:var(--green);">LEVEL: BEGINNER</p>
+          <ul><li><a href="/reverse/strings">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>R2: Crackme – Simple Password Check</h3>
+          <p style="color:#00ff9d;">Beginner</p>
+          <ul><li><a href="/reverse/crackme">→ POST</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>R3: Buffer Overflow</h3>
+          <p style="color:var(--amber);">LEVEL: INTERMEDIATE</p>
+          <ul><li><a href="/reverse/buffer-overflow">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>R4: Anti‑Debugging</h3>
+          <p style="color:var(--amber);">LEVEL: ADVANCED</p>
+          <ul><li><a href="/reverse/anti-debug">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>R5: Format String Exploitation</h3>
+          <p style="color:var(--red);">LEVEL: PRO</p>
+          <ul><li><a href="/reverse/format-string">→ EXECUTE</a></li></ul>
+        </div>
+      </div>
+
+      <hr>
+      <div class="footer">
+        <p><a href="/">← BACK_TO_ROOT</a></p>
+      </div>
+
+<%- include('../partials/footer') %>

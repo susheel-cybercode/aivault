@@ -1,12 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<title><%= title %></title>
-<link rel="stylesheet" href="/css/terminal.css">
+<%- include('../partials/head', { title: title }) %>
+<body class="vault-bg">
+<%- include('../partials/header') %>
 <link rel="stylesheet" href="/css/story.css">
-</head>
-<body>
+
+<!-- ===== Cinematic Story Overlay ===== -->
+<div class="story-overlay" id="story-overlay">
+  <div class="scanlines"></div>
+  <div class="scan-bar"></div>
+
+  <div class="story-cinematic-layout">
+    <div class="story-art-side">
+      <% if (factionKey === 'aegis') { %>
+        <img src="/art/aegis.svg" alt="Aegis Warden" class="story-character-art" />
+      <% } else { %>
+        <img src="/art/null.svg" alt="Null Collective operative" class="story-character-art" />
+      <% } %>
+    </div>
+    <div class="story-lines" id="story-lines-wrap">
+      <div class="story-chapter-badge"><%= chapter.code %> · <%= chapter.category %></div>
+      <div class="story-chapter-title"><%= chapter.name %></div>
+      <div id="story-lines"></div>
+    </div>
+  </div>
+
+  <button class="story-skip" id="story-skip">SKIP STORY ▸▸</button>
+  <button class="story-begin" id="story-begin">BEGIN MISSION</button>
+</div>
+
+<script>
+window.__storyLines = [
+  'Three years after the Blank Tuesday incident...',
+  'The seals placed upon ECHO-7 grow weak.',
+  'Layer <%= chapter.code %> guards the <%= chapter.category %> seal.',
+  '<%= chapter.summary %>',
+  <% if (faction.role === 'Defender') { %>
+  'Your oath as a Warden: identify the flaw. Seal it.',
+  <% } else { %>
+  'Your mission as Null Collective: exploit it. Peel the seal.',
+  <% } %>
+  'The Vault awaits.'
+];
+var s = document.createElement('script');
+s.src = '/js/story-cinematic.js';
+document.head.appendChild(s);
+</script>
+
 <div class="chapter-container">
   <a href="/story/vault" class="back-link">← Return to Vault</a>
 
@@ -30,7 +70,7 @@
   </div>
 
   <div class="access-points">
-    <h4 style="color: #00ff88">ACCESS POINTS:</h4>
+    <h4>ACCESS POINTS:</h4>
     <% const links = {
       a01: [['IDOR Profile','/broken-access?id=1'],['Admin Panel','/broken-access/admin'],['Path Traversal','/broken-access/download?file=/etc/passwd']],
       a02: [['Crypto Debug','/crypto-fails/debug/config'],['JWT Forge','/crypto-fails/forge-token?username=admin&role=admin']],
@@ -71,14 +111,21 @@
       llm07: [['Plugin Exec','/llm/llm07/plugin/execute']],
       llm08: [['Agency','/llm/llm08/assistant']],
       llm09: [['Overreliance','/llm/llm09/decide']],
-      llm10: [['Model Info','/llm/llm10/model-info']]
+      llm10: [['Model Info','/llm/llm10/model-info']],
+      c1: [['Metadata','/cloud/metadata']],
+      c2: [['Container Escape','/cloud/container-escape']],
+      c3: [['IAM Role','/cloud/iam']]
     };
     const k = chapter.id.replace(/^api\d+_alt$/,'api8_alt');
     const linksForChapter = links[chapter.id] || links[k] || [];
     %>
     <ul>
       <% linksForChapter.forEach(l => { %>
-        <li><a href="<%= l[1] %>" target="_blank">→ <%= l[0] %></a></li>
+        <% if (/^(POST|PUT|DELETE) /i.test(l[1])) { %>
+          <li><code><%= l[1] %></code> — <span class="ap-label"><%= l[0] %></span></li>
+        <% } else { %>
+          <li><a href="<%= l[1] %>" target="_blank">→ <%= l[0] %></a></li>
+        <% } %>
       <% }) %>
       <% if (linksForChapter.length === 0) { %><li><em>Direct endpoint access required (see source)</em></li><% } %>
     </ul>
@@ -86,31 +133,31 @@
 
   <% if (!completed) { %>
     <div class="submit-section">
-      <h4 style="color:#ffaa00">SUBMIT THE FLAG</h4>
-      <p class="hint">After exploiting the vulnerability, paste the <code>FLAG{...}</code> you found to crack this seal.</p>
-      <input id="flag-input" placeholder="FLAG{...}" style="background:#0a0a0a;border:1px solid #333;color:#00ff41;padding:0.75rem;font-family:'JetBrains Mono',monospace;border-radius:4px;width:100%;margin-bottom:0.5rem">
-      <button onclick="submitFlag()" class="crack-button">CRACK THIS SEAL</button>
-      <div id="result" style="margin-top:1rem;font-size:0.9rem"></div>
+      <h4>Submit The Flag</h4>
+      <p class="hint" style="color:var(--text-2);">After exploiting the vulnerability, paste the <code>FLAG{...}</code> you found to crack this seal.</p>
+      <input id="flag-input" placeholder="FLAG{...}">
+      <button onclick="submitFlag()" class="crack-button">Crack This Seal</button>
+      <div id="result"></div>
     </div>
   <% } else { %>
-    <div style="padding:1rem;background:rgba(0,255,65,0.1);border:1px solid #00ff41;border-radius:4px;text-align:center;margin-top:1rem">
-      ✓ SEAL CRACKED · Flag: <code style="color:#00ff41"><%= chapter.flag %></code>
+    <div class="seal-cracked-banner">
+      ✓ SEAL CRACKED · Flag: <code><%= chapter.flag %></code>
     </div>
   <% } %>
 
   <div class="hint-section">
-    <h4 style="color:#888">HINTS (escalating — try harder first):</h4>
+    <h4>HINTS (escalating — try harder first):</h4>
     <button onclick="showHint(1)" class="hint-button">Hint 1</button>
     <button onclick="showHint(2)" class="hint-button">Hint 2</button>
     <button onclick="showHint(3)" class="hint-button">Hint 3 (spoiler)</button>
-    <div id="hint-text" style="margin-top:0.5rem;padding:0.5rem;background:#0a0a0a;border-left:3px solid #ffaa00;font-size:0.85rem"></div>
+    <div id="hint-text"></div>
   </div>
 
-  <div style="margin-top:2rem;padding:1rem;background:#0f0f0f;border:1px solid #333;border-radius:4px">
-    <h4 style="color:#00aaff;margin-bottom:0.5rem">SOURCE VIEW (DVWA-style)</h4>
+  <div class="source-viewer">
+    <h4>Source View (DVWA-style)</h4>
     <details>
-      <summary style="cursor:pointer;color:#888">View the vulnerable server-side code →</summary>
-      <iframe src="/story/chapter/<%= pillar %>/<%= chapter.id %>/source" style="width:100%;height:400px;margin-top:0.5rem;border:1px solid #333;background:#0a0a0a"></iframe>
+      <summary>View the vulnerable server-side code &rarr;</summary>
+      <iframe src="/story/chapter/<%= pillar %>/<%= chapter.id %>/source"></iframe>
     </details>
   </div>
 </div>
@@ -127,14 +174,16 @@ async function submitFlag() {
   const j = await r.json();
   const result = document.getElementById('result');
   if (j.success) {
-    result.innerHTML = '<div style="color:#00ff41;font-weight:700"> ✓ ' + j.message + '</div>' +
-      '<div style="margin-top:0.5rem">Progress: ' + j.progress.completedCount + '/' + j.progress.totalChapters +
+    result.className = 'result-ok';
+    result.innerHTML = '✓ ' + j.message +
+      '<div class="result-meta">Progress: ' + j.progress.completedCount + '/' + j.progress.totalChapters +
       ' ('+ j.progress.percentage +'%) · ' + j.progress.points + ' points · Rank: ' + j.rank.current.name + '</div>' +
-      (j.nextChapter ? '<div style="margin-top:0.5rem"><a href="/story/chapter/'+j.nextChapter.pillar+'/'+j.nextChapter.id+'">Next: '+j.nextChapter.name+' →</a></div>' : '') +
-      (j.points_awarded ? '<div style="color:#ffaa00;margin-top:0.5rem">+'+ j.points_awarded +' points awarded</div>' : '');
+      (j.nextChapter ? '<div class="result-next"><a href="/story/chapter/'+j.nextChapter.pillar+'/'+j.nextChapter.id+'">Next: '+j.nextChapter.name+' &rarr;</a></div>' : '') +
+      (j.points_awarded ? '<div class="result-points">+'+ j.points_awarded +' points awarded</div>' : '');
     setTimeout(() => window.location.reload(), 2500);
   } else {
-    result.innerHTML = '<div style="color:#ff3366">✗ '+(j.error || 'Incorrect flag')+'</div>';
+    result.className = 'result-err';
+    result.textContent = '✗ ' + (j.error || 'Incorrect flag');
   }
 }
 async function showHint(n) {
@@ -143,10 +192,7 @@ async function showHint(n) {
   document.getElementById('hint-text').textContent = '[Hint '+n+'/'+j.total+'] ' + j.hint;
 }
 </script>
-<style>
-.submit-section { margin-top: 2rem; padding: 1.5rem; background: rgba(0,0,0,0.6); border: 1px solid #ffaa00; border-radius: 6px; }
-.hint-section { margin-top: 2rem; padding: 1rem; background: rgba(0,0,0,0.4); border: 1px solid #333; border-radius: 4px; }
-.hint-button { background: #1a1a1a; border: 1px solid #444; color: #ffaa00; padding: 0.3rem 0.75rem; margin-right: 0.25rem; cursor: pointer; border-radius: 3px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
-.hint-button:hover { background: #333; }
-</style>
-</body></html>
+
+<%- include('../partials/footer') %>
+</body>
+</html>

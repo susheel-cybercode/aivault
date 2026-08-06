@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head', { title: title }) %>
+<body>
+<%- include('../partials/header', { headerTitle: '[Cloud Security] — Module' }) %>
+
+      <h1>// LOUD SECURITY</h1>
+      <p style="color:var(--text-2); margin-bottom:1.5rem;">AWS, Azure, GCP misconfigurations, IAM abuse, container security. Beginner → Pro.</p>
+
+      <div class="challenge-grid">
+        <div class="challenge-card">
+          <h3>CS1: Publicly Exposed S3 Bucket</h3>
+          <p style="color:var(--green);">Beginner</p>
+          <ul><li><a href="/cloud-sec/s3-public">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>CS2: IAM Privilege Escalation via PassRole</h3>
+          <p style="color:var(--green);">Beginner</p>
+          <ul><li><a href="/cloud-sec/iam-escalation">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>CS3: SSRF to Cloud Metadata Service</h3>
+          <p style="color:var(--amber);">Intermediate</p>
+          <ul><li><a href="/cloud-sec/metadata-ssrf">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>CS4: Container Breakout via Host PID + Mount</h3>
+          <p style="color:var(--red);">Advanced</p>
+          <ul><li><a href="/cloud-sec/container-breakout">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>CS5: Lambda Function Code Injection</h3>
+          <p style="color:var(--red);">Pro</p>
+          <ul><li><a href="/cloud-sec/lambda-injection">→ EXECUTE</a></li></ul>
+        </div>
+      </div>
+
+      <hr>
+      <div class="footer">
+        <p><a href="/">← BACK_TO_ROOT</a></p>
+      </div>
+
+<%- include('../partials/footer') %>

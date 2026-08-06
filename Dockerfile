@@ -38,6 +38,8 @@ COPY --from=builder --chown=nodejs:nodejs /app/node_modules ./node_modules
 COPY --from=builder --chown=nodejs:nodejs /app/src ./src
 COPY --from=builder --chown=nodejs:nodejs /app/package.json ./
 COPY --from=builder --chown=nodejs:nodejs /app/data ./data
+# Harden filesystem: make app read‑only except for data directory (DB, uploads)
+RUN chmod -R 555 /app && chmod -R 777 /app/data && chown -R nodejs:nodejs /app
 
 USER nodejs
 

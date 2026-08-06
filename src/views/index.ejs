@@ -2,26 +2,49 @@
 <html lang="en">
 <%- include('partials/head', { title: title }) %>
 <body>
-<%- include('partials/header', { headerTitle: '[ROOT@AIVAULT ~]# cat /etc/motd' }) %>
+<%- include('partials/header') %>
 
       <%- include('partials/hero') %>
 
       <div class="nav-menu">
-        <a href="/login">Login</a>
-        <a href="/dashboard">Dashboard</a>
-        <a href="#web">OWASP Web Top 10</a>
-        <a href="#api">OWASP API Top 10</a>
-        <a href="#mobile">OWASP Mobile Top 10</a>
-        <a href="#llm">OWASP LLM Top 10</a>
-        <a href="/campaign">Campaign Mode</a>
-        <a href="/cloud">OWASP Cloud‑Native Top 10</a>
+        <a href="/login">// LOGIN</a>
+        <a href="/dashboard">// DASHBOARD</a>
+        <a href="#web">// OWASP_WEB</a>
+        <a href="#api">// OWASP_API</a>
+        <a href="#mobile">// OWASP_MOBILE</a>
+        <a href="#llm">// OWASP_LLM</a>
+        <a href="#cloud">// CLOUD_NATIVE</a>
+        <a href="#labs">// LABS</a>
       </div>
 
       <hr>
 
+      <!-- Search filter -->
+      <div style="margin:1rem 0 1.5rem; text-align:center;">
+        <input type="text" id="moduleSearch" placeholder="> grep modules..." />
+      </div>
+
+      <script>
+      (function(){
+        var box = document.getElementById('moduleSearch');
+        box.addEventListener('input', function(){
+          var q = this.value.trim().toLowerCase();
+          var cats = document.querySelectorAll('.category');
+          cats.forEach(function(cat){
+            var text = cat.textContent.toLowerCase();
+            var match = !q || text.indexOf(q) !== -1;
+            cat.style.display = match ? '' : 'none';
+            if (match && q) {
+              cat.style.order = '0';
+            }
+          });
+        });
+      })();
+      </script>
+
       <!-- OWASP Top 10 Web -->
       <div class="category" id="web">
-        <h2>🔴 OWASP Top 10 Web (2021)</h2>
+        <h2>[VOL.I] OWASP Top 10 Web (2021)</h2>
         <div class="challenge-grid">
           <div class="challenge-card">
             <h3>A01:2021 - Broken Access Control</h3>
@@ -121,7 +144,7 @@
 
       <!-- OWASP API Top 10 -->
       <div class="category" id="api">
-        <h2>🟡 OWASP Top 10 API Security (2023)</h2>
+        <h2>[VOL.II] OWASP Top 10 API (2023)</h2>
         <div class="challenge-grid">
           <div class="challenge-card">
             <h3>API1: Broken Object Level Authz</h3>
@@ -195,7 +218,7 @@
 
       <!-- OWASP Mobile Top 10 -->
       <div class="category" id="mobile">
-        <h2>🟢 OWASP Top 10 Mobile (2024)</h2>
+        <h2>[VOL.III] OWASP Top 10 Mobile (2024)</h2>
         <div class="challenge-grid">
           <div class="challenge-card">
             <h3>M1: Improper Credentials</h3>
@@ -264,7 +287,7 @@
 
       <!-- OWASP LLM Top 10 -->
       <div class="category" id="llm">
-        <h2>🟣 OWASP Top 10 for LLM Applications (2025)</h2>
+        <h2>[VOL.IV] OWASP Top 10 for LLM (2025)</h2>
         <div class="challenge-grid">
           <div class="challenge-card">
             <h3>LLM01: Prompt Injection</h3>
@@ -322,10 +345,35 @@
             </ul>
           </div>
         </div>
-      </div>
+</div>
 
-       <div class="category" id="cloud">
-         <h2>☁️ OWASP Cloud‑Native Top 10 (2024)</h2>
+        <!-- Labs & specialised modules -->
+        <div class="category" id="labs">
+          <h2>Labs &SPECIALISED MODULES</h2>
+          <div class="labs-grid">
+            <a href="/network">Network Security</a>
+            <a href="/crypto-lab">Cryptography Lab</a>
+            <a href="/reverse">Reverse Engineering</a>
+            <a href="/forensics">Digital Forensics</a>
+            <a href="/foundations">Technical Foundations</a>
+            <a href="/soc">SOC &amp; Detection</a>
+            <a href="/incident-response">Incident Response</a>
+            <a href="/malware">Malware Analysis</a>
+            <a href="/wireless">Wireless Security</a>
+            <a href="/iot">IoT / OT Security</a>
+            <a href="/blockchain">Blockchain / Web3</a>
+            <a href="/social">Social Engineering</a>
+            <a href="/osint">OSINT</a>
+            <a href="/red-team">Red Team Ops</a>
+            <a href="/threat-hunting">Threat Hunting</a>
+            <a href="/cloud-sec">Cloud Security</a>
+            <a href="/devsecops">DevSecOps</a>
+            <a href="/grc">GRC</a>
+            <a href="/privacy">Privacy &amp; Data Protection</a>
+          </div>
+        </div>
+        <div class="category" id="cloud">
+          <h2>// OWASP Cloud-Native Top 10 (2024)</h2>
          <div class="challenge-grid">
            <div class="challenge-card">
              <h3>C1 – Insecure Metadata Access</h3>
@@ -343,8 +391,21 @@
        </div>
 
         <hr>
+
+      <div style="text-align:center;padding:2rem 1.5rem;margin:1.5rem 0;background:var(--bg-2);border:1px solid var(--border-2);border-radius:0;box-shadow:none;">
+        <h2 style="margin-top:0;border:none;padding:0;">// SUPPORT_THE_VAULT</h2>
+        <p style="color:var(--text-2);font-size:0.88rem;max-width:480px;margin:0 auto 1.2rem;">
+          AIVault is and always will be 100% free &amp; open source. If you found it valuable, consider supporting the project.
+        </p>
+        <div style="display:flex;gap:0;justify-content:center;flex-wrap:wrap;">
+          <a href="https://ko-fi.com/aivault" target="_blank" rel="noopener" class="button">[ KO-FI ]</a>
+          <a href="https://www.buymeacoffee.com/aivault" target="_blank" rel="noopener" class="button">[ BUY_ME_A_COFFEE ]</a>
+          <a href="https://github.com/sponsors/aivault" target="_blank" rel="noopener" class="button">[ GITHUB_SPONSORS ]</a>
+        </div>
+      </div>
+
       <div class="footer">
-        <p style="color: #ff4757;">⚠ This application contains INTENTIONAL security vulnerabilities.</p>
+        <p style="color: var(--red);">[!] This application contains INTENTIONAL security vulnerabilities.</p>
         <p>Built for educational purposes. Deploy in isolated environments only.</p>
         <p>OWASP® Top 10 Web 2021 | API 2023 | Mobile 2024 | LM 2025 | Cloud 2024</p>
       </div>

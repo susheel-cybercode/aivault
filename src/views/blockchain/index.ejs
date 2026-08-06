@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head', { title: title }) %>
+<body>
+<%- include('../partials/header', { headerTitle: '[Blockchain / Web3] — Module' }) %>
+
+      <h1>// BLOCKCHAIN / WEB3</h1>
+      <p style="color:var(--text-2); margin-bottom:1.5rem;max-width:680px;">Interactive challenges from Beginner to Pro. Each endpoint returns a scenario, hint, and flag.</p>
+
+      <div class="challenge-grid">
+        <div class="challenge-card">
+          <h3>B1: Reentrancy Attack</h3>
+          <p style="color:var(--green);">LEVEL: BEGINNER</p>
+          <ul><li><a href="/blockchain/reentrancy">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>B2: Integer Overflow</h3>
+          <p style="color:#00ff9d;">Beginner</p>
+          <ul><li><a href="/blockchain/overflow">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>B3: Flash Loan Attack</h3>
+          <p style="color:var(--amber);">LEVEL: INTERMEDIATE</p>
+          <ul><li><a href="/blockchain/flash-loan">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>B4: Access Control Bypass</h3>
+          <p style="color:var(--amber);">LEVEL: ADVANCED</p>
+          <ul><li><a href="/blockchain/access-control">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>B5: MEV Front‑Running</h3>
+          <p style="color:var(--red);">LEVEL: PRO</p>
+          <ul><li><a href="/blockchain/mev-front-run">→ EXECUTE</a></li></ul>
+        </div>
+      </div>
+
+      <hr>
+      <div class="footer">
+        <p><a href="/">← BACK_TO_ROOT</a></p>
+      </div>
+
+<%- include('../partials/footer') %>

@@ -1,5 +1,12 @@
 <!DOCTYPE html>
-<html><head><meta charset=UTF-8><title>A04 Insecure Design</title><link rel="stylesheet" href="/css/terminal.css"></head>
-<body><div class="terminal-container"><div class="terminal-header"><span class="terminal-title">[A04] Insecure Design</span></div>
-<div class="terminal-body fade-in"><h1>A04:2021 – Insecure Design</h1>
-<ul><li><a href="/insecure-design/forgot-password">Weak Password Reset Flow</a></li><li><a href="/insecure-design/2fa-bypass">2FA Bypass</a></li><li><a href="/insecure-design/redirect?url=https://evil.com">Open Redirect</a></li><li><a href="/insecure-design/coupon">Business Logic Flaws (Coupon Abuse)</a></li></ul></div></div></body></html>
+<html lang="en">
+<%- include('../partials/head', { title: 'A04 Insecure Design' }) %>
+<body>
+<%- include('../partials/header') %>
+
+<h1>A04:2021 – Insecure Design</h1>
+<ul><li><a href="/insecure-design/forgot-password">Weak Password Reset Flow</a></li><li><a href="/insecure-design/2fa-bypass">2FA Bypass</a></li><li><a href="/insecure-design/redirect?url=https://evil.com">Open Redirect</a></li><li><a href="/insecure-design/coupon">Business Logic Flaws (Coupon Abuse)</a></li></ul>
+
+<%- include('../partials/footer') %>
+</body>
+</html>

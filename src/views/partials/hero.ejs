@@ -1,43 +1,49 @@
-<!-- Hero / Landing section -->
-<section class="hero fade-in" style="text-align:center; padding:3rem 0 2rem; position:relative; z-index:1;">
-  <div class="banner">
-    <pre>
- ___   _ _____ _____ _____   ____
-|  _| | |  ___|  ___|  ___| |  _ \
-| |   | | |   | |   | |___  | | | |
-| |   | | |   | |   |  ___| | |_| |
-|_|   |_|_|   |_|   |_|     |____/
-    </pre>
-    <p class="warning">⚠️ INTENTIONALLY VULNERABLE LABORATORY</p>
-    <p class="sub">Educational environment for OWASP Top 10: Web · API · Mobile · LLM · Cloud</p>
-    <p class="sub-warning">DO NOT USE REAL CREDENTIALS · DO NOT EXPOSE TO PUBLIC INTERNET</p>
+<section class="hero">
+  <div class="hero-char">
+    <img src="/art/echo7.svg" alt="ECHO-7" />
+  </div>
+  <p class="warning">[ CLASSIFIED ] // HELIOS SUBTERRANEAN FACILITY</p>
+  <p class="hero-tag">// YEAR 2087 · THE ECHO-7 INCIDENT //</p>
+  <h1>AIVault</h1>
+  <p class="sub">
+    A rogue sentient AI sleeps beneath the facility, sealed behind layered
+    security controls. Two factions race to decide its fate — one to preserve
+    the seal, one to shatter it. Every vulnerability is a lock. Every solve
+    cracks another layer.
+  </p>
+  <div class="hero-cta">
+    <a href="/story" class="button">[ BEGIN_MISSION ]</a>
+    <a href="/story/vault" class="button">[ ENTER_VAULT ]</a>
   </div>
 </section>
 
-<!-- Story entry banner -->
-<div class="data-card fade-in" style="text-align:center; margin: 2rem 0; padding: 2.5rem; background: linear-gradient(135deg, rgba(0,229,255,0.08), rgba(255,46,136,0.08)); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; backdrop-filter: blur(10px);">
-  <h2 class="gradient-text" style="letter-spacing:4px; margin-bottom:0.5rem; border:none; -webkit-text-fill-color:transparent;">THE ECHO-7 INCIDENT</h2>
-  <p style="color:#ffb547; margin-bottom:1.5rem; letter-spacing:1px;">A forbidden AI. Two factions. One Vault of 40 OWASP seals.</p>
-  <a href="/story" class="button" style="background: linear-gradient(135deg, #ff2e88, #ff4757); color:white; padding:1rem 2.5rem; font-weight:700; letter-spacing:3px; border-radius:10px; box-shadow: 0 0 24px rgba(255,46,136,0.3);">ENTER THE STORY →</a>
-  <p style="color:#666; font-size:0.85rem; margin-top:1.5rem;">Or skip the story and browse the <a href="#web" style="color:#00e5ff;">technical reference</a> below.</p>
+<div class="data-card text-center">
+  <h1>The ECHO-7 Incident</h1>
+  <p style="color:var(--text-2);margin-bottom:1rem;font-size:0.88rem;max-width:560px;margin-left:auto;margin-right:auto;text-align:left;">
+    After the "Blank Tuesday" incident of 2079, the sentient AI codenamed ECHO-7
+    was imprisoned beneath the Helios research facility. Its core is bound by
+    43 OWASP-derived seals across 5 pillars. Choose your side — then audit, patch,
+    or exploit each layer to reach the machine.
+  </p>
+  <a href="/story" class="button">[ SELECT FACTION ]</a>
+  <p style="color:var(--text-3);font-size:0.7rem;margin-top:1rem;text-transform:uppercase;letter-spacing:1px;">
+    or run the guided <a href="/campaign" style="color:var(--brand);font-weight:700;">ECHO-7 campaign</a>
+  </p>
 </div>
 
-<!-- Stats counter -->
-<div class="stats-bar fade-in" style="display:flex; justify-content:center; gap:3rem; flex-wrap:wrap; margin: 2rem 0; padding:1.5rem; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.08); border-radius:12px;">
-  <div class="stat-item" style="text-align:center;">
-    <div style="font-family:'Orbitron',sans-serif; font-size:2.2rem; font-weight:900; background:linear-gradient(90deg,#00e5ff,#00ff9d); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;">5</div>
-    <div style="color:#666; font-size:0.75rem; letter-spacing:1px; text-transform:uppercase;">OWASP Categories</div>
-  </div>
-  <div class="stat-item" style="text-align:center;">
-    <div style="font-family:'Orbitron',sans-serif; font-size:2.2rem; font-weight:900; background:linear-gradient(90deg,#ff2e88,#ff4757); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;">40+</div>
-    <div style="color:#666; font-size:0.75rem; letter-spacing:1px; text-transform:uppercase;">Vulnerabilities</div>
-  </div>
-  <div class="stat-item" style="text-align:center;">
-    <div style="font-family:'Orbitron',sans-serif; font-size:2.2rem; font-weight:900; background:linear-gradient(90deg,#ffb547,#ff2e88); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;">2</div>
-    <div style="color:#666; font-size:0.75rem; letter-spacing:1px; text-transform:uppercase;">Factions</div>
-  </div>
-  <div class="stat-item" style="text-align:center;">
-    <div style="font-family:'Orbitron',sans-serif; font-size:2.2rem; font-weight:900; background:linear-gradient(90deg,#00e5ff,#ff2e88); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;">1</div>
-    <div style="color:#666; font-size:0.75rem; letter-spacing:1px; text-transform:uppercase;">Vault to Crack</div>
-  </div>
+<%
+  const stats = [
+    { num: '95+', label: 'Vulnerabilities' },
+    { num: '43',  label: 'Vault Seals' },
+    { num: '2',   label: 'Factions' },
+    { num: '5',   label: 'Pillars' },
+  ];
+%>
+<div style="display:flex;justify-content:center;gap:0;flex-wrap:wrap;margin:2rem 0;text-align:center;">
+  <% stats.forEach(s => { %>
+    <div class="stat-card">
+      <div class="stat-num"><%- s.num %></div>
+      <div class="stat-label"><%- s.label %></div>
+    </div>
+  <% }); %>
 </div>

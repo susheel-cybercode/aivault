@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head', { title: title }) %>
+<body>
+<%- include('../partials/header', { headerTitle: '[Threat Hunting & Blue Team] — Module' }) %>
+
+      <h1>// THREAT HUNTING & BLUE TEAM</h1>
+      <p style="color:var(--text-2); margin-bottom:1.5rem;max-width:680px;">Interactive challenges from Beginner to Pro. Each endpoint returns a scenario, hint, and flag.</p>
+
+      <div class="challenge-grid">
+        <div class="challenge-card">
+          <h3>TH1: SIEM Query – Detect Lateral Movement</h3>
+          <p style="color:var(--green);">LEVEL: BEGINNER</p>
+          <ul><li><a href="/threat-hunting/siem-query">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>TH2: MITRE ATT&CK Technique Identification</h3>
+          <p style="color:#00ff9d;">Beginner</p>
+          <ul><li><a href="/threat-hunting/mitre-identify">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>TH3: Anomaly Detection – Baseline Deviation</h3>
+          <p style="color:var(--amber);">LEVEL: INTERMEDIATE</p>
+          <ul><li><a href="/threat-hunting/anomaly">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>TH4: Memory Forensics – Rootkit Detection</h3>
+          <p style="color:var(--amber);">LEVEL: ADVANCED</p>
+          <ul><li><a href="/threat-hunting/memory-hunt">→ EXECUTE</a></li></ul>
+        </div>
+        <div class="challenge-card">
+          <h3>TH5: Threat Hunting – Hypothesis Framework</h3>
+          <p style="color:var(--red);">LEVEL: PRO</p>
+          <ul><li><a href="/threat-hunting/hunt">→ EXECUTE</a></li></ul>
+        </div>
+      </div>
+
+      <hr>
+      <div class="footer">
+        <p><a href="/">← BACK_TO_ROOT</a></p>
+      </div>
+
+<%- include('../partials/footer') %>

@@ -1,40 +1,29 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title><%= title %></title>
-  <link rel="stylesheet" href="/css/terminal.css">
-</head>
+<html lang="en">
+<%- include('partials/head', { title: title }) %>
 <body>
-<div class="terminal-container">
-  <div class="terminal-header">
-    <span class="terminal-title">[DASHBOARD] - Username: <%= user?.username || 'Guest' %> (Role: <%= user?.role || 'none' %>)</span>
-  </div>
-  <div class="terminal-body fade-in">
-    <div class="nav-menu">
-      <a href="/">Home</a>
-      <a href="/logout">Logout</a>
-    </div>
-    <h2>Dashboard</h2>
-    <p>Welcome, <strong><%= user.username %></strong>. Your role: <strong><%= user.role %></strong></p>
-    
-    <h3>Your Posts</h3>
-    <% if (posts && posts.length > 0) { %>
-      <ul>
-        <% posts.forEach(p => { %>
-          <li><strong><%= p.title %></strong>: <%= p.content %></li>
-        <% }) %>
-      </ul>
-    <% } else { %>
-      <p>No posts yet.</p>
-    <% } %>
+<%- include('partials/header') %>
 
-    <h3>Quick Links</h3>
-    <ul>
-      <li><a href="/broken-access?id=1">View User Profile (IDOR)</a></li>
-      <li><a href="/injection">SQL Injection Lab</a></li>
-    </ul>
-  </div>
-</div>
+<h2>// DASHBOARD</h2>
+<p>Welcome, <strong><%= user.username %></strong>. Your role: <strong><%= user.role %></strong></p>
+
+<h3>// YOUR_POSTS</h3>
+<% if (posts && posts.length > 0) { %>
+  <ul>
+    <% posts.forEach(p => { %>
+      <li><strong><%= p.title %></strong>: <%= p.content %></li>
+    <% }) %>
+  </ul>
+<% } else { %>
+  <p>No posts yet.</p>
+<% } %>
+
+<h3>// QUICK_LINKS</h3>
+<ul>
+  <li><a href="/broken-access?id=1">View User Profile (IDOR)</a></li>
+  <li><a href="/injection">SQL Injection Lab</a></li>
+</ul>
+
+<%- include('partials/footer') %>
 </body>
 </html>

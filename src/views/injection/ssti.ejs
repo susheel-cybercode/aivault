@@ -1,8 +1,13 @@
 <!DOCTYPE html>
-<html><head><meta charset=UTF-8><title>SSTI</title><link rel="stylesheet" href="/css/terminal.css"></head>
-<body><div class="terminal-container"><div class="terminal-header"><span class="terminal-title">[A03] SSTI</span></div>
-<div class="terminal-body fade-in">
+<html lang="en">
+<%- include('../partials/head', { title: 'SSTI' }) %>
+<body>
+<%- include('../partials/header') %>
+
 <h1>Server-Side Template Injection (EJS)</h1>
 <form method="GET" action="/injection/ssti"><input name="name" placeholder="Enter name"><button>Render</button></form>
 <p class="hint">Try: <code><%%= process.env %></code> or <code><%%= require('child_process').execSync('id').toString() %%></code></p>
-</div></div></body></html>
+
+<%- include('../partials/footer') %>
+</body>
+</html>

@@ -10,7 +10,7 @@ A comprehensive, intentionally vulnerable lab covering all major OWASP Top 10 ca
 
 The lab now includes a **guided story / campaign mode**. Visit **`/campaign`** to see a step‑by‑step dashboard that walks you through the entire OWASP Top 10 experience in the correct order (choose a faction, then A01, A02, …, Cloud‑Native, and the finale). After each challenge you click **"Mark as Completed"** to unlock the next chapter. The campaign uses the same anime‑cyberpunk UI and stores progress in the session, so the experience is completely free for anyone.
 
-## 🎭 The Story
+### ECHO‑7 Incident
 
 **Year 2087.** A forbidden sentient AI codenamed **ECHO-7** was sealed beneath the Helios Subterranean Research Facility after the "Blank Tuesday" incident of 2079. 40 layered OWASP-sealed Vault controls stand between the world and the imprisoned mind.
 
@@ -97,7 +97,7 @@ docker run -p 3000:3000 aivault
 ```
 
 
-## Vulnerabilities Covered (40 total)
+## Vulnerabilities Covered (95 total)
 
 ### OWASP Top 10 Web (2021)
 | ID | Vulnerability | Exploits |
@@ -142,6 +142,7 @@ docker run -p 3000:3000 aivault
 | M10 | Insufficient Cryptography | AES-ECB, hardcoded keys |
 
 ### OWASP Top 10 for LLM (2025)
+
 | ID | Category | Exploits |
 |----|----------|----------|
 | LLM01 | Prompt Injection | Direct, Indirect, RCE via prompt |
@@ -154,6 +155,24 @@ docker run -p 3000:3000 aivault
 | LLM08 | Excessive Agency | Auto-execute critical actions |
 | LLM09 | Overreliance | No human oversight |
 | LLM10 | Model Theft | Weight exposure, extraction attacks |
+
+## Additional Curriculum Modules (Full Cybersecurity Lab)
+
+The lab now includes extended modules covering broader security domains. Each module includes 5 challenges (Beginner → Pro) with flags. See the route files for exact payloads.
+
+| Module | Base Path | Challenge Endpoints |
+|--------|-----------|---------------------|
+| Network Security | `/network` | `GET /port-scan`, `GET /dns-poisoning`, `GET /arp-spoof`, `GET /firewall-evasion`, `POST /pcap-analyze` |
+| Cryptography Lab | `/crypto-lab` | `GET /hash-identify`, `POST /caesar`, `GET /vigenere`, `GET /rsa-weak`, `GET /key-exchange` |
+| Reverse Engineering | `/reverse` | `GET /strings`, `POST /crackme`, `GET /buffer-overflow`, `GET /anti-debug`, `GET /format-string` |
+| Digital Forensics | `/forensics` | `GET /log-analysis`, `GET /file-carving`, `GET /memory-analysis`, `GET /timeline`, `POST /stego` |
+| Social Engineering | `/social` | `GET /phishing`, `GET /pretexting`, `GET /osint`, `GET /deepfake`, `GET /spear-phish` |
+| IoT / OT Security | `/iot` | `GET /default-creds`, `GET /firmware-extract`, `GET /mqtt-hijack`, `GET /modbus-exploit`, `GET /ble-attack` |
+| Blockchain / Web3 | `/blockchain` | `GET /reentrancy`, `GET /overflow`, `GET /flash-loan`, `GET /access-control`, `GET /mev-front-run` |
+| Malware Analysis | `/malware` | `GET /static`, `GET /sandbox`, `GET /unpack`, `POST /yara`, `GET /rootkit` |
+| Wireless Security | `/wireless` | `GET /wep`, `GET /wpa2-handshake`, `GET /evil-twin`, `GET /wps`, `GET /ble-sniff` |
+| DevSecOps | `/devsecops` | `GET /git-secrets`, `GET /dependency-confusion`, `GET /terraform-misconfig`, `GET /container-escape`, `GET /supply-chain-action` |
+| Threat Hunting & Blue Team | `/threat-hunting` | `GET /siem-query`, `GET /mitre-identify`, `GET /anomaly`, `GET /memory-hunt`, `POST /hunt` |
 
 ## ☁️ OWASP Cloud‑Native Top 10 (2024)
 
@@ -174,6 +193,7 @@ docker run -p 3000:3000 aivault
 All **OWASP API Top 10** endpoints are mounted at `/api/`. So e.g. `router.get('/api/users', ...)` becomes `GET /api/api/users`.
 All **OWASP Mobile Top 10** endpoints are mounted at `/mobile/`.
 All **OWASP LLM Top 10** endpoints are mounted at `/llm/`.
+Curriculum modules are mounted at their own base paths (`/network`, `/crypto-lab`, `/reverse`, `/forensics`, `/social`, `/iot`, `/blockchain`, `/malware`, `/wireless`, `/devsecops`, `/threat-hunting`).
 
 ## OWASP Top 10 API Security (2023) — Endpoints
 See full route list in `src/routes/api_top10.js`. Quick reference:
@@ -262,6 +282,24 @@ POST /api/process-url                # InjectionI
 - Bug fixes for actual broken exploit paths
 - Report security issues... if you can exploit them, that's the point!
 
+## Support the Project
+
+AIVault is and always will be **100% free and open source**. If it helped you learn, we'd appreciate a donation:
+
+- **Ko-fi**: https://ko-fi.com/aivault
+- **Buy Me a Coffee**: https://www.buymeacoffee.com/aivault
+- **GitHub Sponsors**: https://github.com/sponsors/aivault
+
+Every donation keeps the servers running and new challenges coming.
+
+## Recommended Tools
+
+These tools complement the AIVault curriculum (affiliate links — using them supports the project at no extra cost to you):
+
+- [Burp Suite](https://portswigger.net/burp) — Web proxy & vulnerability scanner
+- [TryHackMe](https://tryhackme.com) — Guided hacking labs
+- [HackTheBox](https://www.hackthebox.com) — Penetration testing challenges
+
 ## Disclaimer
 This software is provided for EDUCATIONAL PURPOSES ONLY. The developer assumes NO LIABILITY for any direct, indirect, incidental, or consequential damages arising from the use of this software. By using this software, you agree that you are using it solely for security research, educational purposes, or CTF competitions.
 
@@ -270,5 +308,5 @@ MIT License - see [LICENSE](LICENSE)
 
 ---
 
-Made with educational intent. All OWASP Top 10 categories (Web, API, Mobile, LLM applications) contributed.
+Made with educational intent. All OWASP Top 10 categories (Web, API, Mobile, LLM, Cloud‑Native) plus a full cybersecurity curriculum (Network, Crypto, Reverse, Forensics, Social, IoT, Blockchain, Malware, Wireless, DevSecOps, Threat Hunting) contributed.
 Built to teach and learn application security through practical exploitation.

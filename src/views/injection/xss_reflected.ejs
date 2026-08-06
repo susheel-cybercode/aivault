@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><title><%= title %></title><link rel="stylesheet" href="/css/terminal.css"></head>
-<body><div class="terminal-container"><div class="terminal-header"><span class="terminal-title">[A03] Reflected XSS</span></div>
-<div class="terminal-body fade-in">
+<html lang="en">
+<%- include('../partials/head', { title: title }) %>
+<body>
+<%- include('../partials/header') %>
+
 <h1>Reflected XSS</h1>
 <form method="GET" action="/injection/xss/reflected">
   <input name="name" placeholder="Your name" value="<%= name %>">
   <button>Greet</button>
 </form>
 <h2>Hello, <%- name %>!</h2> <!-- vulnerable: raw output -->
-<p class="hint">Try: <code>&lt;script&gt;alert('XSS')&lt;/script&gt;</code></p>
-</div></div></body></html>
+<p class="hint">Try: <code><script>alert('XSS')</script></code></p>
+
+<%- include('../partials/footer') %>
+</body>
+</html>
